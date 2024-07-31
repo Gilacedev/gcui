@@ -1,8 +1,8 @@
-import Blocks from "@/components/Blocks";
+import Blocks from "../Blocks";
 import Image from "next/image";
-import {H2, Paragraph} from "@/components/Typo";
-import Button from "@/components/Button";
-import ColorTypes from "@/components/functions/ColorTypes";
+import {H2, Paragraph} from "../Typo";
+import Button from "../Button";
+import ColorTypes from "../functions/ColorTypes";
 
 interface SloganProps {
 	media: string;
@@ -28,7 +28,7 @@ export default function Product({media, title, description ,url , particular}: R
 					{description}
 				</Paragraph>
 				<div className={"my-4 w-full"}>
-					<Button color={ColorTypes.default} icon={<span className={"fas fa-shopping-cart"}></span>} url={url}>
+					<Button color={ColorTypes.default} icon={<span className={"fas fa-shopping-cart"}></span>} url={url} tag={"a"}>
 						مشاهده و خرید
 					</Button>
 				</div>

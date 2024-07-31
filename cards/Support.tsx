@@ -1,5 +1,5 @@
-import {H3, Paragraph} from "@/components/Typo";
-import colorTypes from "@/components/functions/ColorTypes";
+import {H3, Paragraph} from "../Typo";
+import colorTypes from "../functions/ColorTypes";
 interface SupportProps {
 	color: colorTypes;
 	title: string;

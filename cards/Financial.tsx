@@ -1,5 +1,4 @@
-import Blocks from "@/components/Blocks";
-import {H3, Paragraph} from "@/components/Typo";
+import {H3, Paragraph} from "../Typo";
 interface FinancialCardProps {
 	number: number;
 	title: string;

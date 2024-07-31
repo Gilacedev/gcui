@@ -1,4 +1,12 @@
-const Gradient = (props)=>{
+import React from "react";
+
+interface blockProps {
+	particular?: boolean,
+	children?: React.ReactNode | string,
+	className?: string
+}
+
+const Gradient:React.FC<blockProps> = ({...props})=>{
 	return (
 		<div className={`relative p-2 bg-gradient-to-b from-slate-700 to-slate-800 rounded-xl ${props.className} ${props.particular?"particular":""}`}>
 			{props.children}
@@ -15,7 +23,7 @@ const Gradient = (props)=>{
 			}
 		</div>)
 }
-const Bordered = (props)=>{
+const Bordered:React.FC<blockProps> = ({...props})=>{
 	/* Rectangle 3 */
 	return (
 		<div className={`relative p-4 border border-dashed border-slate-600 rounded-xl ${props.className} ${props.particular?"particular":""}`}>
@@ -34,7 +42,7 @@ const Bordered = (props)=>{
 
 		</div>)
 }
-const Dark = (props)=>{
+const Dark:React.FC<blockProps> = ({...props})=>{
 	return (
 		<div className={`relative p-4 bg-slate-900 bg-opacity-50 rounded-xl text-slate-50 ${props.className} ${props.particular?"particular":""}`}>
 			{props.children}

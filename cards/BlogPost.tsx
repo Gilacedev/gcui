@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Button from "@/components/Button";
-import colorTypes from "@/components/functions/ColorTypes";
-import {H2, Paragraph} from "@/components/Typo";
-import Blocks from "@/components/Blocks";
+import Button from "../Button.tsx";
+import colorTypes from "../functions/ColorTypes";
+import {H2, Paragraph} from "../Typo";
+import Blocks from "../Blocks";
 
 interface BlogPostProps {
 	author: string;

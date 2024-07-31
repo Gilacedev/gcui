@@ -1,5 +1,11 @@
 "use client";
-const Switch = (props) => {
+import React from "react";
+
+interface switchProps {
+    name :string,
+    [propName: string]: any;
+}
+const Switch:React.FC<switchProps> = ({...props}) => {
     return (
         <label className={`relative w-14 h-8 rounded-full overflow-hidden flex items-center p-1 cursor-pointer`}>
             <input {...props} className={`opacity-0 w-0 overflow-hidden h-0 peer cursor-pointer`} type={"checkbox"} id={`switch_${props.name}`}/>

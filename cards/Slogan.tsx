@@ -1,6 +1,6 @@
-import Blocks from "@/components/Blocks";
+import Blocks from "../Blocks";
 import Image from "next/image";
-import {H2, Paragraph} from "@/components/Typo";
+import {H2, Paragraph} from "../Typo";
 interface SloganProps {
 	media: string;
 	title: string;

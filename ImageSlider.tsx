@@ -1,7 +1,7 @@
 "use client"
 import {useState} from "react";
 
-interface ImageSliderProps {
+type ImageSliderProps = {
 	media:string[];
 	alt :string;
 }
@@ -10,7 +10,7 @@ function get_url_extension( url ) {
 }
 
 const ImageSlider = ({media,alt}: Readonly<ImageSliderProps>) => {
-	const [localMedia, setLocalMedia] = useState(media || []);
+	const [localMedia] = useState(media || []);
 	const [currentMedia, setCurrentMedia] = useState(0);
 	return (
 		<div>

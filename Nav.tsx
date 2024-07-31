@@ -1,26 +1,26 @@
 import Link from "next/link";
 import Image from "next/image";
-import MenuItem from "@/components/MenuItem";
-import Button from "@/components/Button";
-import SearchForm from "@/components/SearchForm";
-import {AuthCheck} from "@/components/functions/Auth";
-import Badge from "@/components/Badge";
-import Device from "@/components/functions/Device";
+import MenuItem from "./MenuItem";
+import Button from "./Button";
+import SearchForm from "./SearchForm";
+import {AuthCheck} from "./functions/Auth";
+import Badge from "./Badge";
+import Device from "./functions/Device";
 import Language from "@/locales/fa/common.ts";
-
+import ColorTypes from "./functions/ColorTypes.ts";
 
 
 //just in development :
 export const fetchCache = 'force-no-store'
 
 
-const AuthBlock = ({isMobile}) => {
+const AuthBlock = ({isMobile} : {isMobile:boolean}) => {
 	"use client";
 	const authStatus = AuthCheck();
 	if (!authStatus) {
 		return (
 			<div>
-				<Button color={"primary"} tag={"a"} href={"/auth"}>
+				<Button color={ColorTypes.primary} tag={"a"} href={"/auth"}>
 					{Language.login}
 				</Button>
 			</div>
@@ -31,7 +31,7 @@ const AuthBlock = ({isMobile}) => {
 		return (
 			<div className={"flex gap-2"}>
 				<div>
-					<Button color={"default"} tag={"a"} href={"/logout"} icon={<span className={"far fa-sign-out"}/>}/>
+					<Button color={ColorTypes.default} tag={"a"} href={"/logout"} icon={<span className={"far fa-sign-out"}/>}/>
 				</div>
 			</div>
 		)
@@ -39,20 +39,20 @@ const AuthBlock = ({isMobile}) => {
 	return (
 		<div className={"flex gap-2"}>
 			<div className={"relative"}>
-				<Button color={"default"} tag={"a"} href={"/logout"}
+				<Button color={ColorTypes.default} tag={"a"} href={"/logout"}
 						icon={<span className={"far fa-shopping-basket-alt"}/>}/>
 				<div className={"absolute -top-2 left-1/2 "}>
-					<Badge color={"danger"}  particular={true}>+99</Badge>
+					<Badge color={ColorTypes.danger}  particular={true}>+99</Badge>
 				</div>
 			</div>
 			<div className={"relative"}>
-				<Button color={"default"} tag={"a"} href={"/logout"} icon={<span className={"far fa-bell"}/>}/>
+				<Button color={ColorTypes.default} tag={"a"} href={"/logout"} icon={<span className={"far fa-bell"}/>}/>
 				<div className={"absolute -top-2  left-1/2  "}>
-					<Badge color={"danger"}>3</Badge>
+					<Badge color={ColorTypes.danger}>3</Badge>
 				</div>
 			</div>
 			<div>
-				<Button color={"default"} tag={"a"} href={"/logout"} icon={<span className={"far fa-sign-out"}/>}/>
+				<Button color={ColorTypes.default} tag={"a"} href={"/logout"} icon={<span className={"far fa-sign-out"}/>}/>
 			</div>
 		</div>
 	)
@@ -85,7 +85,7 @@ const ActionBar = () => {
 						</span>
 					</Link>
 					<div className={"absolute -top-2 left-1/2 "}>
-						<Badge color={"danger"} particular={true}>+99</Badge>
+						<Badge color={ColorTypes.danger} particular={true}>+99</Badge>
 					</div>
 				</li>
 				<li className={"w-1/5 border-l border-slate-300 relative"}>
@@ -97,7 +97,7 @@ const ActionBar = () => {
 						</span>
 					</Link>
 					<div className={"absolute -top-2 left-1/2 "}>
-						<Badge color={"danger"}>2</Badge>
+						<Badge color={ColorTypes.danger}>2</Badge>
 					</div>
 
 				</li>

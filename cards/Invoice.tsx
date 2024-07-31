@@ -1,13 +1,13 @@
-import Blocks from "@/components/Blocks";
+import Blocks from "../Blocks";
 import React from "react";
-import InlineMessage from "@/components/InlineMessage";
+import InlineMessage from "../InlineMessage";
 
 interface InvoiceProps {
 	title: string;
 	description: React.ReactNode | string;
 	date: string;
 	time: string;
-	message ?: React.ReactNode | InlineMessage;
+	message ?: React.ReactNode | typeof InlineMessage;
 	action ?: React.ReactNode | string;
 }
 const Invoice = ({title, description, date, time, message, action}: Readonly<InvoiceProps>) =>

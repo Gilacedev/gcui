@@ -1,4 +1,4 @@
-import colorTypes from "@/components/functions/ColorTypes";
+import colorTypes from "./functions/ColorTypes";
 interface BadgeProps {
 	color?: colorTypes;
 	children: React.ReactNode;

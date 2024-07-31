@@ -1,6 +1,5 @@
 "use client"
 import React, {useState} from "react";
-import {Delay} from "@/components/functions/Delay";
 interface tabProps {
 	headers: React.ReactNode[]
 	contents: React.ReactNode[]

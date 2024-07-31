@@ -1,5 +1,5 @@
-import ColorTypes from "@/components/functions/ColorTypes";
-import colorTypes from "@/components/functions/ColorTypes";
+import ColorTypes from "./functions/ColorTypes";
+import colorTypes from "./functions/ColorTypes";
 
 interface InlineMessageProps {
 	message: string;

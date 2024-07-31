@@ -1,14 +1,15 @@
-import ColorTypes from "@/components/functions/ColorTypes";
+import ColorTypes from "./functions/ColorTypes";
 import React from "react";
 
-interface ButtonProps {
+type ButtonProps = {
 	color?: ColorTypes;
 	tag?: string;
 	icon?: React.ReactNode;
 	children?: React.ReactNode;
 	particular?: boolean;
+	[propName: string]: any;
 }
-const Button = (props: Readonly<ButtonProps>) => {
+const Button:React.FC<ButtonProps> = ({...props}) => {
 	const color = props.color || ColorTypes.default
 	const Tag = props.tag || "button";
 

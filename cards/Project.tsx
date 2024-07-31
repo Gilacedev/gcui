@@ -1,6 +1,6 @@
-import Blocks from "@/components/Blocks";
+import Blocks from "../Blocks";
 import Image from "next/image";
-import {H3, Paragraph} from "@/components/Typo";
+import {H3, Paragraph} from "../Typo";
 
 interface ProjectProps {
 	media: string;

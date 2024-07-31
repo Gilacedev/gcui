@@ -1,6 +1,11 @@
+import React from "react";
 
+interface radioProps {
+    name :string,
+    [propName: string]: any;
+}
 
-const Radio = (props) => {
+const Radio:React.FC<radioProps> = ({...props}) => {
     return (
         <label className={`    flex items-center p-1 cursor-pointer`}>
             <input {...props} className={`opacity-0 w-0 overflow-hidden h-0 peer cursor-pointer`} type={"radio"} id={`radio_${props.name}`}/>

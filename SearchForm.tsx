@@ -1,9 +1,9 @@
 "use client";
-import Modal from "@/components/Modal";
+import Modal from "./Modal";
 import {useState} from "react";
-import Input from "@/components/Input";
-import Button from "@/components/Button";
-import ColorTypes from "@/components/functions/ColorTypes";
+import Input from "./Input";
+import Button from "./Button";
+import ColorTypes from "./functions/ColorTypes";
 
 export default function SearchForm() {
 	const [open, setOpen] = useState(false);

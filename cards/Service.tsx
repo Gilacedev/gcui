@@ -1,8 +1,7 @@
-import Blocks from "@/components/Blocks";
-import Image from "next/image";
-import {H2, Paragraph} from "@/components/Typo";
-import Button from "@/components/Button";
-import ColorTypes from "@/components/functions/ColorTypes";
+import Blocks from "../Blocks";
+import {H2, Paragraph} from "../Typo";
+import Button from "../Button";
+import ColorTypes from "../functions/ColorTypes";
 
 interface SloganProps {
 	title: string;

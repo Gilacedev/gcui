@@ -1,6 +1,6 @@
-import {H2, Paragraph} from "@/components/Typo";
-import Button from "@/components/Button";
-import Blocks from "@/components/Blocks";
+import {H2, Paragraph} from "./Typo";
+import Button from "./Button";
+import Blocks from "./Blocks";
 
 interface AlertMessageProps {
 	icon?: React.ReactNode;

@@ -1,0 +1,7 @@
+@import "utilities/fix.css";
+@import "utilities/icons.css";
+@import "utilities/fonts.css";
+@import "utilities/animations.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
