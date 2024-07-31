@@ -1,20 +1,18 @@
-import Link from "next/link";
-import Image from "next/image";
 import MenuItem from "./MenuItem";
 import Button from "./Button";
 import SearchForm from "./SearchForm";
 import {AuthCheck} from "./functions/Auth";
 import Badge from "./Badge";
 import Device from "./functions/Device";
-import Language from "@/locales/fa/common.ts";
 import ColorTypes from "./functions/ColorTypes.ts";
+import Image from "./Image";
 
 
 //just in development :
 export const fetchCache = 'force-no-store'
 
 
-const AuthBlock = ({isMobile} : {isMobile:boolean}) => {
+const AuthBlock = ({isMobile ,Language} : {isMobile:boolean,Language:object}) => {
 	"use client";
 	const authStatus = AuthCheck();
 	if (!authStatus) {
@@ -57,64 +55,64 @@ const AuthBlock = ({isMobile} : {isMobile:boolean}) => {
 		</div>
 	)
 }
-const ActionBar = () => {
+const ActionBar = (Language) => {
 	return (
 		<div className={"fixed bottom-0 left-0 w-full bg-slate-200 h-16 text-slate-700 z-40"}>
 			<ul className={"flex justify-stretch"}>
 				<li className={"w-1/5 border-l border-slate-300"}>
-					<Link href={"/dashboard/businesses"} className={"flex gap-2 flex-col items-center justify-center border-b-4 border-indigo-500 h-16"}>
+					<a href={"/dashboard/businesses"} className={"flex gap-2 flex-col items-center justify-center border-b-4 border-indigo-500 h-16"}>
 						<span className={"fa fa-briefcase text-indigo-500"}></span>
 						<span className={"text-sm"}>
 							{Language.businesses}
 						</span>
-					</Link>
+					</a>
 				</li>
 				<li className={"w-1/5 border-l border-slate-300"}>
-					<Link href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
+					<a href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
 						<span className={"fa fa-credit-card text-slate-400"}></span>
 						<span className={"text-sm"}>
 							{Language.invoices}
 						</span>
-					</Link>
+					</a>
 				</li>
 				<li className={"w-1/5 border-l border-slate-300 relative"}>
-					<Link href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
+					<a href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
 						<span className={"fa fa-shopping-basket-alt text-slate-400"}></span>
 						<span className={"text-sm"}>
 							{Language.order_basket}
 						</span>
-					</Link>
+					</a>
 					<div className={"absolute -top-2 left-1/2 "}>
 						<Badge color={ColorTypes.danger} particular={true}>+99</Badge>
 					</div>
 				</li>
 				<li className={"w-1/5 border-l border-slate-300 relative"}>
-					<Link href={"/dashboard/invoices"}
+					<a href={"/dashboard/invoices"}
 						  className={"flex gap-2 flex-col items-center justify-center  h-16"}>
 						<span className={"fa fa-bell text-slate-400"}></span>
 						<span className={"text-sm"}>
 							{Language.events}
 						</span>
-					</Link>
+					</a>
 					<div className={"absolute -top-2 left-1/2 "}>
 						<Badge color={ColorTypes.danger}>2</Badge>
 					</div>
 
 				</li>
 				<li className={"w-1/5"}>
-					<Link href={"/dashboard/invoices"}
+					<a href={"/dashboard/invoices"}
 						  className={"flex gap-2 flex-col items-center justify-center  h-16"}>
 						<span className={"fa fa-headset text-slate-400"}></span>
 						<span className={"text-sm"}>
 							{Language.support}
 						</span>
-					</Link>
+					</a>
 				</li>
 			</ul>
 		</div>
 	)
 }
-const Nav = async () => {
+const Nav = async ({Language}:{Language:object}) => {
 	let isMobile = await Device()
 	if (isMobile)
 	{
@@ -128,20 +126,19 @@ const Nav = async () => {
 							</li>
 							<li>
 								<h1 className={"relative overflow-hidden"}>
-									<Link href={"/"} className={"relative"}>
-										<Image className={"h-12 w-auto"} width={100} height={100}
-											   src={"./assets/images/gilace-logo.svg"} alt={"gilace logo"}/>
+									<a href={"/"} className={"relative h-12 w-auto"}>
+										<Image type={'contain'} src={"./assets/images/gilace-logo.svg"} alt={"gilace logo"}/>
 										<span className={"absolute top-40"}>
                                     گیلاس
                                 </span>
-									</Link>
+									</a>
 
 								</h1>
 							</li>
 						</ul>
 						<ul className={"flex gap-2 items-center"}>
 							<li>
-								<AuthBlock isMobile={isMobile}/>
+								<AuthBlock language={Language} isMobile={isMobile}/>
 							</li>
 							<li className={"ms-2"}>
 								<SearchForm/>
@@ -149,20 +146,19 @@ const Nav = async () => {
 						</ul>
 					</div>
 				</div>
-				<ActionBar/>
+				<ActionBar language={Language}/>
 			</div>
 		);
 	}
 	return (
 		<nav className={"flex gap-3 h-16"}>
 			<h1 className={"overflow-hidden h-20 w-20"}>
-				<Link href={"/"} className={"relative"}>
-					<Image className={"h-20 w-auto"} width={100} height={100}
-						   src={"./assets/images/gilace-logo.svg"} alt={"gilace logo"}/>
+				<a href={"/"} className={"relative h-20 w-auto"}>
+					<Image type={"contain"} src={"./assets/images/gilace-logo.svg"} alt={"gilace logo"}/>
 					<span className={"absolute top-40"}>
-                                    گیلاس
-                                </span>
-				</Link>
+						گیلاس
+					</span>
+				</a>
 			</h1>
 			<div className={"flex justify-between h-16 w-full border-b border-slate-700 mt-2"}>
 				<ul className={"flex items-center"}>
@@ -184,7 +180,7 @@ const Nav = async () => {
 				</ul>
 				<ul className={"flex items-center"}>
 					<li>
-						<AuthBlock isMobile={isMobile}/>
+						<AuthBlock Language={Language} isMobile={isMobile}/>
 					</li>
 					<li className={"ms-2"}>
 						<SearchForm/>
