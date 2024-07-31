@@ -29,7 +29,7 @@ export default function Product({media, title, description ,url , particular}: R
 					{description}
 				</Paragraph>
 				<div className={"my-4 w-full"}>
-					<Button color={ColorTypes.default} icon={<span className={"fas fa-shopping-cart"}></span>} url={url} tag={"a"}>
+					<Button color={ColorTypes.default} icon={<span className={"fas fa-shopping-cart"}></span>} href={url} tag={"a"}>
 						مشاهده و خرید
 					</Button>
 				</div>

@@ -1,13 +1,12 @@
 import Blocks from "../Blocks";
 import React from "react";
-import InlineMessage from "../InlineMessage";
 
 interface InvoiceProps {
 	title: string;
 	description: React.ReactNode | string;
 	date: string;
 	time: string;
-	message ?: React.ReactNode | typeof InlineMessage;
+	message ?: React.ReactNode;
 	action ?: React.ReactNode | string;
 }
 const Invoice = ({title, description, date, time, message, action}: Readonly<InvoiceProps>) =>
@@ -35,7 +34,9 @@ const Invoice = ({title, description, date, time, message, action}: Readonly<Inv
 				</div>
 				<div className={"flex justify-between items-center"}>
 					<div>
-						{message}
+						{
+							message
+						}
 					</div>
 					<div>
 						{action}

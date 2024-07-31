@@ -11,9 +11,13 @@ import Image from "./Image";
 //just in development :
 export const fetchCache = 'force-no-store'
 
+type authBlockProps = {
+	[Language: string]: any;
+}
 
-const AuthBlock = ({isMobile ,Language} : {isMobile:boolean,Language:object}) => {
+const AuthBlock =  ({Language}:authBlockProps) => {
 	"use client";
+	const isMobile = Device()
 	const authStatus = AuthCheck();
 	if (!authStatus) {
 		return (
@@ -55,7 +59,7 @@ const AuthBlock = ({isMobile ,Language} : {isMobile:boolean,Language:object}) =>
 		</div>
 	)
 }
-const ActionBar = (Language) => {
+const ActionBar = (Language: {[Language: string]: any}  ) => {
 	return (
 		<div className={"fixed bottom-0 left-0 w-full bg-slate-200 h-16 text-slate-700 z-40"}>
 			<ul className={"flex justify-stretch"}>
@@ -87,8 +91,7 @@ const ActionBar = (Language) => {
 					</div>
 				</li>
 				<li className={"w-1/5 border-l border-slate-300 relative"}>
-					<a href={"/dashboard/invoices"}
-						  className={"flex gap-2 flex-col items-center justify-center  h-16"}>
+					<a href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
 						<span className={"fa fa-bell text-slate-400"}></span>
 						<span className={"text-sm"}>
 							{Language.events}
@@ -100,8 +103,7 @@ const ActionBar = (Language) => {
 
 				</li>
 				<li className={"w-1/5"}>
-					<a href={"/dashboard/invoices"}
-						  className={"flex gap-2 flex-col items-center justify-center  h-16"}>
+					<a href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
 						<span className={"fa fa-headset text-slate-400"}></span>
 						<span className={"text-sm"}>
 							{Language.support}
@@ -112,8 +114,8 @@ const ActionBar = (Language) => {
 		</div>
 	)
 }
-const Nav = async ({Language}:{Language:object}) => {
-	let isMobile = await Device()
+const Nav = async ({Language}:{ [Language: string]: any    }) => {
+	const isMobile = await Device()
 	if (isMobile)
 	{
 		return (
@@ -138,7 +140,7 @@ const Nav = async ({Language}:{Language:object}) => {
 						</ul>
 						<ul className={"flex gap-2 items-center"}>
 							<li>
-								<AuthBlock language={Language} isMobile={isMobile}/>
+								<AuthBlock Language={Language}/>
 							</li>
 							<li className={"ms-2"}>
 								<SearchForm/>
@@ -163,24 +165,24 @@ const Nav = async ({Language}:{Language:object}) => {
 			<div className={"flex justify-between h-16 w-full border-b border-slate-700 mt-2"}>
 				<ul className={"flex items-center"}>
 					<li className={"ms-2"}>
-						<MenuItem title={Language.home} icon={"far fa-home"} url={"/"} isActive={true}/>
+						<MenuItem title={Language.home!} icon={"far fa-home"} url={"/"} isActive={true}/>
 					</li>
 					<li className={"ms-2"}>
-						<MenuItem title={Language.solutions} icon={"far fa-rocket-launch"} url={"/solutions"}/>
+						<MenuItem title={Language?.solutions} icon={"far fa-rocket-launch"} url={"/solutions"}/>
 					</li>
 					<li className={"ms-2"}>
-						<MenuItem title={Language.projects} icon={"far fa-mug-saucer"} url={"/projects"}/>
+						<MenuItem title={Language?.projects} icon={"far fa-mug-saucer"} url={"/projects"}/>
 					</li>
 					<li className={"ms-2"}>
-						<MenuItem title={Language.about} icon={"far fa-crown"} url={"/about"}/>
+						<MenuItem title={Language?.about} icon={"far fa-crown"} url={"/about"}/>
 					</li>
 					<li className={"ms-2"}>
-						<MenuItem title={Language.contact} icon={"far fa-phone"} url={"/contact"}/>
+						<MenuItem title={Language?.contact} icon={"far fa-phone"} url={"/contact"}/>
 					</li>
 				</ul>
 				<ul className={"flex items-center"}>
 					<li>
-						<AuthBlock Language={Language} isMobile={isMobile}/>
+						<AuthBlock Language={Language} />
 					</li>
 					<li className={"ms-2"}>
 						<SearchForm/>

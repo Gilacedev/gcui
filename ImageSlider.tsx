@@ -5,8 +5,8 @@ type ImageSliderProps = {
 	media:string[];
 	alt :string;
 }
-function get_url_extension( url ) {
-	return url.split(/[#?]/)[0].split('.').pop().trim();
+function get_url_extension( url:string ) {
+	return url.split(/[#?]/)[0].split('.').pop()?.trim();
 }
 
 const ImageSlider = ({media,alt}: Readonly<ImageSliderProps>) => {
@@ -23,7 +23,7 @@ const ImageSlider = ({media,alt}: Readonly<ImageSliderProps>) => {
 				}
 				{
 					//if in array ["jpg","jpeg","png","gif"]
-					["jpg", "jpeg", "png", "gif"].includes(get_url_extension(localMedia[0])) &&
+					["jpg", "jpeg", "png", "gif"].includes(get_url_extension(localMedia[0])??"") &&
                     <img src={localMedia[currentMedia]} alt={alt} className={"w-full h-full object-cover rounded-xl"}/>
 				}
 			</div>
@@ -40,7 +40,7 @@ const ImageSlider = ({media,alt}: Readonly<ImageSliderProps>) => {
 								}
 								{
 									//if in array ["jpg","jpeg","png","gif"]
-									["jpg", "jpeg", "png", "gif"].includes(get_url_extension(item)) &&
+									["jpg", "jpeg", "png", "gif"].includes(get_url_extension(item)??"") &&
 									<img src={item} alt={alt} className={"w-full h-full object-cover rounded-xl"}/>
 								}
                                     <div className={`rounded absolute left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-indigo-400 to-indigo-500 transition-all duration-300 bottom-0 ${currentMedia === index ? " opacity-100 blur-0" : "blur-md  translate-y-4" }`}></div>

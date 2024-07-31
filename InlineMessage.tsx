@@ -1,7 +1,7 @@
 import ColorTypes from "./functions/ColorTypes";
 import colorTypes from "./functions/ColorTypes";
 
-interface InlineMessageProps {
+type InlineMessageProps =  {
 	message: string;
 	color:ColorTypes
 }
