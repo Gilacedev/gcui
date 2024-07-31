@@ -1,8 +1,8 @@
 import Blocks from "../Blocks";
-import Image from "next/image";
 import {H2, Paragraph} from "../Typo";
 import Button from "../Button";
 import ColorTypes from "../functions/ColorTypes";
+import Image from "../Image";
 
 interface SloganProps {
 	media: string;
@@ -17,8 +17,9 @@ export default function Product({media, title, description ,url , particular}: R
 		<Blocks.Gradient className={"relative mt-8"}>
 			<div className={"relative z-10 -my-8 text-center pb-10 px-4"}>
 				<div className={""}>
-					<Image src={localMedia} alt={title} width={100} height={100}
-						   className={"w-3/4 mx-auto "}/>
+					<div className={"w-3/4 mx-auto "} >
+						<Image src={localMedia} alt={title} type={"contain"}/>
+					</div>
 				</div>
 				<div className={"bg-gradient-shadow w-full h-12"}></div>
 				<H2 element={"h3"} className={"my-2"}>

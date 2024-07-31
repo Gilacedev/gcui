@@ -1,8 +1,8 @@
-import Image from "next/image";
-import Button from "../Button.tsx";
+import Button from "../Button";
 import colorTypes from "../functions/ColorTypes";
 import {H2, Paragraph} from "../Typo";
 import Blocks from "../Blocks";
+import Image from "../Image";
 
 interface BlogPostProps {
 	author: string;
@@ -19,8 +19,10 @@ export default function BlogPost({author, authorMedia, date,instagram, title, de
 		<Blocks.Gradient>
 			<div className={"flex gap-2 justify-between p-2"}>
 				<div className={"flex gap-2 items-center"}>
-					<div>
-						<Image className={"w-10 h-10 rounded-full"} src={authorImage} alt={author} width={100} height={100}></Image>
+					<div >
+						<div className={"w-10 h-10 rounded-full overflow-hidden"}>
+							<Image src={authorImage} alt={author} type={"cover"}></Image>
+						</div>
 					</div>
 					<div>
 						<div className={"text-slate-400"}>
@@ -53,9 +55,8 @@ export default function BlogPost({author, authorMedia, date,instagram, title, de
 				{
 					media &&
                     <div>
-                        <Image className={"w-full h-auto"}
-                               src={media} alt={title} width={1000}
-                               height={1000}></Image>
+                        <Image
+                               src={media} alt={title} type={"cover"}></Image>
 
                     </div>
 

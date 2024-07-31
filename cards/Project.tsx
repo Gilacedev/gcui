@@ -1,6 +1,6 @@
 import Blocks from "../Blocks";
-import Image from "next/image";
 import {H3, Paragraph} from "../Typo";
+import Image from "../Image";
 
 interface ProjectProps {
 	media: string;
@@ -15,7 +15,7 @@ export default function Project({media, title, description}: Readonly<ProjectPro
 		<Blocks.Gradient >
 			<div className={"flex gap-4 items-center p-2"}>
 				<div>
-					<Image src={localNader} alt={title} width={100} height={100}></Image>
+					<Image src={localNader} alt={title} type={"contain"}></Image>
 				</div>
 				<div className={""}>
 					<H3 className={"text-indigo-300 mb-2"}>

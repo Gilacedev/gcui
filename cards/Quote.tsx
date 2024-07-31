@@ -1,5 +1,5 @@
-import Image from "next/image";
 import {H3, Paragraph} from "../Typo";
+import Image from "../Image";
 
 interface QuotesProps {
 	title : string;
@@ -13,8 +13,9 @@ const Quote = ({title, description, text, media, brand}: Readonly<QuotesProps>) 
 		<div className={"relative flex flex-col overflow-hidden rounded-xl w-64"}>
 			<div className={"relative z-10 text-center p-4"}>
 				<div>
-					<Image src={media} alt={title} width={100} height={100}
-						   className={"w-32 h-32 rounded-full mx-auto my-6"}/>
+					<div className={"w-32 h-32 rounded-full mx-auto my-6 overflow-hidden"}>
+						<Image type={"cover"} src={media} alt={title}/>
+					</div>
 				</div>
 				<div>
 					<H3 className={"text-pink-100 text-lg mb-2"}>
@@ -30,8 +31,9 @@ const Quote = ({title, description, text, media, brand}: Readonly<QuotesProps>) 
 					<span className={"fa fa-quote-right float-right text-indigo-500"}></span>
 				</div>
 			</div>
-			<Image src={media} alt={title} width={100} height={100}
-				   className={"absolute scale-x-110 left-0 top-0 w-full h-full object-cover blur-md rounded-xl saturate-50 brightness-75 contrast-75"}/>
+			<div className={"absolute scale-x-110 left-0 top-0 w-full h-full object-cover blur-md rounded-xl saturate-50 brightness-75 contrast-75"}>
+				<Image src={media} alt={title} type={"cover"}/>
+			</div>
 			<div
 				className={"absolute left-0 top-0 w-full h-full object-cover mix-blend-overlay bg-slate-800 opacity-80"}></div>
 			<div
