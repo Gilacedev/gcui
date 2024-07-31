@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import {Delay} from "/functions/Delay.ts";
+import {Delay} from ".//functions/Delay";
 
 interface modalProps {
     open: boolean,
