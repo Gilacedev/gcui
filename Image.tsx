@@ -20,7 +20,7 @@ const Image = ({src, alt, type}: ImageProps) => {
 			<img ref={imgRef} onLoad={() => {
 				setLoading(false)
 			}}
-				className={`w-full h-full ${type === "cover" ? "object-cover" : "object-contain"} ${loading ? "opacity-0" : "opacity-100"}`}
+				className={`w-full h-full transition-all duration-1000 ${type === "cover" ? "object-cover" : "object-contain"} ${loading ? "opacity-0 scale-75" : "opacity-100 scale-100" }`}
 				src={src} alt={alt}/>
 			<div
 				className={`absolute border-2 border-slate-300 border-opacity-30 rounded-full particular w-6 h-6 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${loading ? "block" : "hidden"}`}>
