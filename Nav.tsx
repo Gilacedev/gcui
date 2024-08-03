@@ -114,8 +114,8 @@ const ActionBar = (Language: {[Language: string]: any}  ) => {
 		</div>
 	)
 }
-const Nav = async ({Language}:{ [Language: string]: any    }) => {
-	const isMobile = await Device()
+const Nav = ({Language}:{ [Language: string]: any    }) => {
+	const isMobile = Device()
 	if (isMobile)
 	{
 		return (
