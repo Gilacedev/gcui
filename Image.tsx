@@ -16,7 +16,7 @@ const Image = ({src, alt, type}: ImageProps) => {
 	}, []);
 
 	return (
-		<div className={`w-full h-auto  relative rounded-[inherit] ${loading ? "bg-slate-700" : ""}`}>
+		<div className={`w-full h-full  relative rounded-[inherit] ${loading ? "bg-slate-700 bg-opacity-50" : ""}`}>
 			<img ref={imgRef} onLoad={() => {
 				setLoading(false)
 			}}

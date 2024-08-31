@@ -6,6 +6,7 @@ import Badge from "./Badge";
 import Device from "./functions/Device";
 import ColorTypes from "./functions/ColorTypes.ts";
 import Image from "./Image";
+import NavbarBars from "@/components/NavbarBars";
 
 
 //just in development :
@@ -15,7 +16,7 @@ type authBlockProps = {
 	[Language: string]: any;
 }
 
-const AuthBlock =  ({Language}:authBlockProps) => {
+const AuthBlock = ({Language}: authBlockProps) => {
 	"use client";
 	const isMobile = Device()
 	const authStatus = AuthCheck();
@@ -28,12 +29,12 @@ const AuthBlock =  ({Language}:authBlockProps) => {
 			</div>
 		)
 	}
-	if(isMobile)
-	{
+	if (isMobile) {
 		return (
 			<div className={"flex gap-2"}>
 				<div>
-					<Button color={ColorTypes.default} tag={"a"} href={"/logout"} icon={<span className={"far fa-sign-out"}/>}/>
+					<Button color={ColorTypes.default} tag={"a"} href={"/logout"}
+							icon={<span className={"far fa-sign-out"}/>}/>
 				</div>
 			</div>
 		)
@@ -44,7 +45,7 @@ const AuthBlock =  ({Language}:authBlockProps) => {
 				<Button color={ColorTypes.default} tag={"a"} href={"/logout"}
 						icon={<span className={"far fa-shopping-basket-alt"}/>}/>
 				<div className={"absolute -top-2 left-1/2 "}>
-					<Badge color={ColorTypes.danger}  particular={true}>+99</Badge>
+					<Badge color={ColorTypes.danger} particular={true}>+99</Badge>
 				</div>
 			</div>
 			<div className={"relative"}>
@@ -54,82 +55,28 @@ const AuthBlock =  ({Language}:authBlockProps) => {
 				</div>
 			</div>
 			<div>
-				<Button color={ColorTypes.default} tag={"a"} href={"/logout"} icon={<span className={"far fa-sign-out"}/>}/>
+				<Button color={ColorTypes.default} tag={"a"} href={"/logout"}
+						icon={<span className={"far fa-sign-out"}/>}/>
 			</div>
 		</div>
 	)
 }
-const ActionBar = (Language: {[Language: string]: any}  ) => {
-	return (
-		<div className={"fixed bottom-0 left-0 w-full bg-slate-200 h-16 text-slate-700 z-40"}>
-			<ul className={"flex justify-stretch"}>
-				<li className={"w-1/5 border-l border-slate-300"}>
-					<a href={"/dashboard/businesses"} className={"flex gap-2 flex-col items-center justify-center border-b-4 border-indigo-500 h-16"}>
-						<span className={"fa fa-briefcase text-indigo-500"}></span>
-						<span className={"text-sm"}>
-							{Language.businesses}
-						</span>
-					</a>
-				</li>
-				<li className={"w-1/5 border-l border-slate-300"}>
-					<a href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
-						<span className={"fa fa-credit-card text-slate-400"}></span>
-						<span className={"text-sm"}>
-							{Language.invoices}
-						</span>
-					</a>
-				</li>
-				<li className={"w-1/5 border-l border-slate-300 relative"}>
-					<a href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
-						<span className={"fa fa-shopping-basket-alt text-slate-400"}></span>
-						<span className={"text-sm"}>
-							{Language.order_basket}
-						</span>
-					</a>
-					<div className={"absolute -top-2 left-1/2 "}>
-						<Badge color={ColorTypes.danger} particular={true}>+99</Badge>
-					</div>
-				</li>
-				<li className={"w-1/5 border-l border-slate-300 relative"}>
-					<a href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
-						<span className={"fa fa-bell text-slate-400"}></span>
-						<span className={"text-sm"}>
-							{Language.events}
-						</span>
-					</a>
-					<div className={"absolute -top-2 left-1/2 "}>
-						<Badge color={ColorTypes.danger}>2</Badge>
-					</div>
-
-				</li>
-				<li className={"w-1/5"}>
-					<a href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
-						<span className={"fa fa-headset text-slate-400"}></span>
-						<span className={"text-sm"}>
-							{Language.support}
-						</span>
-					</a>
-				</li>
-			</ul>
-		</div>
-	)
-}
-const Nav = ({Language}:{ [Language: string]: any    }) => {
+const Nav = ({Language}: { [Language: string]: any }) => {
 	const isMobile = Device()
-	if (isMobile)
-	{
+	if (isMobile) {
 		return (
 			<div>
 				<div className={"flex bg-slate-900 h-16 w-screen"}>
 					<div className={"flex justify-between items-center w-full px-2"}>
 						<ul className={"flex gap-2 items-center"}>
 							<li>
-								<span className={"far fa-bars text-2xl px-3"}></span>
+								<NavbarBars />
 							</li>
 							<li>
 								<h1 className={"relative overflow-hidden"}>
-									<a href={"/"} className={"relative h-12 w-auto"}>
-										<Image type={'contain'} src={"./assets/images/gilace-logo.svg"} alt={"gilace logo"}/>
+									<a href={"/"} className={"relative h-12 w-12 block"}>
+										<Image type={'contain'} src={"./assets/images/gilace-logo.svg"}
+											   alt={"gilace logo"}/>
 										<span className={"absolute top-40"}>
                                     گیلاس
                                 </span>
@@ -148,7 +95,6 @@ const Nav = ({Language}:{ [Language: string]: any    }) => {
 						</ul>
 					</div>
 				</div>
-				<ActionBar language={Language}/>
 			</div>
 		);
 	}
@@ -182,7 +128,7 @@ const Nav = ({Language}:{ [Language: string]: any    }) => {
 				</ul>
 				<ul className={"flex items-center"}>
 					<li>
-						<AuthBlock Language={Language} />
+						<AuthBlock Language={Language}/>
 					</li>
 					<li className={"ms-2"}>
 						<SearchForm/>

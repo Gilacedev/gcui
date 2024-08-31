@@ -13,15 +13,15 @@ export default function Project({media, title, description}: Readonly<ProjectPro
 
 	return (
 		<Blocks.Gradient >
-			<div className={"flex gap-4 items-center p-2"}>
-				<div>
+			<div className={"flex text-center sm:text-start flex-wrap sm:flex-nowrap gap-4 items-center"}>
+				<div className={"w-full h-12 sm:h-auto sm:w-1/3"}>
 					<Image src={localNader} alt={title} type={"contain"}></Image>
 				</div>
 				<div className={""}>
 					<H3 className={"text-indigo-300 mb-2"}>
 						{title}
 					</H3>
-					<Paragraph className={"text-slate-400"}>
+					<Paragraph className={"text-sm text-slate-400"}>
 						{description}
 					</Paragraph>
 				</div>

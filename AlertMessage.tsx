@@ -12,14 +12,14 @@ interface AlertMessageProps {
 const AlertMessage = ({icon,title,description,url,reactionText}:AlertMessageProps) => {
 	return (
 		<Blocks.Dark>
-			<div className={" gap-4 flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-stretch"}>
+			<div className={"py-8 gap-4 flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-stretch"}>
 				{
 					icon &&
                     <div className={"text-4xl text-indigo-500"}>
 						{icon}
                     </div>
 				}
-				<div className={"w-full"}>
+				<div className={"w-full flex flex-col gap-4"}>
 					<H2 element={"div"}>
 						{title}
 					</H2>
@@ -29,7 +29,7 @@ const AlertMessage = ({icon,title,description,url,reactionText}:AlertMessageProp
 				</div>
 				{
 					url &&
-                    <div>
+                    <div className={"w-52"}>
                         <Button tag={"a"} href={url} icon={<span className={"far fa-chevron-left"}/>}>
 							{reactionText}
                         </Button>

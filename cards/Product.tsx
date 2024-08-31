@@ -14,7 +14,7 @@ interface SloganProps {
 export default function Product({media, title, description ,url , particular}: Readonly<SloganProps>) {
 	let localMedia = media || "assets/images/image-placeholder.svg";
 	return (
-		<Blocks.Gradient className={"relative mt-8"}>
+		<Blocks.Gradient className={"relative mt-8 w-full"}>
 			<div className={"relative z-10 -my-8 text-center pb-10 px-4"}>
 				<div className={""}>
 					<div className={"w-3/4 mx-auto "} >

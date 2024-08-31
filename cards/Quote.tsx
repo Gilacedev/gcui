@@ -10,7 +10,7 @@ interface QuotesProps {
 }
 const Quote = ({title, description, text, media, brand}: Readonly<QuotesProps>) => {
 	return (
-		<div className={"relative flex flex-col overflow-hidden rounded-xl w-64"}>
+		<div className={"relative flex flex-col overflow-hidden rounded-xl min-w-64"}>
 			<div className={"relative z-10 text-center p-4"}>
 				<div>
 					<div className={"w-32 h-32 rounded-full mx-auto my-6 overflow-hidden"}>

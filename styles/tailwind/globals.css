@@ -5,3 +5,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+    .hidden-body
+    {
+        transform: translate3d(-50%,200px,-300px);
+        transform-origin: left top;
+        opacity: 0.5;
+    }
+    .hidden-body-parent
+    {
+        perspective: 1500px;
+        transform-style: preserve-3d;
+        overflow-y: hidden;
+    }
+}

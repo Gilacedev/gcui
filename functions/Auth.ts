@@ -2,4 +2,14 @@ function AuthCheck(): boolean
 {
 	return false;
 }
-export {AuthCheck};
+const doLogout = async ()=>{
+
+}
+const doLogin = async () =>{
+
+}
+export {
+	AuthCheck,
+	doLogout,
+	doLogin
+};

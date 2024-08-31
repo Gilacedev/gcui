@@ -12,7 +12,7 @@ const H1: React.FC<TypoProps>  = (
 		...props
 	}
 ) => {
-	return <Tag {...props} className={props.className??"text-4xl font-bold"}>{children}</Tag>
+	return <Tag {...props} className={props.className??"text-2xl sm:text-4xl font-bold"}>{children}</Tag>
 }
 const H2: React.FC<TypoProps>  = (
 	{
