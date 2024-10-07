@@ -3,6 +3,7 @@ import {H2, Paragraph} from "../Typo";
 import Button from "../Button";
 import ColorTypes from "../functions/ColorTypes";
 import Image from "../Image";
+import content from "@/types/Content";
 
 interface SloganProps {
 	media: string;
@@ -11,32 +12,36 @@ interface SloganProps {
 	url:string;
 	particular?: boolean;
 }
-export default function Product({media, title, description ,url , particular}: Readonly<SloganProps>) {
-	let localMedia = media || "assets/images/image-placeholder.svg";
+export default function Product({product}: { product: content }) {
+	if(!product)
+	{
+		return null
+	}
+	let localMedia = product.avatar ? process.env.NEXT_PUBLIC_UPLOAD_URL+"/"+product.avatar : "assets/images/image-placeholder.svg";
 	return (
 		<Blocks.Gradient className={"relative mt-8 w-full"}>
 			<div className={"relative z-10 -my-8 text-center pb-10 px-4"}>
 				<div className={""}>
 					<div className={"w-3/4 mx-auto "} >
-						<Image src={localMedia} alt={title} type={"contain"}/>
+						<Image src={localMedia} alt={product.title} type={"contain"}/>
 					</div>
 				</div>
 				<div className={"bg-gradient-shadow w-full h-12"}></div>
 				<H2 element={"h3"} className={"my-2"}>
-					{title}
+					{product.title}
 				</H2>
 				<Paragraph className={"text-slate-400"}>
-					{description}
+					{product.short_description}
 				</Paragraph>
 				<div className={"my-4 w-full"}>
-					<Button color={ColorTypes.default} icon={<span className={"fas fa-shopping-cart"}></span>} href={url} tag={"a"}>
+					<Button color={ColorTypes.default} icon={<span className={"fas fa-shopping-cart"}></span>} href={"/products/"+product.slug} tag={"a"}>
 						مشاهده و خرید
 					</Button>
 				</div>
 			</div>
-			<div className={`absolute top-2 left-2 right-2 bottom-2 border border-indigo-500 rounded-2xl  ${particular ? "particular" : ""}`}>
+			<div className={`absolute top-2 left-2 right-2 bottom-2 border border-indigo-500 rounded-2xl  ${product._featured ? "particular" : ""}`}>
 				{
-					particular &&
+					product._featured &&
                     <>
                         <i></i>
                         <i></i>

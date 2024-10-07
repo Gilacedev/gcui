@@ -1,5 +1,5 @@
 import Image from "@/components/Image";
-const Footer = ({page , menu , namads}) => {
+const Footer = ({settings , menu , namads}) => {
 	let footerMenu = []
 	let footerMenuTitle = ""
 	try {
@@ -8,6 +8,7 @@ const Footer = ({page , menu , namads}) => {
 		footerMenuTitle = menu.title
 	}
 	catch (e) {
+		console.error("Footer menu error", e)
 	}
 
 	return (
@@ -22,17 +23,14 @@ const Footer = ({page , menu , namads}) => {
 							</div>
 							<div>
 								<div className={"font-bold text-3xl"}>
-									شرکت گیلاس
+									{settings.find((setting)=>setting?.name=="footer_site_name")?.value }
 								</div>
 								<div className={""}>
-									{page.title}
+									{settings.find((setting)=>setting?.name=="footer_site_slogan")?.value }
 								</div>
 							</div>
 							<div className={"w-full text-sm text-slate-500"}>
-								شرکت داده پردازان گیلاس شمال با برند تجاری گیلاس ، در حال حاضر بزرگترین توسعه دهنده
-								وب در شمال کشور است که با بیش از ۱۰۰۰ پروژه آنلاین ،
-								سهم قابل توجهی را در مارکت رو به رشد آی تی کشور دارد
-
+								{settings.find((setting) => setting?.name == "footer_description")?.value}
 							</div>
 						</div>
 						<div>

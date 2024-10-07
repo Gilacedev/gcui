@@ -61,8 +61,17 @@ const AuthBlock = ({Language}: authBlockProps) => {
 		</div>
 	)
 }
-const Nav = ({Language}: { [Language: string]: any }) => {
+const Nav = ({Language , menu }) => {
 	const isMobile = Device()
+	let menuItems = []
+	let activeId = 1
+	try {
+		let data = JSON.parse(menu.meta)
+		menuItems = data.menu
+	}
+	catch (e) {
+		console.log(e)
+	}
 	if (isMobile) {
 		return (
 			<div>
@@ -110,21 +119,11 @@ const Nav = ({Language}: { [Language: string]: any }) => {
 			</h1>
 			<div className={"flex justify-between h-16 w-full border-b border-slate-700 mt-2"}>
 				<ul className={"flex items-center"}>
-					<li className={"ms-2"}>
-						<MenuItem title={Language.home!} icon={"far fa-home"} url={"/"} isActive={true}/>
-					</li>
-					<li className={"ms-2"}>
-						<MenuItem title={Language?.solutions} icon={"far fa-rocket-launch"} url={"/solutions"}/>
-					</li>
-					<li className={"ms-2"}>
-						<MenuItem title={Language?.projects} icon={"far fa-mug-saucer"} url={"/projects"}/>
-					</li>
-					<li className={"ms-2"}>
-						<MenuItem title={Language?.about} icon={"far fa-crown"} url={"/about"}/>
-					</li>
-					<li className={"ms-2"}>
-						<MenuItem title={Language?.contact} icon={"far fa-phone"} url={"/contact"}/>
-					</li>
+					{menuItems.map((item, index) => {
+						return (
+							<MenuItem  key={item.id} item={item}/>
+						)
+					})}
 				</ul>
 				<ul className={"flex items-center"}>
 					<li>
