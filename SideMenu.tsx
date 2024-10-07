@@ -5,7 +5,7 @@ import {MenuStores} from "@/components/stores/menuStore";
 const SideMenu = () => {
 	const open = useSyncExternalStore(MenuStores.subscribe, MenuStores.getSnapshot, MenuStores.getServerSnapshot);
 	return (
-		<aside className={`transition-all duration-500 ease-slip w-screen h-screen p-4 fixed top-0 start-0 z-50 group ${open?"menu-open scale-x-100 translate-y-0":"scale-x-0 -translate-y-full"}  peer `}>
+		<aside className={`transition-all duration-500 origin-top-right ease-slip w-screen h-screen p-4 fixed top-0 start-0 z-50 group ${open?"menu-open scale-x-100 translate-y-0":"scale-x-0 -translate-y-full"}  peer `}>
 			<div className={"absolute top-0 start-0 w-full h-full bg-opacity-10 bg-slate-900" } onClick={()=>{
 				MenuStores.setMenu(false)
 			}}></div>

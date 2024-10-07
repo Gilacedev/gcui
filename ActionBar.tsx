@@ -3,7 +3,6 @@ import ColorTypes from "@/components/functions/ColorTypes";
 import Language from "@/locales/Language";
 const ActionBar = () => {
 	const language = Language("common");
-	console.log("language", language)
 	return (
 		<div className={"fixed bottom-0 left-0 w-full bg-slate-200 h-16 text-slate-700 z-40"}>
 			<ul className={"flex justify-stretch"}>
