@@ -8,7 +8,6 @@ const Footer = ({page , menu , namads}) => {
 		footerMenuTitle = menu.title
 	}
 	catch (e) {
-		console.error("Footer menu error", e)
 	}
 
 	return (
