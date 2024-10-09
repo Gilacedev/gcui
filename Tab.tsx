@@ -13,15 +13,15 @@ const Tab = ({ headers, contents }: Readonly<tabProps>) => {
 				{headers.map((item, index) => (
 					<li key={index} onClick={()=>{
 						setActiveHeaderIndex(index)
-					}} className={`pb-4 px-4 font-normal relative h-10`}>
+					}} className={`pb-4 px-4 font-normal relative h-10 cursor-pointer`}>
 						{item}
 						<div className={`rounded absolute left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-indigo-400 to-indigo-500 transition-all duration-300 bottom-0 ${activeHeaderIndex === index ? " opacity-100 blur-0" : "blur-md  translate-y-4" }`}></div>
 					</li>
 				))}
 			</ul>
-			<ul className={"p-4"}>
+			<ul className={"p-4 min-h-[30dvh]"}>
 				{contents.map((item, index) => (
-					<li key={index}  className={`pb-4 px-4 ${index !== activeHeaderIndex ? "hidden" : ""}`} >
+					<li key={index}  className={`animate-fadeIn pb-4 px-4 ${index !== activeHeaderIndex ? "hidden" : ""}`} >
 						{item}
 					</li>
 				))}
