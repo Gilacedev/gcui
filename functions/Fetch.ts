@@ -1,6 +1,5 @@
 import {doLogout} from "@/components/functions/Auth";
 import Language from "@/locales/Language";
-import {bool} from "prop-types";
 
 type ConfigType = {
 	method : "get"|"post",
@@ -9,7 +8,7 @@ type ConfigType = {
 	cache ?: string,
 	url : string ,
 	data :  ReadableStream<any> | Blob | ArrayBufferView | ArrayBuffer | FormData | URLSearchParams | string,
-}
+} | null
 type ReactionType = undefined | Function
 export async function Fetch(config:ConfigType , success:ReactionType, failed:ReactionType) {
 
@@ -23,14 +22,15 @@ export async function Fetch(config:ConfigType , success:ReactionType, failed:Rea
 				...config.headers,
 			},
 			dataType: config.dataType?? "application/json",
-			cache: cacheTypesArray.includes(config.cache) ? config.cache : "default",
+			cache:"no-store",
+			signal: AbortSignal.timeout(5000),
 		}
 		if (config.data) {
 			if (fetchConfigs) {
 				fetchConfigs.body = config.data
 			}
 		}
-		const response = await fetch(config.url, fetchConfigs)
+		const response = await fetch(config.url, {...fetchConfigs,cache:"no-store"});
 		if (response.status === 403) {
 			await doLogout();
 			(typeof failed == "function") && failed()
