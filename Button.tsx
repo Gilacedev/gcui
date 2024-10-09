@@ -37,6 +37,12 @@ const Button: React.FC<ComponentProps> = (
 		className += " relative particular"
 		particularium = <div><i></i> <i></i> <i></i></div>
 	}
+	if(props.href){
+		Tag = 'a'
+	}
+	if(props.className){
+		className += " " + props.className
+	}
 	return (
 		<Tag {...props} className={className}>
 			{children}
