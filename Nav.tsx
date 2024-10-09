@@ -84,7 +84,7 @@ const Nav = ({Language , menu }) => {
 							<li>
 								<h1 className={"relative overflow-hidden"}>
 									<a href={"/"} className={"relative h-12 w-12 block"}>
-										<Image type={'contain'} src={"./assets/images/gilace-logo.svg"}
+										<Image type={'contain'} src={"/assets/images/gilace-logo.svg"}
 											   alt={"gilace logo"}/>
 										<span className={"absolute top-40"}>
                                     گیلاس
@@ -111,7 +111,7 @@ const Nav = ({Language , menu }) => {
 		<nav className={"flex gap-3 h-16"}>
 			<h1 className={"overflow-hidden h-20 w-20"}>
 				<a href={"/"} className={"relative h-20 w-auto"}>
-					<Image type={"contain"} src={"./assets/images/gilace-logo.svg"} alt={"gilace logo"}/>
+					<Image type={"contain"} src={"/assets/images/gilace-logo.svg"} alt={"gilace logo"}/>
 					<span className={"absolute top-40"}>
 						گیلاس
 					</span>

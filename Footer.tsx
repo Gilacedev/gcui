@@ -18,7 +18,7 @@ const Footer = ({settings , menu , namads}) => {
 					<div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
 						<div className={"flex items-center gap-2 flex-wrap"}>
 							<div className={"w-20"}>
-								<Image type={'contain'} src={"./assets/images/gilace-logo.svg"}
+								<Image type={'contain'} src={"/assets/images/gilace-logo.svg"}
 									   alt={"gilace logo"}/>
 							</div>
 							<div>
