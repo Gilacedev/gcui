@@ -5,6 +5,8 @@ import language from "@/locales/Language";
 import {H1, Paragraph} from "@/components/Typo";
 import Button from "@/components/Button";
 import ColorTypes from "@/components/functions/ColorTypes";
+import Add from "@/components/functions/Basket";
+import {BasketStores} from "@/components/stores/BasketStore";
 
 const Plans = ({plans}) => {
 
@@ -52,7 +54,7 @@ const Plans = ({plans}) => {
 		)
 	}
 	const PlanItem = ({item}) => {
-		return (<div className={`bg-slate-900 bg-opacity-20 p-4 rounded-xl flex flex-col gap-4 animate-dropDown ${activePlan !== item.duration ? "hidden" : ""}`}>
+		return (<div className={`bg-slate-900 bg-opacity-20 p-4 rounded-xl flex flex-col gap-4 ${activePlan !== item.duration ? "hidden" : ""} ${item._featured?"animate-onTheEarth":"animate-dropDown"}`}>
 				<div className={"text-center"}>
 					<H1 element={"div"}>
 						{item.title}
@@ -79,7 +81,7 @@ const Plans = ({plans}) => {
 					<span className={"pe-2"}>
 						{language()["duration"]}
 					</span>:
-					<span className={"text-pink-400"}>
+					<span className={"text-violet-400"}>
 						{language()[item.duration]}
 					</span>
 
@@ -89,17 +91,27 @@ const Plans = ({plans}) => {
 						{
 							item._freemium == 1 &&
 							<div className={"text-indigo-500"}>
-								<div>
-									{language()["freemium"]}
-								</div>
-								<div className={"text-sm text-slate-500"}>
+                                <div>
+									<span>
+										{language()["freemium"]}
+									</span>
+                                    <span className={"text-slate-500 line-through"}>
+										<span className={"pe-2"}>
+											{Intl.NumberFormat().format(item.price)}
+										</span>
+										<span className={"text-sm "}>
+											{language()["price_unit"]}
+										</span>
+									</span>
+                                </div>
+                                <div className={"text-sm text-slate-500"}>
 									{language()["freemium_description"]}
-								</div>
-							</div>
+                                </div>
+                            </div>
 						}
 						{
 							item._freemium == 0 &&
-							<span className={"text-indigo-500"}>
+                            <span className={"text-indigo-300"}>
 								<span className={"text-lg font-bold pe-2"}>
 									{Intl.NumberFormat().format(item.price)}
 								</span>
@@ -110,17 +122,6 @@ const Plans = ({plans}) => {
 						}
 					</div>
 					<div>
-						{
-							item._freemium == 1 &&
-                            <span className={"text-slate-500 line-through"}>
-								<span className={"pe-2"}>
-									{Intl.NumberFormat().format(item.price)}
-								</span>
-								<span className={"text-sm "}>
-									{language()["price_unit"]}
-								</span>
-							</span>
-						}
 						{
 							item._freemium == 0 && item.fake_price &&
                             <span className={"text-slate-500 text-sm line-through"}>
@@ -137,7 +138,11 @@ const Plans = ({plans}) => {
 				</div>
 				<div>
 					<div className={"grid grid-cols-1"}>
-						<Button particular={item._featured} color={item._featured?ColorTypes.primary:ColorTypes.default} className={"!justify-center"} icon={<span className={"far fa-shopping-cart"}></span>}>
+						<Button particular={item._featured} color={ColorTypes.primary} className={"!justify-center"} icon={<span className={"far fa-shopping-cart"}></span>} onClick={()=>{
+							//add to cart
+							Add(item.slug)
+							BasketStores.setBasket(true)
+						}}>
 							<span>{language()["build_this_service"]}</span>
 						</Button>
 					</div>

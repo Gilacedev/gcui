@@ -14,7 +14,7 @@ const Badge = (props:BadgeProps)=> {
 		color = "bg-indigo-600"
 	}
 	else if (props.color === colorTypes.danger) {
-		color = "bg-pink-500"
+		color = "bg-violet-500"
 	}
 	else if (props.color === colorTypes.success) {
 		color = "bg-green-500"

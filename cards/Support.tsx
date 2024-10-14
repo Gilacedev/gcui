@@ -12,7 +12,7 @@ return (
 			<div>
 				{
 					color === colorTypes.danger &&
-						<div className={"w-6 h-6 shadow-lg shadow-pink-600 bg-pink-600 rounded-full"}></div>
+						<div className={"w-6 h-6 shadow-lg shadow-violet-600 bg-violet-600 rounded-full"}></div>
 				}
 				{
 					color === colorTypes.default &&

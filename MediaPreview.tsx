@@ -47,10 +47,10 @@ const MediaPreview = ({content}) => {
 		<div className={""}>
 			<div className={"flex flex-col"}>
 				<div className={"relative"}>
-					<div className={"absolute top-1/2 left-1  bg-black bg-opacity-50 p-3 text-3xl rounded-lg flex items-center justify-center -translate-y-1/2 z-10 cursor-pointer hover:text-pink-400 transition-all"} onClick={()=>{prevItem()}}>
+					<div className={"absolute top-1/2 left-1  bg-black bg-opacity-50 p-3 text-3xl rounded-lg flex items-center justify-center -translate-y-1/2 z-10 cursor-pointer hover:text-violet-400 transition-all"} onClick={()=>{prevItem()}}>
 						<span className={"far fa-chevron-left "} />
 					</div>
-					<div className={"absolute top-1/2 right-1 bg-black bg-opacity-50 p-3 text-3xl rounded-lg flex items-center justify-center -translate-y-1/2 z-10 cursor-pointer hover:text-pink-400 transition-all"} onClick={()=>{nextItem()}}>
+					<div className={"absolute top-1/2 right-1 bg-black bg-opacity-50 p-3 text-3xl rounded-lg flex items-center justify-center -translate-y-1/2 z-10 cursor-pointer hover:text-violet-400 transition-all"} onClick={()=>{nextItem()}}>
 						<span className={"far fa-chevron-right "} />
 					</div>
 					<div className={"h-[60dvh] bg-slate-700 rounded-xl overflow-hidden"}>

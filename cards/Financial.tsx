@@ -15,7 +15,7 @@ export default function FinancialCard({number, title, description, icon}: Readon
 			</div>
 			<div>
 				<H3 className={"mb-4"}>
-					<span className={`fa fa-${icon} text-pink-400 me-2`}></span>
+					<span className={`fa fa-${icon} text-violet-400 me-2`}></span>
 					<span>
 						{title}
 					</span>

@@ -1,44 +1,42 @@
 import {H3, Paragraph} from "../Typo";
 import Image from "../Image";
+import Content from "@/types/Content";
 
-interface QuotesProps {
-	title : string;
-	description : string;
-	text : string;
-	media : string;
-	brand : string;
-}
-const Quote = ({title, description, text, media, brand}: Readonly<QuotesProps>) => {
+const Quote = ({data}: Readonly<Content>) => {
+	if (!data) {
+		return null
+	}
+
 	return (
 		<div className={"relative flex flex-col overflow-hidden rounded-xl min-w-64"}>
 			<div className={"relative z-10 text-center p-4"}>
 				<div>
 					<div className={"w-32 h-32 rounded-full mx-auto my-6 overflow-hidden"}>
-						<Image type={"cover"} src={media} alt={title}/>
+						<Image type={"cover"} src={process.env.NEXT_PUBLIC_UPLOAD_URL+"/"+data.avatar} alt={data.title}/>
 					</div>
 				</div>
 				<div>
-					<H3 className={"text-pink-100 text-lg mb-2"}>
-						{title}
+					<H3 className={"text-violet-200 text-lg mb-2"}>
+						{data.title}
 					</H3>
 					<Paragraph className={"text-slate-400 font-light"}>
-						{description}
+						{data.short_description}
 					</Paragraph>
 					<span className={"fa fa-quote-left float-left text-indigo-500"}></span>
-					<Paragraph className={"text-slate-300 mt-6"}>
-						{text}
+					<Paragraph className={"text-slate-300 mt-6"} element={"div"}>
+						<div dangerouslySetInnerHTML={{__html: data.description}}/>
 					</Paragraph>
 					<span className={"fa fa-quote-right float-right text-indigo-500"}></span>
 				</div>
 			</div>
 			<div className={"absolute scale-x-110 left-0 top-0 w-full h-full object-cover blur-md rounded-xl saturate-50 brightness-75 contrast-75"}>
-				<Image src={media} alt={title} type={"cover"}/>
+				<Image src={process.env.NEXT_PUBLIC_UPLOAD_URL+"/"+data.avatar} alt={data.title} type={"cover"}/>
 			</div>
 			<div
 				className={"absolute left-0 top-0 w-full h-full object-cover mix-blend-overlay bg-slate-800 opacity-80"}></div>
 			<div
 				className={"absolute bottom-2 left-2 origin-top-left opacity-10 -rotate-90 text-4xl uppercase text-center text-nowrap font-black"}>
-				{brand}
+				{data.slug}
 			</div>
 		</div>
 	);

@@ -4,5 +4,6 @@ enum ColorTypes {
 	danger = "danger",
 	success = "success",
 	warning = "warning",
+	dark = "dark",
 }
 export default ColorTypes;

@@ -1,6 +1,8 @@
 import Badge from "@/components/Badge";
 import ColorTypes from "@/components/functions/ColorTypes";
 import Language from "@/locales/Language";
+import ActionBarBasket from "@/components/ActionBarBasket";
+
 const ActionBar = () => {
 	const language = Language("common");
 	return (
@@ -24,15 +26,7 @@ const ActionBar = () => {
 					</a>
 				</li>
 				<li className={"w-1/5 border-l border-slate-300 relative"}>
-					<a href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
-						<span className={"fa fa-shopping-basket-alt text-slate-400"}></span>
-						<span className={"text-sm"}>
-							{language.order_basket}
-						</span>
-					</a>
-					<div className={"absolute -top-2 left-1/2 "}>
-						<Badge color={ColorTypes.danger} particular={true}>+99</Badge>
-					</div>
+					<ActionBarBasket />
 				</li>
 				<li className={"w-1/5 border-l border-slate-300 relative"}>
 					<a href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
