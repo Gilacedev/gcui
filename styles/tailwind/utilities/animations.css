@@ -104,12 +104,12 @@
 @keyframes bounceFromBottom {
     0% {
         transform-origin: center top;
-        transform: translateY(100%) scaleY(0);
+        transform: translateY(200%) scaleY(0);
         opacity: .6;
     }
     80% {
         transform-origin: center top;
-        transform: translateY(0) scaleY(1.2);
+        transform: translateY(-30%) scaleY(1.2);
         opacity: 1;
     }
     100% {
@@ -124,11 +124,11 @@
         opacity: 1;
     }
     20% {
-        transform: translateY(0) scaleY(1.2);
+        transform: translateY(-30%) scaleY(1.2);
         opacity: 1;
     }
     100% {
-        transform: translateY(100%) scaleY(0);
+        transform: translateY(200%) scaleY(0);
         opacity: .6;
     }
 }
