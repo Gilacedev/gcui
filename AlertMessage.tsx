@@ -8,7 +8,7 @@ const AlertMessage = ({data}: { data:content }) => {
 	if (!data) {
 		return null
 	}
-	if(data)
+	if(data && data.meta)
 	{
 
 		let tempMeta = {
@@ -24,7 +24,6 @@ const AlertMessage = ({data}: { data:content }) => {
 			tempMeta.btn_title = temp2.menu[0].btn_title
 		}
 		catch (e) {
-			console.log(e)
 			tempMeta.url = null
 			tempMeta.icon = "exclamation-circle"
 			tempMeta.btn_title = ""
@@ -53,7 +52,7 @@ const AlertMessage = ({data}: { data:content }) => {
 					data.meta.url &&
                     <div className={"w-52"}>
                         <Button tag={"a"} href={data.meta.url} icon={<span className={"far fa-chevron-left"}/>}>
-							{data.meta.btn_title}
+							<span>{data.meta.btn_title}</span>
                         </Button>
                     </div>
 				}
