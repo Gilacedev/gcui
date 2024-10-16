@@ -18,11 +18,11 @@ const Button: React.FC<ComponentProps> = (
 		...props}
 ) => {
 	const color = props.color || ColorTypes.default
-	let className = "text-slate-50 h-10 px-4 rounded-xl  items-center transition-all  inline-flex gap-4"
+	let className = "text-slate-50 h-10 px-4 rounded-xl  items-center transition-all duration-500  inline-flex gap-4 whitespace-nowrap"
 	if (color === ColorTypes.default) {
-		className += " text-base bg-slate-700 active:bg-slate-500 disabled:bg-slate-300"
+		className += " text-base bg-slate-700 active:bg-slate-500 disabled:bg-slate-300 shadow-black/10 shadow-lg hover:shadow-xl hover:shadow-black/20 "
 	} else if (color === ColorTypes.primary) {
-		className += " text-base bg-bg-gilace active:bg-violet-600 disabled:bg-violet-300"
+		className += " text-base bg-bg-gilace active:bg-violet-600 shadow-violet-800/30 shadow-lg hover:shadow-xl hover:shadow-violet-800/40   disabled:bg-violet-300"
 	} else if (color === ColorTypes.danger) {
 		className += " text-base bg-violet-500 active:bg-violet-600 disabled:bg-violet-300"
 	} else if (color === ColorTypes.success) {
@@ -38,7 +38,7 @@ const Button: React.FC<ComponentProps> = (
 	let particularium: string | React.ReactNode = ""
 	if (particular) {
 		className += " relative particular"
-		particularium = <div><i></i> <i></i> <i></i></div>
+		particularium = <div className={"flex-grow-0"}><i></i> <i></i> <i></i></div>
 	}
 	if(props.href){
 		Tag = 'a'
@@ -47,7 +47,7 @@ const Button: React.FC<ComponentProps> = (
 		className += " " + props.className
 	}
 	return (
-		<Tag {...props} className={className}>
+		<Tag {...props} className={className }>
 			{children}
 			{
 				icon

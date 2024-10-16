@@ -26,6 +26,11 @@ body::-webkit-scrollbar-thumb {
     mask-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.13911502100840334) 100%);
     -webkit-mask-image: -webkit-linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%);
 }
+.radial-mask
+{
+    mask-image: radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(0,0,0,0.13911502100840334) 100%);
+    -webkit-mask-image: -webkit-radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%);
+}
 .fixScrollUi
 {
     scrollbar-width: thin;
@@ -88,6 +93,37 @@ body::-webkit-scrollbar-thumb {
 {
     text-shadow:  0 0.2rem 0.5rem rgba(0,0,0,0.5);
 }
+/*add animation delay to tailwind*/
+.animation-delay-50
+{
+    animation-delay: 50ms !important;
+}
+.animation-delay-100
+{
+    animation-delay: 100ms !important;
+}
+.animation-delay-200
+{
+    animation-delay: 200ms !important;
+}
+.animation-delay-400
+{
+    animation-delay: 400ms !important;
+}
+.animation-delay-600
+{
+    animation-delay: 600ms !important;
+}
+.animation-delay-800
+{
+    animation-delay: 800ms !important;
+}
+.animation-delay-1000
+{
+    animation-delay: 1000ms !important;
+}
+
+
 @keyframes particularMove
 {
     0%
@@ -106,5 +142,4 @@ body::-webkit-scrollbar-thumb {
     100% {
         transform: rotate(360deg);
     }
-
 }

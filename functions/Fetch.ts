@@ -79,8 +79,14 @@ export async function Fetch(config:ConfigType , success:ReactionType, failed:Rea
 		}
 	} catch (error) {
 
+		if (typeof failed == "function") {
+			failed()
+		}
 		console.log("error",error)
 		switch (error.message) {
+			case "bad request":
+				// toast.error(<Toast title="خطا در ارسال اطلاعات" message="لطفا مجددا تلاش کنید." />, {});
+				break;
 			case 'timeout of 15000ms exceeded':
 				// toast.error(<Toast title="خطا در برقراری ارتباط با شبکه" message="لطفا مجددا تلاش کنید." />, {});
 				break;

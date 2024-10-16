@@ -15,7 +15,7 @@ export default function Project({data}: {data:Content})
 	return (
 		<Blocks.Gradient >
 			<div className={"flex text-center  sm:text-start flex-wrap sm:flex-nowrap gap-4 items-center"}>
-				<a href={"/projects/"+data.slug} className={"w-full h-12 sm:h-auto sm:w-1/3 block" }>
+				<a href={"/projects/"+data.slug} className={"w-full h-12 sm:h-auto sm:w-1/3 block rounded-xl overflow-hidden shadow-lg shadow-slate-900/30" }>
 					<Image src={localNader} alt={data.title} type={"contain"}></Image>
 				</a>
 				<div className={"w-full"}>
