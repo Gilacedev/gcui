@@ -6,11 +6,7 @@ import Language from "@/locales/Language";
 import {BasketStores} from "@/components/stores/BasketStore";
 
 const ActionBarBasket = () => {
-	if(typeof window === "undefined")
-	{
-		return;
-	}
-		const totalBasket = Get().length;
+	const totalBasket = Get().length;
 	if (totalBasket > 0) {
 		return (
 			<div className={"relative"}>
@@ -19,8 +15,8 @@ const ActionBarBasket = () => {
 				}} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
 					<span className={"fa fa-shopping-basket-alt text-slate-400"}></span>
 					<span className={"text-sm"}>
-							{Language().order_basket}
-						</span>
+						{Language().order_basket}
+					</span>
 				</div>
 				<div className={"absolute -top-2 left-1/2 "}>
 					<Badge color={ColorTypes.danger}>{totalBasket}</Badge>
