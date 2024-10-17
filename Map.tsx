@@ -86,7 +86,7 @@ const Map = ({settings}) => {
 	return (
 		<div className={"h-full w-full"}>
 			<div className={"absolute top-0 left-0 p-2 z-[2]"}>
-				<Button className={"gap-0"} particular={true} color={ColorTypes.primary} tag={"a"}
+				<Button className={"!gap-0"} particular={true} color={ColorTypes.primary} tag={"a"}
 						href={"geo:" + settings.latitude + "," + settings.longitude}>
 					<span className={"fa fa-location-arrow-up"}/>
 				</Button>
