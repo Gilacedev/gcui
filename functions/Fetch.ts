@@ -3,18 +3,17 @@ import Language from "@/locales/Language";
 
 type ConfigType = {
 	method : "get"|"post",
-	headers : string | null,
-	dataType : string,
+	headers? : object | [] | null,
+	dataType? : string,
 	cache ?: string,
 	url : string ,
-	data :  ReadableStream<any> | Blob | ArrayBufferView | ArrayBuffer | FormData | URLSearchParams | string,
+	data :  ReadableStream<any> | Blob | ArrayBufferView | ArrayBuffer | FormData | URLSearchParams | string | object,
 } | null
 type ReactionType = undefined | Function
 export async function Fetch(config:ConfigType , success:ReactionType, failed:ReactionType) {
 
 	try {
 		const cacheTypesArray = ["no-cache", "default" , "reload" , "force-cache" , "only-if-cached" , "no-store"]
-		config.method == "post" ? console.log("config", config) : ""
 		const fetchConfigs :RequestInit | undefined = {
 			method: config.method || 'GET',
 			headers: {
