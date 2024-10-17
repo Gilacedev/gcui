@@ -8,36 +8,37 @@ const AlertMessage = ({data}: { data:content }) => {
 	if (!data) {
 		return null
 	}
+	let extraFeatures = {
+		url: null,
+		icon: "exclamation-circle",
+		btn_title: "",
+		reactionText: ""
+	}
+
 	if(data && data.meta)
 	{
 
-		let tempMeta = {
-			url: null,
-			icon: "exclamation-circle",
-			btn_title: "",
-			reactionText: ""
-		}
 		try {
 			let temp2 = JSON.parse(data.meta)
-			tempMeta.url = temp2.menu[0].url
-			tempMeta.icon = temp2.menu[0].icon
-			tempMeta.btn_title = temp2.menu[0].btn_title
+			if (temp2 && temp2.menu && temp2.menu.length > 0)
+			{
+				extraFeatures.url = temp2.menu[0].url
+				extraFeatures.icon = temp2.menu[0].icon
+				extraFeatures.btn_title = temp2.menu[0].btn_title
+			}
 		}
 		catch (e) {
-			tempMeta.url = null
-			tempMeta.icon = "exclamation-circle"
-			tempMeta.btn_title = ""
+			console.log("menu data:",data.meta)
 		}
-		data.meta = tempMeta
 	}
 
 	return (
 		<Blocks.Dark>
 			<div className={"py-8 gap-4 flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-stretch"}>
 				{
-					data.meta.icon &&
+					extraFeatures.icon &&
                     <div className={"text-4xl text-indigo-500"}>
-						<span className={`far fa-${data.meta.icon}`}/>
+						<span className={`far fa-${extraFeatures.icon}`}/>
                     </div>
 				}
 				<div className={"w-full flex flex-col gap-4"}>
@@ -49,10 +50,10 @@ const AlertMessage = ({data}: { data:content }) => {
 					</Paragraph>
 				</div>
 				{
-					data.meta.url &&
+					extraFeatures.url &&
                     <div className={"w-52"}>
-                        <Button tag={"a"} href={data.meta.url} icon={<span className={"far fa-chevron-left"}/>}>
-							<span>{data.meta.btn_title}</span>
+                        <Button tag={"a"} href={extraFeatures.url} icon={<span className={"far fa-chevron-left"}/>}>
+							<span>{extraFeatures.btn_title}</span>
                         </Button>
                     </div>
 				}
