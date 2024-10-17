@@ -1,7 +1,6 @@
 import MenuItem from "./MenuItem";
 import Button from "./Button";
 import SearchForm from "./SearchForm";
-import {AuthCheck} from "./functions/Auth";
 import Badge from "./Badge";
 import Device from "./functions/Device";
 import ColorTypes from "./functions/ColorTypes.ts";
@@ -20,7 +19,7 @@ type authBlockProps = {
 const AuthBlock = () => {
 	"use client";
 	const isMobile = Device()
-	const authStatus = AuthCheck();
+	const authStatus = false;
 	if (!authStatus) {
 		return (
 			<div>
