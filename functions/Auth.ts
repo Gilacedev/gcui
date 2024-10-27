@@ -3,14 +3,38 @@ import Language from "@/locales/Language";
 import ColorTypes from "@/components/functions/ColorTypes";
 import * as AuthModel from "@/models/AuthModel";
 import * as rdd from 'react-device-detect';
-import {redirect} from "next/navigation";
 import {Fetch} from "@/components/functions/Fetch";
 
-function AuthCheck(): boolean
+async function Auth_check()
 {
-	return false;
+	let result = false
+	await fetch(process.env.NEXT_PUBLIC_APP_BASE_URL+"/webservice/check/api", {
+		method: "get",
+		cache:"no-store",
+	}).then((response) => {
+		result = true
+	},
+	(error) => {
+		result = false
+	})
+
+	return result
 }
-const doLogout = async ()=>{
+const Auth_logout = async ()=>{
+	let result = false
+	const configs = {
+		method: "get",
+		url: process.env.NEXT_PUBLIC_APP_BASE_URL+"/webservice/logout/api",
+		cache:"no-store"
+	}
+	await Fetch(configs, (data) => {
+		console.log("why you said true??!",data)
+		result = true
+	}, (error) => {
+		result = false
+	}
+	)
+	return result
 }
 const Auth_sendSms = async (mobile) =>{
 
@@ -70,40 +94,38 @@ const Auth_confirmSms = async (mobile, code) =>{
 	formData.append("type", rdd.isMobile ? "mobile" : rdd.isTablet ? "tablet" : "desktop")
 
 	let response = false
+	let token = ""
 	await AuthModel.loginConfirmSms(formData, (data) => {
-		let token = data.token
-
-		console.log("DADADA",data)
-		let formData = new FormData()
-		formData.append("token", token)
-
-		//send token to /api/login route
-		// add content type form data :
-		Fetch({
-			method: "post",
-
-			url:  "/api/login",
-			data: formData,
-			cache:"no-store"
-		}, (data) => {
-			ToastStores.setToast({message: Language().loginSuccess, title: Language().success, type:ColorTypes.success, icon: "check-circle"})
-			redirect("/management")
-			response = true
-		},
-		(error) => {
-			ToastStores.setToast({message: Language().loginFailed, title: Language().error, type:ColorTypes.danger, icon: "exclamation-circle"})
-			response = false
-		})
+		token = data.token
 		response = true
 	}, (error) => {
 		ToastStores.setToast({message: Language().loginFailed, title: Language().error, type:ColorTypes.danger, icon: "exclamation-circle"})
 		response= false
 	})
-	return response
+	let localResponse = false
+	if(response){
+		let formData = new FormData()
+		formData.append("token", token)
+		await Fetch({
+				method: "post",
+				url:  "/webservice/login/api",
+				data: formData,
+				cache:"no-store"
+			}, (data) => {
+				ToastStores.setToast({message: Language().loginSuccess, title: Language().success, type:ColorTypes.success, icon: "check-circle"})
+				localResponse = true
+			},
+			(error) => {
+				ToastStores.setToast({message: Language().loginFailed, title: Language().error, type:ColorTypes.danger, icon: "exclamation-circle"})
+				localResponse = false
+			})
+	}
+	return localResponse;
 }
 export {
-	AuthCheck,
-	doLogout,
+	Auth_check,
+	Auth_logout,
 	Auth_sendSms,
 	Auth_confirmSms
 };
+

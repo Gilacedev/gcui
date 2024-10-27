@@ -1,3 +1,5 @@
+import Language from "@/locales/Language";
+
 type metaConfig = {
 	useSiteName?: boolean,
 	useOpenGraph?: boolean,
@@ -35,4 +37,24 @@ export const meteDataGenerator = (page, settings, config:metaConfig={
 export const titleCreator = (page,settings)=>
 {
 	return settings.find((setting) => setting?.name == "site_name")?.value + " | " + page.title
+}
+export const notFound = () => {
+	return {
+		title: "404 | Not Found",
+		description: "Page not found",
+		robots: {
+			index: false,
+			follow: false,
+		},
+	}
+}
+export const metaDataGeneratorManagement = (title) => {
+	return {
+		title: Language().management + " | " + title,
+		description: "Management page",
+		robots: {
+			index: false,
+			follow: false,
+		},
+	}
 }

@@ -1,27 +1,43 @@
-import {doLogout} from "@/components/functions/Auth";
-import Language from "@/locales/Language";
-
 type ConfigType = {
-	method : "get"|"post",
-	headers? : object | [] | null,
+	method : "get"|"post"|"put"|"delete"|"patch"|"head"|"options"|"connect"|"trace"|"GET"|"POST"|"PUT"|"DELETE"|"PATCH"|"HEAD"|"OPTIONS"|"CONNECT"|"TRACE",
+	headers? : object | object[] | null,
+	authorization? : boolean,
 	dataType? : string,
 	cache ?: string,
 	url : string ,
-	data :  ReadableStream<any> | Blob | ArrayBufferView | ArrayBuffer | FormData | URLSearchParams | string | object,
+	strictSSL?: boolean,
+	data? :  ReadableStream<any> | Blob | ArrayBufferView | ArrayBuffer | FormData | URLSearchParams | string | object | null,
 } | null
 type ReactionType = undefined | Function
 export async function Fetch(config:ConfigType , success:ReactionType, failed:ReactionType) {
-
+	let rawResponse;
 	try {
 		const cacheTypesArray = ["no-cache", "default" , "reload" , "force-cache" , "only-if-cached" , "no-store"]
+
+		if(config && config.authorization){
+			let token = ""
+			if (typeof window !== "undefined") {
+				token = await fetch("/webservice/cookie/api", {}).then((res) => res.json()).then((data) => data.token);
+			}
+			console.log("client token", token)
+			if(token !== "") {
+				config.headers = {
+					...config.headers,
+					Authorization: `Bearer ${token}`
+				}
+			}
+
+		}
 		const fetchConfigs :RequestInit | undefined = {
 			method: config.method || 'GET',
+			withCredentials:config?.authorization?? false,
 			headers: {
 				Accept: 'application/json',
 				...config.headers,
 			},
 			dataType: config.dataType?? "application/json",
 			cache:"no-store",
+			strictSSL: false,
 			signal: AbortSignal.timeout(5000),
 		}
 		if (config.data) {
@@ -29,71 +45,24 @@ export async function Fetch(config:ConfigType , success:ReactionType, failed:Rea
 				fetchConfigs.body = config.data
 			}
 		}
-		const response = await fetch(config.url, {...fetchConfigs,cache:"no-store"});
-		if (response.status === 403) {
-			await doLogout();
-			(typeof failed == "function") && failed()
-			return false
-		}
-		if (response.ok) {
-			const data = await response.json();
+		rawResponse = await fetch(config.url, {...fetchConfigs,cache:"no-store"});
+		if (rawResponse.ok) {
+			const data = await rawResponse.json();
 			if (typeof success === 'function') {
 				success({
 					data: data
 				});
 			}
 		} else {
-			const result = await response.json();
-			//TODO:fix language:
-			let validationMessage = Language("common").error500Message;
-			let validationMessageData = '';
-
-			(typeof failed == "function") && failed()
-
-
-			switch (result.status) {
-				case 401:
-					break;
-				case 400:
-					if (result.messages && result.messages.message) {
-						validationMessage = result.messages.message;
-					}
-					if (result.messages && result.messages.data) {
-						validationMessageData = result.messages.data;
-					}
-					// toast.error(<Toast title={validationMessage} errorList={validationMessageData} />, {});
-					break;
-				case 403:
-					return doLogout();
-				case 500:
-					const validationMessage500 = "خطای سرور";
-					const validationMessageData500 = "لطفا مجددا تلاش کنید.";
-					// toast.error(<Toast title={validationMessage500} message={validationMessageData500} />, {});
-					break;
-				default:
-					console.log("result.status",result)
-					// toast.error(<Toast title={"unrecognizable error"} message={"please connect to developers and report this bug"} />, {});
-					break;
+			if (typeof failed == "function") {
+				failed(rawResponse)
 			}
 		}
 	} catch (error) {
 
+		console.log("Fetch error", error)
 		if (typeof failed == "function") {
-			failed()
-		}
-		console.log("error",error)
-		switch (error.message) {
-			case "bad request":
-				// toast.error(<Toast title="خطا در ارسال اطلاعات" message="لطفا مجددا تلاش کنید." />, {});
-				break;
-			case 'timeout of 15000ms exceeded':
-				// toast.error(<Toast title="خطا در برقراری ارتباط با شبکه" message="لطفا مجددا تلاش کنید." />, {});
-				break;
-			case 'Request failed with status code 402':
-				// toast.error(<Toast title="خطای توکن" message="لطفا مجددا تلاش کنید." />, {});
-				break;
-			default:
-				break;
+			failed(error)
 		}
 	} finally {
 	}

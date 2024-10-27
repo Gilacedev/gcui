@@ -8,18 +8,18 @@ html {
     direction: ltr;
 }
 body::-webkit-scrollbar {
-    width: 2rem;
+    width: 0.4rem;
 }
 html {
     scrollbar-width: thin;
-    scrollbar-color: theme('colors.indigo.500') theme('colors.slate.900');
+    scrollbar-color: theme('colors.violet.500') theme('colors.slate.900');
 }
 body::-webkit-scrollbar-track {
-    background: theme('colors.indigo.500');
+    background: theme('colors.violet.500');
 }
 body::-webkit-scrollbar-thumb {
-    background-color: theme('colors.slate.800') ;
-    border-radius: 1rem;
+    background-color: theme('colors.violet.800') ;
+    border-radius: 0.2rem;
 }
 .v-mask
 {
@@ -36,6 +36,9 @@ body::-webkit-scrollbar-thumb {
     scrollbar-width: thin;
     scrollbar-color: theme('colors.slate.700') theme('colors.slate.800');
 }
+
+
+
 .particular i
 {
     transition: all 200ms;

@@ -7,6 +7,11 @@ import ColorTypes from "./functions/ColorTypes.ts";
 import Image from "./Image";
 import NavbarBars from "@/components/NavbarBars";
 import Language from "@/locales/Language";
+import {cookies} from "next/headers";
+import MenuBasketButton from "@/components/MenuBasketButton";
+import {useSyncExternalStore} from "react";
+import {AuthStores} from "@/components/stores/AuthStore";
+import ActionBarDesktop from "@/components/ActionBarDesktop";
 
 
 //just in development :
@@ -16,51 +21,20 @@ type authBlockProps = {
 	[Language: string]: any;
 }
 
-const AuthBlock = () => {
+const AuthBlock = async () => {
 	"use client";
 	const isMobile = Device()
-	const authStatus = false;
-	if (!authStatus) {
-		return (
-			<div>
-				<Button color={ColorTypes.primary} tag={"a"} href={"/auth"}>
-					<span>{Language().login_to_panel}</span>
-					<span className={"far fa-users ms-2"}/>
-				</Button>
-			</div>
-		)
-	}
 	if (isMobile) {
 		return (
 			<div className={"flex gap-2"}>
 				<div>
-					<Button color={ColorTypes.default} tag={"a"} href={"/logout"}
-							icon={<span className={"far fa-sign-out"}/>}/>
+					<Button color={ColorTypes.default} tag={"a"} href={"/management"}
+							icon={<span className={"far fa-user-gear"}/>}/>
 				</div>
 			</div>
 		)
 	}
-	return (
-		<div className={"flex gap-2"}>
-			<div className={"relative"}>
-				<Button color={ColorTypes.default} tag={"a"} href={"/logout"}
-						icon={<span className={"far fa-shopping-basket-alt"}/>}/>
-				<div className={"absolute -top-2 left-1/2 "}>
-					<Badge color={ColorTypes.danger} particular={true}>+99</Badge>
-				</div>
-			</div>
-			<div className={"relative"}>
-				<Button color={ColorTypes.default} tag={"a"} href={"/logout"} icon={<span className={"far fa-bell"}/>}/>
-				<div className={"absolute -top-2  left-1/2  "}>
-					<Badge color={ColorTypes.danger}>3</Badge>
-				</div>
-			</div>
-			<div>
-				<Button color={ColorTypes.default} tag={"a"} href={"/logout"}
-						icon={<span className={"far fa-sign-out"}/>}/>
-			</div>
-		</div>
-	)
+	return (<ActionBarDesktop />)
 }
 const Nav = ({Language , menu }) => {
 	const isMobile = Device()

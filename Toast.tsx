@@ -53,7 +53,7 @@ const Toast = () => {
 	},[message])
 
 	return (
-		<div className={`fixed bottom-12 left-0 w-full md:w-96 z-50`}>
+		<div className={`fixed bottom-12 left-0 w-full md:w-96 md:left-2 md:bottom-2 z-50`}>
 			{
 				messagesList.map((item, index) => {
 					return (

@@ -13,6 +13,8 @@ import {AuthStores} from "@/components/stores/AuthStore";
 import Loader from "@/components/Loader";
 
 const Basket = () => {
+
+
 	const open = useSyncExternalStore(BasketStores.subscribe, BasketStores.getSnapshot, BasketStores.getServerSnapshot);
 	const auth = useSyncExternalStore(AuthStores.subscribe, AuthStores.getSnapshot, AuthStores.getServerSnapshot);
 	const [storageBasketItems, setStorageBasketItems] = useState([]);
@@ -20,6 +22,15 @@ const Basket = () => {
 		const basketItems = Get();
 		setStorageBasketItems(basketItems);
 	}, [open])
+
+	//check in clientside to protect Hydration:
+	const [ isClient, setIsClient ] = useState(false);
+	useEffect(() => {
+		setIsClient(true);
+	}, []);
+	if (!isClient) {
+		return null;
+	}
 
 
 	const PayableItem = ({item}) => {
@@ -118,7 +129,11 @@ const Basket = () => {
 					!auth && <Login/>
 				}
 				{
-					auth && <div>Pay </div>
+					auth && <div>
+						<Button color={ColorTypes.primary} tag={"a"} href={"/management/pay"} icon={<span className={"far fa-chevron-left"}/>}>
+							{Language().continue}
+						</Button>
+					</div>
 				}
 
 			</div>

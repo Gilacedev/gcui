@@ -5,17 +5,24 @@ import Button from "@/components/Button";
 import {useState} from "react";
 import {Auth_confirmSms, Auth_sendSms} from "@/components/functions/Auth";
 import {redirect} from "next/navigation";
+import { useRouter } from 'next/navigation'
+import {AuthStores} from "@/components/stores/AuthStore";
 
 const Login	= ({onSuccess=undefined}) => {
+	const router = useRouter()
+
 	const [loading, setLoading] = useState(false);
 	const [step, setStep] = useState(1);
 	const [mobile, setMobile] = useState("");
-	const onSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
+	const onSubmitFirstForm = async (e:React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+
+		//disable form during request
 		if (loading) return;
+
 		setLoading(true);
-		let data = new FormData(e.currentTarget);
-		let mobile = data.get("mobile");
+		let data 	= new FormData(e.currentTarget);
+		let mobile 		= data.get("mobile");
 		let result = await Auth_sendSms(mobile);
 		setLoading(false);
 		setMobile(String(mobile));
@@ -25,17 +32,23 @@ const Login	= ({onSuccess=undefined}) => {
 		}
 
 	}
-	const onSubmit2 = async (e:React.FormEvent<HTMLFormElement>) => {
+	const onSubmitSecondForm = async (e:React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+
+		//disable form during request
 		if (loading) return;
+
 		setLoading(true);
-		//get form data
-		//send to server
-		let data = new FormData(e.currentTarget);
-		let mobile = data.get("mobile");
-		let code = data.get("otp-code");
-		await Auth_confirmSms(mobile, code);
+		let data 	= new FormData(e.currentTarget);
+		let mobile 		= data.get("mobile");
+		let code 		= data.get("otp-code");
+		const result = await Auth_confirmSms(mobile, code);
 		setLoading(false);
+		if (result) {
+			AuthStores.setAuth(true)
+			router.push('/management')
+			router.refresh()
+		}
 	}
 	return (
 		<div className={"flex flex-col gap-2"}>
@@ -44,7 +57,7 @@ const Login	= ({onSuccess=undefined}) => {
 				{
 					step === 1 &&
                     <form onSubmit={(e) => {
-						onSubmit(e)
+						onSubmitFirstForm(e)
 					}}>
                         <Input name={"mobile"} loading={loading ? 1 : 0} required={true} type={"tel"} inputMode="numeric"
                                 icon={<span className='far fa-mobile-retro text-indigo-500'/>}
@@ -74,7 +87,7 @@ const Login	= ({onSuccess=undefined}) => {
 				{
 					step === 2 &&
 					<form onSubmit={(e) => {
-						onSubmit2(e)
+						onSubmitSecondForm(e)
 					}}>
 						<input type={"hidden"} name={"mobile"} value={mobile}/>
                         <Input loading={loading ? 1 : 0} name={"otp-code"} required={true} type={"number"} inputMode="numeric"
