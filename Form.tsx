@@ -22,7 +22,7 @@ const Form = ({ children, title , onSubmit ,loading ,type }: FormProps) => {
 				onSubmit(e);
 			}}>
 				<div
-					className={"py-4 border-b border-slate-100 border-opacity-10 flex items-center justify-between sticky top-16 z-10 rounded-2xl px-4 bg-slate-900"}>
+					className={"py-4 border-b border-slate-100 border-opacity-10 flex items-center justify-between sticky top-24 z-[1] rounded-2xl px-4 mb-8 bg-slate-900"}>
 					<div className={"text-sm text-teal-500"}>
 						{title}
 					</div>
@@ -39,6 +39,10 @@ const Form = ({ children, title , onSubmit ,loading ,type }: FormProps) => {
 				</div>
 
 				<div className={` ${loading ? "opacity-50 animate-pulse" : ""}`}>{children}</div>
+				{
+					type == "edit" &&
+					<input name={"_method"} value={"PUT"} type={"hidden"}/>
+				}
 			</form>
 
 		</Blocks.Dark>
