@@ -6,6 +6,7 @@ type ConfigType = {
 	cache ?: string,
 	url : string ,
 	strictSSL?: boolean,
+	isFile?: boolean,
 	data? :  ReadableStream<any> | Blob | ArrayBufferView | ArrayBuffer | FormData | URLSearchParams | string | object | null,
 } | null
 type ReactionType = undefined | Function
@@ -47,6 +48,12 @@ export async function Fetch(config:ConfigType , success:ReactionType, failed:Rea
 		}
 		rawResponse = await fetch(config.url, {...fetchConfigs,cache:"no-store"});
 		if (rawResponse.ok) {
+			if (config.isFile) {
+				if (typeof success === 'function') {
+					let response = await rawResponse.blob();
+					success(response);
+				}
+			}
 			const data = await rawResponse.json();
 			if (typeof success === 'function') {
 				success({
