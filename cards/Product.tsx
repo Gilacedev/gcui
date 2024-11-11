@@ -32,7 +32,7 @@ export default function Product({product}: { product: content }) {
 				<H2 element={"h3"} className={"my-2"}>
 					{product.title}
 				</H2>
-				<Paragraph className={"text-slate-400 h-9 text-ellipsis"}>
+				<Paragraph className={"text-slate-400  text-ellipsis line-clamp-2"}>
 					{product.short_description}
 				</Paragraph>
 				<div className={"my-4 w-full"}>
