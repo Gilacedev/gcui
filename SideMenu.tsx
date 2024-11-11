@@ -10,10 +10,6 @@ const SideMenu = () => {
 	const [isAuthenticated, setIsAuthenticated] = useState(AuthStores.getSnapshot());
 	const [isHydrated, setIsHydrated] = useState(false); 
 
-	useEffect(()=>{
-		console.log(isAuthenticated)
-	},[isAuthenticated])
-
 	useEffect(() => {
 		setIsHydrated(true);
 	  const unsubscribe = AuthStores.subscribe(() => {
