@@ -52,7 +52,7 @@ const Modal:React.FC<modalProps> = ({ open, onClose, children, name, zindex = 30
         <div id={`modal-${name}`} className={protectInitial?"hidden":""}>
              <div className={`modal fixed group w-full h-full top-0 left-0 z-${zindex} ${modalClass === "show" ? "show " : ""} ${modalClass === "hidden" ? "hidden" : ""} ${modalClass === "hiding" ? "hiding" : ""}`}>
             <div className={"flex h-full items-center justify-center "}>
-                <div onDrag={(e) => { e.stopPropagation(); e.preventDefault() }} className={"group-[.show]:animate-comeFromBottom group-[.hiding]:animate-goToBottom flex items-center justify-center relative z-10 bg-slate-800 rounded-2xl w-[calc(100vw-20px)] sm:w-1/3"}>
+                <div onDrag={(e) => { e.stopPropagation(); e.preventDefault() }} className={"group-[.show]:animate-comeFromBottom group-[.hiding]:animate-goToBottom flex items-center justify-center relative z-10 bg-slate-900 rounded-2xl w-[calc(100vw-20px)] sm:w-1/3"}>
                     <div className={"relative w-full max-h-[calc(100vh-20px)]"}>
                         <div className={"absolute fa fa-times p-3 left-0 top-0 text-slate-50 opacity-40 z-10 cursor-pointer"}
                             onClick={closeAction} />
