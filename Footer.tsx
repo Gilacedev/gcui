@@ -15,7 +15,7 @@ const Footer = ({settings , menu , namads}) => {
 
 	return (
 		<div>
-			<Blocks.Dark className={" py-8"}>
+			<Blocks.Dark className={"py-8 lg:pb-8 pb-14"}>
 				<div className={"container mx-auto p-4"}>
 					<div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
 						<div className={"flex items-center gap-2 flex-wrap"}>
