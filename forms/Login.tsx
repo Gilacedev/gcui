@@ -4,7 +4,6 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import {useState} from "react";
 import {Auth_confirmSms, Auth_sendSms} from "@/components/functions/Auth";
-import {redirect} from "next/navigation";
 import { useRouter } from 'next/navigation'
 import {AuthStores} from "@/components/stores/AuthStore";
 
@@ -47,7 +46,7 @@ const Login	= ({onSuccess=undefined}) => {
 		if (result) {
 			AuthStores.setAuth(true)
 			router.push('/management')
-			router.refresh()
+			//router.refresh()
 		}
 	}
 	return (
@@ -65,7 +64,7 @@ const Login	= ({onSuccess=undefined}) => {
                         <label className={"text-xs text-slate-500 text-end block pt-2 pb-6"}>
 							{Language().mobileHint}
                         </label>
-                        <div className={"grid grid-cols-2"}>
+                        <div className={"flex"}>
                             <Button disabled={loading ? 1 : 0} particular={true} className={"justify-evenly"}
                                     loading={loading ? 1 : 0} color={"primary"}
                                     icon={<span className={"far fa-chevron-left"}/>} type={"submit"}>
@@ -96,7 +95,7 @@ const Login	= ({onSuccess=undefined}) => {
                         <label className={"text-xs text-slate-500 text-end block pt-2 pb-6"}>
 							{Language().otpHint}
                         </label>
-                        <div className={"grid grid-cols-2"}>
+                        <div className={"flex"}>
                             <Button disabled={loading ? 1 : 0} particular={true} className={"justify-evenly"}
                                     loading={loading ? 1 : 0} color={"primary"}
                                     icon={<span className={"far fa-chevron-left"}/>} type={"submit"}>

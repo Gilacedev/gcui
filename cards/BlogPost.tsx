@@ -70,7 +70,7 @@ export default function BlogPost({blog,compact}: Readonly<{blog: ContentType,com
 				</div>
 			</div>
 			<div className={"md:p-2"}>
-				<div className={"flex items-start justify-between"}>
+				<div className={"flex items-start justify-between gap-2"}>
 					<div>
 						<a href={"/blog/" + blog.slug}>
 							<H2 className={"h-16 text-slate-300 text-ellipsis w-full overflow-hidden  line-clamp-2 my-4 md:my-0 font-bold text-lg"}>
