@@ -12,7 +12,7 @@ const ActionBar = () => {
 					<a href={"/dashboard/businesses"}
 					   className={"flex gap-2 flex-col items-center justify-center border-b-4 border-violet-400 h-16"}>
 						<span className={"fa fa-briefcase text-violet-400"}></span>
-						<span className={"text-sm"}>
+						<span className={"text-xs"}>
 							{language.businesses}
 						</span>
 					</a>
@@ -20,7 +20,7 @@ const ActionBar = () => {
 				<li className={"w-1/5 border-l border-slate-300 border-opacity-10"}>
 					<a href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
 						<span className={"fa fa-credit-card text-slate-400"}></span>
-						<span className={"text-sm"}>
+						<span className={"text-xs"}>
 							{language.invoices}
 						</span>
 					</a>
@@ -31,7 +31,7 @@ const ActionBar = () => {
 				<li className={"w-1/5 border-l border-slate-300 border-opacity-10 relative"}>
 					<a href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
 						<span className={"fa fa-bell text-slate-400"}></span>
-						<span className={"text-sm"}>
+						<span className={"text-xs"}>
 							{language.events}
 						</span>
 					</a>
@@ -43,7 +43,7 @@ const ActionBar = () => {
 				<li className={"w-1/5"}>
 					<a href={"/dashboard/invoices"} className={"flex gap-2 flex-col items-center justify-center  h-16"}>
 						<span className={"fa fa-headset text-slate-400"}></span>
-						<span className={"text-sm"}>
+						<span className={"text-xs"}>
 							{language.support}
 						</span>
 					</a>
