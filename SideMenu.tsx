@@ -8,8 +8,14 @@ import { AuthStores } from "./stores/AuthStore";
 const SideMenu = () => {
 
 	const [isAuthenticated, setIsAuthenticated] = useState(AuthStores.getSnapshot());
+	const [isHydrated, setIsHydrated] = useState(false); 
+
+	useEffect(()=>{
+		console.log(isAuthenticated)
+	},[isAuthenticated])
 
 	useEffect(() => {
+		setIsHydrated(true);
 	  const unsubscribe = AuthStores.subscribe(() => {
 		setIsAuthenticated(AuthStores.getSnapshot());
 	  });
@@ -50,7 +56,7 @@ const SideMenu = () => {
 						<a href={"/auth"}
 								className={"flex flex-col gap-4 items-center justify-center bg-bg-gilace rounded-lg p-4  text-slate-50 active:scale-105 transition-all "}>
 								<span className={"far fa-user-crown text-4xl text-violet-300 opacity-70"}></span>
-								<span>{isAuthenticated ? Language().profile : Language().login_to_panel}</span>
+								<span>{isHydrated && isAuthenticated ? Language().profile : Language().login_to_panel}</span>
 							</a>
 					</div>
 					<div className={"grid grid-cols-2 gap-4"}>
