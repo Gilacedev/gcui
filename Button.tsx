@@ -1,5 +1,5 @@
 import ColorTypes from "./functions/ColorTypes";
-import React, {ElementType, HTMLAttributes} from 'react';
+import React, { ElementType, HTMLAttributes } from 'react';
 import Loader from "@/components/Loader";
 
 interface ComponentProps extends HTMLAttributes<HTMLOrSVGElement> {
@@ -8,15 +8,17 @@ interface ComponentProps extends HTMLAttributes<HTMLOrSVGElement> {
 	icon?: React.ReactNode;
 	color?: ColorTypes | string;
 	href?: string;
+	type?:string
 }
 
 const Button: React.FC<ComponentProps> = (
 	{
-		tag :  Tag = 'button',
-		children : children,
-		particular : particular,
-		icon : icon,
-		...props}
+		tag: Tag = 'button',
+		children: children,
+		particular: particular,
+		icon: icon,
+		...props
+	}
 ) => {
 	const color = props.color || ColorTypes.default
 	let loading = props.loading ? true : false;
@@ -40,18 +42,18 @@ const Button: React.FC<ComponentProps> = (
 
 	let particularium: string | React.ReactNode = ""
 	if (particular) {
-		className += " relative particular"
+		className += "relative particular"
 		particularium = <div className={"flex-grow-0"}><i></i> <i></i> <i></i></div>
 	}
-	if(props.href){
+	if (props.href) {
 		Tag = 'a'
 	}
-	if(props.className){
+	if (props.className) {
 		className += " " + props.className
 	}
 
 	return (
-		<Tag {...props} className={className } disabled={(props.loading || props.disabled)?true:false}>
+		<Tag {...props} className={className} disabled={(props.loading || props.disabled) ? true : false}>
 			{
 				!loading &&
 				children
