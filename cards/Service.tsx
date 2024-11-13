@@ -11,7 +11,7 @@ export default function Service({service}: { service: content }) {
 	}
 	return (
 		<Blocks.Gradient className={"relative"}>
-			<div className={"relative z-10 -my-8 text-center pb-10 px-4"}>
+			<div className={"relative z-10 -my-8 text-center pb-10  lg:px-4 px-2"}>
 				<div className={"bg-gradient-shadow w-full h-12"}></div>
 				<H2 element={"h3"} className={"my-2 text-orange-400"}>
 					<span className={"fa fa-bolt me-2"} />
@@ -21,7 +21,7 @@ export default function Service({service}: { service: content }) {
 					{service.short_description}
 				</Paragraph>
 				<div className={"my-4 w-full"}>
-					<Button color={ColorTypes.default} icon={<span className={"fas fa-shopping-cart"}></span>} href={"/services/" +"/"+ service.slug} tag={"a"}>
+					<Button color={ColorTypes.default} icon={<span className={"fas fa-shopping-cart lg:flex hidden"}></span>} href={"/services/" +"/"+ service.slug} tag={"a"}>
 						مشاهده و خرید
 					</Button>
 				</div>

@@ -51,7 +51,7 @@ const AlertMessage = ({data}: { data:content }) => {
 				</div>
 				{
 					extraFeatures.url &&
-                    <div className={"w-52"}>
+                    <div className={"w-52 flex justify-center items-center"}>
                         <Button tag={"a"} href={extraFeatures.url} icon={<span className={"far fa-chevron-left"}/>}>
 							<span>{extraFeatures.btn_title}</span>
                         </Button>

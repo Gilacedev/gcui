@@ -5,7 +5,6 @@ import Blocks from "@/components/Blocks";
 import ColorTypes from "@/components/functions/ColorTypes";
 
 const Business = ({business, editable = false}) => {
-	console.log("business", business)
 	return (
 		<Blocks.Dark className={"p-4 rounded-2xl"}>
 			<div className={"rounded-2xl rounded-tl-[100px] bg-slate-900 bg-opacity-60 absolute z-[2] top-0 left-0 w-full h-full backdrop-blur-3xl"}></div>
@@ -48,8 +47,8 @@ const Business = ({business, editable = false}) => {
 				</div>
 				{
 					editable &&
-                    <div className={"flex gap-2"}>
-                        <Button className={"flex-1"} color={ColorTypes.primary} tag={"a"}
+                    <div className={"flex justify-between w-full gap-2"}>
+                        <Button className={"flex"} color={ColorTypes.primary} tag={"a"}
                                 href={`/management/business/${business.id}`}>
 						<span>
 							{Language().management}

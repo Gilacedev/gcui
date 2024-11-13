@@ -44,7 +44,7 @@ const Bordered:React.FC<blockProps> = ({...props})=>{
 }
 const Dark:React.FC<blockProps> = ({...props})=>{
 	return (
-		<div className={`relative p-4 bg-slate-900 bg-opacity-50 rounded-xl text-slate-50 ${props.className} ${props.particular?"particular":""}`}>
+		<div className={`relative p-4 bg-slate-900 bg-opacity-50 rounded-xl mx-2 lg:mx-0 text-slate-50 ${props.className} ${props.particular?"particular":""}`}>
 			{props.children}
 			{
 				props.particular &&

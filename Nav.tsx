@@ -6,11 +6,6 @@ import Device from "./functions/Device";
 import ColorTypes from "./functions/ColorTypes.ts";
 import Image from "./Image";
 import NavbarBars from "@/components/NavbarBars";
-import Language from "@/locales/Language";
-import {cookies} from "next/headers";
-import MenuBasketButton from "@/components/MenuBasketButton";
-import {useSyncExternalStore} from "react";
-import {AuthStores} from "@/components/stores/AuthStore";
 import ActionBarDesktop from "@/components/ActionBarDesktop";
 
 

@@ -17,8 +17,6 @@ const Map = ({settings}) => {
 				null,
 				false // Lazy load the plugin
 			);
-
-			console.log("Set", settings)
 			mapRef.current = new mapboxgl.Map({
 				style: 'mapbox://styles/mapbox/dark-v10',
 				container: mapContainerRef.current,
