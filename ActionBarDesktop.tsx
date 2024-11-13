@@ -36,7 +36,6 @@ const ActionBarDesktop = () => {
 					</div>
 					<div>
 						<Button color={ColorTypes.default} onClick={() => {
-							AuthStores.setAuth(false)
 							router.replace("/management")
 						}} icon={<span className={"far fa-user-gear"} />} />
 					</div>
