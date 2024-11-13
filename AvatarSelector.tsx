@@ -22,9 +22,7 @@ const AvatarSelector = (props) => {
 		localH = 300
 	}
 	let aspect = localW / localH;
-	const handleOk = () => {
-		setIsModalOpen(false);
-	};
+
 	const handleCancel = () => {
 		setIsModalOpen(false);
 	};
@@ -144,7 +142,7 @@ const AvatarSelector = (props) => {
 						</ReactCrop>
 					</div>
 					<div className={"p-4 flex gap-2 items-center"}>
-						<Button color={ColorTypes.primary} onClick={confirmCrop}
+						<Button type='button' color={ColorTypes.primary} onClick={confirmCrop}
 								icon={<span className={"fa fa-crop"}/>}>
 							{Language().crop}
 						</Button>
