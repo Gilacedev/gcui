@@ -20,9 +20,9 @@ export default function Product({product}: { product: content }) {
 	let localMedia = product.avatar ? process.env.NEXT_PUBLIC_UPLOAD_URL+"/"+product.avatar : "assets/images/image-placeholder.svg";
 	return (
 		<Blocks.Gradient className={"relative mt-8 w-full"}>
-			<div className={"relative z-10 -my-8 text-center pb-10 px-4"}>
+			<div className={"relative z-10 -my-8 text-center pb-10 px-4 "}>
 				<div className={"animate-onTheEarth"}>
-					<div className={"w-3/4 mx-auto "} >
+					<div className={"w-3/4 mx-auto rounded-md"} >
 						<Image src={localMedia} alt={product.title} type={"contain"}/>
 					</div>
 				</div>
