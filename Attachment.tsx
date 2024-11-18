@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import Button from "@/components/Button";
 import ColorTypes from "@/components/functions/ColorTypes";
 
-const Attachment = ({ inputName, setFilesInForm ,children , loading }) => {
-	const [files, setFiles] = useState([]);
+const Attachment = ({ inputName, setFilesInForm, children, loading , files , setFiles }) => {
+
+
 
 	useEffect(() => {
 		// Update parent form with the current files
@@ -25,7 +26,7 @@ const Attachment = ({ inputName, setFilesInForm ,children , loading }) => {
 			<input
 				type="file"
 				id={`file-input-${inputName}`}
-				style={{display: 'none'}}
+				style={{ display: 'none' }}
 				onChange={handleFileChange}
 				multiple
 			/>
@@ -33,7 +34,7 @@ const Attachment = ({ inputName, setFilesInForm ,children , loading }) => {
 				{children}
 				<div className={"absolute left-2 bottom-2 flex gap-2"}>
 					<Button type={"button"} onClick={() => document.getElementById(`file-input-${inputName}`).click()}>
-						<span className={"fa fa-paperclip"}/>
+						<span className={"fa fa-paperclip"} />
 					</Button>
 					<Button type={"submit"} color={ColorTypes.primary} loading={loading}> <span
 						className={"far fa-paper-plane-top rotate-180"}></span> </Button>
@@ -44,7 +45,7 @@ const Attachment = ({ inputName, setFilesInForm ,children , loading }) => {
 				{files.map((file, index) => (
 					<div key={index} className={"flex items-center gap-2 bg-indigo-800 p-2 text-xs rounded"}>
 						<span>{file.name}</span>
-						<span className={"fa fa-times cursor-pointer"} onClick={() => removeFile(index)}/>
+						<span className={"fa fa-times cursor-pointer"} onClick={() => removeFile(index)} />
 					</div>
 				))}
 			</div>
