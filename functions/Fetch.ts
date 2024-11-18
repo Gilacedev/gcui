@@ -1,27 +1,28 @@
 type ConfigType = {
-	method : "get"|"post"|"put"|"delete"|"patch"|"head"|"options"|"connect"|"trace"|"GET"|"POST"|"PUT"|"DELETE"|"PATCH"|"HEAD"|"OPTIONS"|"CONNECT"|"TRACE",
-	headers? : object | object[] | null,
-	authorization? : boolean,
-	dataType? : string,
-	cache ?: string,
-	url : string ,
+	method: "get" | "post" | "put" | "delete" | "patch" | "head" | "options" | "connect" | "trace" | "GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "OPTIONS" | "CONNECT" | "TRACE",
+	headers?: object | object[] | null,
+	authorization?: boolean,
+	dataType?: string,
+	cache?: string,
+	url: string,
 	strictSSL?: boolean,
 	isFile?: boolean,
-	data? :  ReadableStream<any> | Blob | ArrayBufferView | ArrayBuffer | FormData | URLSearchParams | string | object | null,
+	timeout?: number
+	data?: ReadableStream<any> | Blob | ArrayBufferView | ArrayBuffer | FormData | URLSearchParams | string | object | null,
 } | null
 type ReactionType = undefined | Function
-export async function Fetch(config:ConfigType , success:ReactionType, failed:ReactionType) {
+export async function Fetch(config: ConfigType, success: ReactionType, failed: ReactionType) {
 	let rawResponse;
 	try {
-		const cacheTypesArray = ["no-cache", "default" , "reload" , "force-cache" , "only-if-cached" , "no-store"]
-
-		if(config && config.authorization){
+		const cacheTypesArray = ["no-cache", "default", "reload", "force-cache", "only-if-cached", "no-store"]
+		let timeOut = config?.timeout ? config.timeout : 6000
+		if (config && config.authorization) {
 			let token = ""
 			if (typeof window !== "undefined") {
 				token = await fetch("/webservice/cookie/api", {}).then((res) => res.json()).then((data) => data.token);
 			}
 			console.log("client token", token)
-			if(token !== "") {
+			if (token !== "") {
 				config.headers = {
 					...config.headers,
 					Authorization: `Bearer ${token}`
@@ -29,24 +30,24 @@ export async function Fetch(config:ConfigType , success:ReactionType, failed:Rea
 			}
 
 		}
-		const fetchConfigs :RequestInit | undefined = {
+		const fetchConfigs: RequestInit | undefined = {
 			method: config.method || 'GET',
-			withCredentials:config?.authorization?? false,
+			withCredentials: config?.authorization ?? false,
 			headers: {
 				Accept: 'application/json',
 				...config.headers,
 			},
-			dataType: config.dataType?? "application/json",
-			cache:"no-store",
+			dataType: config.dataType ?? "application/json",
+			cache: "no-store",
 			strictSSL: false,
-			signal: AbortSignal.timeout(5000),
+			signal: AbortSignal.timeout(timeOut),
 		}
 		if (config.data) {
 			if (fetchConfigs) {
 				fetchConfigs.body = config.data
 			}
 		}
-		rawResponse = await fetch(config.url, {...fetchConfigs,cache:"no-store"});
+		rawResponse = await fetch(config.url, { ...fetchConfigs, cache: "no-store" });
 		if (rawResponse.ok) {
 			if (config.isFile) {
 				if (typeof success === 'function') {
