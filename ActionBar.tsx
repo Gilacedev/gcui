@@ -6,14 +6,19 @@ import Badge from "@/components/Badge";
 import ColorTypes from "@/components/functions/ColorTypes";
 import Language from "@/locales/Language";
 import ActionBarBasket from "@/components/ActionBarBasket";
-import { useSyncExternalStore } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import { AuthStores } from './stores/AuthStore';
 
 
 const ActionBar = () => {
 	const language = Language("common");
 	const currentPath = usePathname();
+	const [authStatus, setAuthStatus] = useState(false);
 	const auth = useSyncExternalStore(AuthStores.subscribe, AuthStores.getSnapshot, AuthStores.getServerSnapshot);
+
+	useEffect(() => {
+		setAuthStatus(auth)
+	}, [auth])
 
 	const items = [
 		{ path: '/dashboard/businesses', icon: 'fa fa-briefcase', label: language.businesses },
@@ -21,7 +26,7 @@ const ActionBar = () => {
 		{ path: '/dashboard/invoices', icon: 'fa fa-bell', label: language.events, hasBadge: true, badgeCount: 2 },
 		{ path: '/dashboard/support', icon: 'fa fa-headset', label: language.support },
 	];
-	if (auth) {
+	if (authStatus) {
 		return (
 			<div className="fixed bottom-2 left-4 rounded-2xl w-[calc(100dvw-2rem)] bg-violet-900 bg-opacity-20 backdrop-blur-3xl h-16 text-slate-300 z-40">
 				<ul className="flex justify-stretch">
@@ -48,6 +53,8 @@ const ActionBar = () => {
 				</ul>
 			</div>
 		);
+	} else {
+		return (<></>)
 	}
 
 };
