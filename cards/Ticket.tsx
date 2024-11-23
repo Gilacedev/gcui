@@ -9,7 +9,7 @@ const Ticket = ({ticket}) => {
 		<Blocks.Dark >
 			<div className={"flex items-center justify-between text-xs"}>
 				<div className={"text-slate-600"}>
-					{ticket.business.name}
+					{ticket.business && ticket.business.name}
 				</div>
 				<div>
 					<Badge color={ColorTypes.default} >

@@ -13,8 +13,6 @@ import {AuthStores} from "@/components/stores/AuthStore";
 import Loader from "@/components/Loader";
 
 const Basket = () => {
-
-
 	const open = useSyncExternalStore(BasketStores.subscribe, BasketStores.getSnapshot, BasketStores.getServerSnapshot);
 	const auth = useSyncExternalStore(AuthStores.subscribe, AuthStores.getSnapshot, AuthStores.getServerSnapshot);
 	const [storageBasketItems, setStorageBasketItems] = useState([]);
@@ -126,7 +124,7 @@ const Basket = () => {
 					}
 				</div>
 				{
-					!auth && <Login/>
+					!auth && <Login login-for-shopping={true}/>
 				}
 				{
 					auth && <div>
