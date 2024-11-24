@@ -1,20 +1,21 @@
 "use client"
-import {useEffect, useState, useSyncExternalStore} from "react";
-import {BasketStores} from "@/components/stores/BasketStore";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import { BasketStores } from "@/components/stores/BasketStore";
 import Modal from "@/components/Modal";
-import {Get, Remove} from "@/components/functions/Basket";
-import {H1, Paragraph} from "@/components/Typo";
-import {getPayable} from "@/models/PayableModel";
+import { Get, Remove } from "@/components/functions/Basket";
+import {Paragraph } from "@/components/Typo";
+import { getPayable } from "@/models/PayableModel";
 import Language from "@/locales/Language";
 import ColorTypes from "@/components/functions/ColorTypes";
 import Button from "@/components/Button";
 import Login from "@/components/forms/Login";
-import {AuthStores} from "@/components/stores/AuthStore";
+import { AuthStores } from "@/components/stores/AuthStore";
 import Loader from "@/components/Loader";
 
 const Basket = () => {
 	const open = useSyncExternalStore(BasketStores.subscribe, BasketStores.getSnapshot, BasketStores.getServerSnapshot);
 	const auth = useSyncExternalStore(AuthStores.subscribe, AuthStores.getSnapshot, AuthStores.getServerSnapshot);
+	const [loadingContinue, setLoadingContinue] = useState(false);
 	const [storageBasketItems, setStorageBasketItems] = useState([]);
 	useEffect(() => {
 		const basketItems = Get();
@@ -22,7 +23,7 @@ const Basket = () => {
 	}, [open])
 
 	//check in clientside to protect Hydration:
-	const [ isClient, setIsClient ] = useState(false);
+	const [isClient, setIsClient] = useState(false);
 	useEffect(() => {
 		setIsClient(true);
 	}, []);
@@ -31,7 +32,7 @@ const Basket = () => {
 	}
 
 
-	const PayableItem = ({item}) => {
+	const PayableItem = ({ item }) => {
 		const [payable, setPayable] = useState({});
 		const [loading, setLoading] = useState(true);
 		useEffect(() => {
@@ -39,46 +40,47 @@ const Basket = () => {
 				return;
 			}
 			setLoading(true);
-			getPayable(item).then((res) => {
+			getPayable(parseInt(item)).then((res) => {
 				setPayable(res);
 				setLoading(false);
 			})
 		}, [item])
-		return <div>
+
+		return(<div>
 
 			{
 				payable && !loading &&
 				<div className={"flex items-center gap-2 justify-between py-2"}>
 					<div className={"text-green-400"}>
-						{payable.content ? payable.content.title :""}
+						{payable.content ? payable.content.title : ""}
 					</div>
 					<div className={"flex items-center"}>
 						<div className={"text-slate-400"}>
 							{payable.title}
 						</div>
 						<div className={"px-1"} >/</div>
-                        <div className={"text-slate-400"}>
+						<div className={"text-slate-400"}>
 							{
 								payable.duration === "monthly" &&
-                                <div className={""}>
+								<div className={""}>
 									{Language().monthly}
-                                </div>
+								</div>
 							}
 							{
 								payable.duration === "yearly" &&
-                                <div className={""}>
+								<div className={""}>
 									{Language().yearly}
-                                </div>
+								</div>
 							}
 							{
 								payable.duration === "lifetime" &&
-                                <div className={""}>
+								<div className={""}>
 									{Language().lifetime}
-                                </div>
+								</div>
 							}
-                        </div>
-                    </div>
-                    <div className={"flex gap-1"}>
+						</div>
+					</div>
+					<div className={"flex gap-1"}>
 						<span>
 							{new Intl.NumberFormat('fa-IR').format(payable.price)}
 						</span>
@@ -87,23 +89,23 @@ const Basket = () => {
 						</span>
 					</div>
 					<div>
-						<Button color={ColorTypes.danger} icon={<span className={"far fa-trash-alt"}/>} onClick={()=>{
+						<Button color={ColorTypes.danger} icon={<span className={"far fa-trash-alt"} />} onClick={() => {
 							//remove from basket
-							Remove(payable.slug)
+							Remove(payable.id)
 							const basketItems = Get();
 							setStorageBasketItems(basketItems);
 
-						}}/>
+						}} />
 					</div>
 				</div>
 			}
 			{
 				loading && <Loader />
 			}
-		</div>
+		</div>)
 	}
 	return (
-		<Modal open={open} onClose={()=>{
+		<Modal open={open} onClose={() => {
 			BasketStores.setBasket(false)
 		}} name={"basket-modal"} zindex={10}>
 			<div className={"p-4 flex flex-col gap-2"}>
@@ -113,10 +115,9 @@ const Basket = () => {
 				<div className={"pb-2 border-b border-slate-600"}>
 					{
 						open && storageBasketItems.map((item, index) => {
-							return <PayableItem key={index} item={item}/>
+							return <PayableItem key={index} item={item} />
 						})
 					}
-
 					{
 						storageBasketItems.length === 0 ? <div className={"text-center"} >
 							{Language().emptyBasket}
@@ -124,11 +125,16 @@ const Basket = () => {
 					}
 				</div>
 				{
-					!auth && <Login login-for-shopping={true}/>
+					!auth && <Login login-for-shopping={true} />
 				}
 				{
 					auth && <div>
-						<Button color={ColorTypes.primary} tag={"a"} href={"/management/pay"} icon={<span className={"far fa-chevron-left"}/>}>
+						<Button
+							onClick={() => { setLoadingContinue(true) }}
+							loading={loadingContinue ? 1 : 0}
+							color={ColorTypes.primary} tag={"a"}
+							href={"/management/pay"}
+							icon={<span className={"far fa-chevron-left"} />}>
 							{Language().continue}
 						</Button>
 					</div>
