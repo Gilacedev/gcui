@@ -1,5 +1,5 @@
 "use client";
-export default function Add(slug:string)
+export default function Add(id:number)
 {
 	if(typeof window === "undefined")
 	{
@@ -17,13 +17,13 @@ export default function Add(slug:string)
 			console.log(e)
 		}
 	}
-	if (cards.includes(slug)) {
+	if (cards.includes(id)) {
 		return;
 	}
-	cards.push(slug);
+	cards.push(id);
 	localStorage.setItem("cards",JSON.stringify(cards));
 }
-export function Remove(slug:string)
+export function Remove(id:number)
 {
 	if(typeof window === "undefined")
 	{
@@ -42,7 +42,7 @@ export function Remove(slug:string)
 			return [];
 		}
 	}
-	cards = cards.filter((item) => item !== slug);
+	cards = cards.filter((item) => item !== id);
 	localStorage.setItem("cards",JSON.stringify(cards));
 }
 export function Get()
@@ -54,7 +54,6 @@ export function Get()
 
 	let storageCards = localStorage.getItem("cards");
 	let cards = []
-	console.log(storageCards)
 	if(storageCards)
 	{
 		try {

@@ -140,7 +140,7 @@ const Plans = ({plans}) => {
 					<div className={"grid grid-cols-1"}>
 						<Button particular={item._featured} color={ColorTypes.primary} className={"!justify-center"} icon={<span className={"far fa-shopping-cart"}></span>} onClick={()=>{
 							//add to cart
-							Add(item.slug)
+							Add(item.id)
 							BasketStores.setBasket(true)
 						}}>
 							<span>{language()["build_this_service"]}</span>
