@@ -4,6 +4,7 @@ import Button from "../Button";
 import ColorTypes from "../functions/ColorTypes";
 import content from "@/types/Content";
 import {bool} from "prop-types";
+import Language from "@/locales/Language";
 
 export default function Service({service}: { service: content }) {
 	if (!service) {
@@ -22,7 +23,7 @@ export default function Service({service}: { service: content }) {
 				</Paragraph>
 				<div className={"my-4 w-full"}>
 					<Button color={ColorTypes.default} icon={<span className={"fas fa-shopping-cart lg:flex hidden"}></span>} href={"/services/" +"/"+ service.slug} tag={"a"}>
-						مشاهده و خرید
+						{Language().view_and_buy}
 					</Button>
 				</div>
 			</div>

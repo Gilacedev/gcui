@@ -4,6 +4,7 @@ import Button from "../Button";
 import ColorTypes from "../functions/ColorTypes";
 import Image from "../Image";
 import content from "@/types/Content";
+import Language from "@/locales/Language";
 
 interface SloganProps {
 	media: string;
@@ -37,7 +38,7 @@ export default function Product({product}: { product: content }) {
 				</Paragraph>
 				<div className={"my-4 w-full"}>
 					<Button color={ColorTypes.default} icon={<span className={"fas fa-shopping-cart"}></span>} href={"/products/"+product.slug} tag={"a"}>
-						مشاهده و خرید
+						{Language().view_and_buy}
 					</Button>
 				</div>
 			</div>
