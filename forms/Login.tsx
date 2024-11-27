@@ -52,6 +52,8 @@ const Login = ({ beforShopping = false }: login) => {
 			} else {
 				router.push('/management')
 			}
+		}else{
+			setLoading(false);
 		}
 	}
 	return (
@@ -86,7 +88,6 @@ const Login = ({ beforShopping = false }: login) => {
 							</div>
 						</div>
 					</form>
-
 				}
 				{
 					step === 2 &&
