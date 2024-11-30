@@ -4,10 +4,12 @@ import Badge from "@/components/Badge";
 import ColorTypes from "@/components/functions/ColorTypes";
 import Language from "@/locales/Language";
 import {BasketStores} from "@/components/stores/BasketStore";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useSyncExternalStore} from "react";
+import { BasketCountStores } from "./stores/BasketCountStore";
 
 const ActionBarBasket = () => {
 	const [totalBasket , setTotalBasket] = useState(0)
+	const count = useSyncExternalStore(BasketCountStores.subscribe, BasketCountStores.getSnapshot, BasketCountStores.getServerSnapshot);
 	useEffect(()=>{
 		let total = Get()
 		setTotalBasket(total?total.length:0)
@@ -25,7 +27,7 @@ const ActionBarBasket = () => {
 			{
 				totalBasket > 0 &&
                 <div className={"absolute -top-2 left-1/2 "}>
-                    <Badge color={ColorTypes.danger}>{totalBasket}</Badge>
+                    <Badge color={ColorTypes.danger}>{count}</Badge>
                 </div>
 			}
 		</div>

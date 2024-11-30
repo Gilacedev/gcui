@@ -1,4 +1,7 @@
 "use client";
+
+import { BasketCountStores } from "../stores/BasketCountStore";
+
 export default function Add(id: number , content_id:number) {
 	if (typeof window === "undefined") {
 	  return;
@@ -29,6 +32,7 @@ export default function Add(id: number , content_id:number) {
   
 	// Add the ID to the array and update localStorage
 	cards.push({id:id , content_id:content_id});
+	BasketCountStores.setBasketCount(cards.length)
 	localStorage.setItem("cards", JSON.stringify(cards));
   }
   
@@ -52,6 +56,7 @@ export function Remove(id:number)
 		}
 	}
 	cards = cards.filter((item) => item.id !== id);
+	BasketCountStores.setBasketCount(cards.length)
 	localStorage.setItem("cards",JSON.stringify(cards));
 }
 export function Get()
