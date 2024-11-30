@@ -1,28 +1,37 @@
 "use client";
-export default function Add(id:number)
-{
-	if(typeof window === "undefined")
-	{
-		return;
+export default function Add(id: number , content_id:number) {
+	if (typeof window === "undefined") {
+	  return;
 	}
-	//first get the card from localStorage:
+  
+	// Get the cards from localStorage
 	let storageCards = localStorage.getItem("cards");
-	let cards = []
-	if(storageCards)
-	{
-		try {
-			cards = JSON.parse(storageCards);
-		}
-		catch (e) {
-			console.log(e)
-		}
-	}
-	if (cards.includes(id)) {
+	let cards: { id: number; content_id: number }[] = [];
+
+  
+	if (storageCards) {
+	  try {
+		cards = JSON.parse(storageCards);
+	  } catch (e) {
+		console.error("Error parsing localStorage data:", e);
 		return;
+	  }
 	}
-	cards.push(id);
-	localStorage.setItem("cards",JSON.stringify(cards));
-}
+  
+	// Check if the ID already exists (ensuring type match)
+	if (cards.some((cardId) => cardId.id === id)) {
+	  return;
+	}
+	 // Check if the contentId already exists
+	 if (cards.some((item) => item.content_id === content_id)) {
+		return;
+	  }
+  
+	// Add the ID to the array and update localStorage
+	cards.push({id:id , content_id:content_id});
+	localStorage.setItem("cards", JSON.stringify(cards));
+  }
+  
 export function Remove(id:number)
 {
 	if(typeof window === "undefined")
@@ -42,7 +51,7 @@ export function Remove(id:number)
 			return [];
 		}
 	}
-	cards = cards.filter((item) => item !== id);
+	cards = cards.filter((item) => item.id !== id);
 	localStorage.setItem("cards",JSON.stringify(cards));
 }
 export function Get()
