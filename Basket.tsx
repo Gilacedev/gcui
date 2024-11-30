@@ -115,7 +115,7 @@ const Basket = () => {
 				<div className={"pb-2 border-b border-slate-600"}>
 					{
 						open && storageBasketItems.map((item, index) => {
-							return <PayableItem key={index} item={item} />
+							return <PayableItem key={index} item={item.id} />
 						})
 					}
 					{
