@@ -77,14 +77,13 @@ const Plans = ({plans}) => {
 						})}
 					</div>
 				</div>
-				<div className={"font-light"}>
+				<div className={"font-light flex gap-1"}>
 					<span className={"pe-2"}>
-						{language()["duration"]}
-					</span>:
-					<span className={"text-violet-400"}>
+					{language()["duration"]}
+					</span>: 
+					 <span className={"text-violet-400"}>
 						{language()[item.duration]}
 					</span>
-
 				</div>
 				<div className={"flex justify-between items-center pt-4 border-t border-slate-700"}>
 					<div>
@@ -140,7 +139,7 @@ const Plans = ({plans}) => {
 					<div className={"grid grid-cols-1"}>
 						<Button particular={item._featured} color={ColorTypes.primary} className={"!justify-center"} icon={<span className={"far fa-shopping-cart"}></span>} onClick={()=>{
 							//add to cart
-							Add(item.id)
+							Add(item.id , item.content_id)
 							BasketStores.setBasket(true)
 						}}>
 							<span>{language()["build_this_service"]}</span>
