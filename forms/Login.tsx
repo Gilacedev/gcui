@@ -52,7 +52,9 @@ const Login = ({ beforShopping = false }: login) => {
 			} else {
 				router.push('/management')
 			}
-		}else{
+		}
+		else
+		{
 			setLoading(false);
 		}
 	}

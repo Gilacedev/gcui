@@ -1,6 +1,5 @@
 "use client";
-
-import { usePathname } from "next/navigation";
+import { usePathname } from 'next/navigation';
 import Badge from "@/components/Badge";
 import ColorTypes from "@/components/functions/ColorTypes";
 import Language from "@/locales/Language";

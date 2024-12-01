@@ -1,6 +1,10 @@
+"use client";
 import ColorTypes from "./functions/ColorTypes";
 import React, { ElementType, HTMLAttributes } from 'react';
 import Loader from "@/components/Loader";
+import {useRouter} from "next/navigation";
+import Link from "next/link";
+import TransitionLink from "@/components/TransitionLink";
 
 interface ComponentProps extends HTMLAttributes<HTMLOrSVGElement> {
 	tag?: ElementType;
@@ -20,6 +24,7 @@ const Button: React.FC<ComponentProps> = (
 		...props
 	}
 ) => {
+	const router = useRouter();
 	const color = props.color || ColorTypes.default
 	let loading = props.loading ? true : false;
 
@@ -46,11 +51,38 @@ const Button: React.FC<ComponentProps> = (
 		particularium = <div className={"flex-grow-0"}><i></i> <i></i> <i></i></div>
 	}
 	if (props.href) {
-		Tag = 'a'
+		return (
+			<Link {...props} className={className} disabled={(props.loading || props.disabled) ? true : false} onClick={(e)=>{
+				e.preventDefault();
+				document.querySelector(".page-transition").classList.add("bye")
+				router.push(props.href as string);
+
+			}}>
+				{
+					!loading &&
+					children
+				}
+				{
+					!loading &&
+					icon
+				}
+				{
+					!loading &&
+					particularium
+				}
+				{
+					loading &&
+                    <Loader />
+				}
+			</Link>
+
+		)
+
 	}
 	if (props.className) {
 		className += " " + props.className
 	}
+
 
 	return (
 		<Tag {...props} className={className} disabled={(props.loading || props.disabled) ? true : false}>

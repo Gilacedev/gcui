@@ -1,6 +1,8 @@
 "use client"
 import Language from "@/locales/Language";
 import { usePathname } from 'next/navigation'
+import Link from "next/link";
+import TransitionLink from "@/components/TransitionLink";
 
 interface MenuItemProps {
 	id:number;
@@ -29,10 +31,10 @@ const MenuItem = ({ item }: { menuElement: MenuItemProps }) => {
 	const title:string = Language()[item.title]
 	const isUrlExists = getActiveItem({pathname , item})
 	return (
-		<a href={item.url} className={`inline-flex items-center gap-2 p-2 box-border hover:border-b-4 border-violet-500 transition-all leading-[3rem] ${isUrlExists && "border-b-4"}`}>
+		<TransitionLink href={item.url} className={`inline-flex items-center gap-2 p-2 box-border hover:border-b-4 border-violet-500 transition-all leading-[3rem] ${isUrlExists && "border-b-4"}`}>
 			<span className={`text-slate-400 far fa-${item.icon}`}></span>
 			<span className={"text-slate-50"}>{title}</span>
-		</a>
+		</TransitionLink>
 	)
 }
 export default MenuItem
