@@ -8,7 +8,7 @@ import Badge from "@/components/Badge";
 import Language from "@/locales/Language";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import Blocks from "./Blocks";
+import NotificationBox from "./NotificationBox";
 
 const ActionBarDesktop = () => {
   const authStatus = useSyncExternalStore(
@@ -68,24 +68,7 @@ const ActionBarDesktop = () => {
                     : "scale-90 opacity-0"
                 }`}
               >
-                <div className="bg-slate-800 rounded-2xl p-4">
-                  <div className="p-4 border-b">
-                    <p className="font-semibold text-slate-50">Notifications</p>
-                  </div>
-                  <ul className="divide-y divide-gray-200">
-                    <li className="p-4 hover:bg-gray-100">Notification 1</li>
-                    <li className="p-4 hover:bg-gray-100">Notification 2</li>
-                    <li className="p-4 hover:bg-gray-100">Notification 3</li>
-                  </ul>
-                  <div className="p-4 text-center border-t">
-                    <a
-                      href="/notifications"
-                      className="text-blue-500 hover:underline"
-                    >
-                      View all
-                    </a>
-                  </div>
-                </div>
+               <NotificationBox/>
               </div>
             )}
           </div>

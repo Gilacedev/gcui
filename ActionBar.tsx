@@ -7,6 +7,7 @@ import ActionBarBasket from "@/components/ActionBarBasket";
 import { useEffect, useState, useRef, useSyncExternalStore } from "react";
 import { AuthStores } from "./stores/AuthStore";
 import Blocks from "./Blocks";
+import NotificationBox from "./NotificationBox";
 
 const ActionBar = () => {
 	const language = Language("common");
@@ -90,13 +91,8 @@ const ActionBar = () => {
 											? "scale-100 opacity-100"
 											: "scale-90 opacity-0"
 										}`}
-								>
-									<div className="bg-slate-800 rounded-2xl p-4">
-										<div className="p-4 border-b">
-											<p className="font-semibold text-slate-800">Notifications</p>
-										</div>
-										
-									</div>
+								>	
+								<NotificationBox/>
 								</div>
 							)}
 						</li>
