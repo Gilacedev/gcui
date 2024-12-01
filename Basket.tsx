@@ -11,6 +11,7 @@ import Button from "@/components/Button";
 import Login from "@/components/forms/Login";
 import { AuthStores } from "@/components/stores/AuthStore";
 import Loader from "@/components/Loader";
+import Empty from "@/components/Empty";
 
 const Basket = () => {
 	const open = useSyncExternalStore(BasketStores.subscribe, BasketStores.getSnapshot, BasketStores.getServerSnapshot);
@@ -109,26 +110,26 @@ const Basket = () => {
 			BasketStores.setBasket(false)
 		}} name={"basket-modal"} zindex={10}>
 			<div className={"p-4 flex flex-col gap-2"}>
-				<div className={"text-slate-300 pb-2 border-b border-slate-600"}>
-					<Paragraph element={"div"}>سبد خرید</Paragraph>
+				<div className={"text-slate-300 pb-2 border-b border-slate-600/20 text-xl font-bold"}>
+					<div>
+						{Language().basket}
+					</div>
 				</div>
-				<div className={"pb-2 border-b border-slate-600"}>
+				<div className={"pb-2 border-b border-slate-600/20"}>
 					{
 						open && storageBasketItems.map((item, index) => {
 							return <PayableItem key={index} item={item.id} />
 						})
 					}
 					{
-						storageBasketItems.length === 0 ? <div className={"text-center"} >
-							{Language().emptyBasket}
-						</div> : ""
+						storageBasketItems.length === 0 && <Empty amplitude={24} frequency={1.2} message={Language().emptyBasket} />
 					}
 				</div>
 				{
 					!auth && <Login login-for-shopping={true} />
 				}
 				{
-					auth && <div>
+					auth && <div className={"flex justify-end"}>
 						<Button
 							onClick={() => { setLoadingContinue(true) }}
 							loading={loadingContinue ? 1 : 0}
