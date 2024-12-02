@@ -22,7 +22,7 @@ const MenuBasketButton = () => {
 			}}
 					icon={<span className={"far fa-shopping-basket-alt"}/>}/>
 			<div className={"absolute -top-2 left-1/2 "}>
-				<Badge color={ColorTypes.danger} particular={true}>{count}</Badge>
+				<Badge color={ColorTypes.primary} particular={true}>{count}</Badge>
 			</div>
 		</div>)
 }

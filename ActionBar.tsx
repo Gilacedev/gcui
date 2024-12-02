@@ -8,6 +8,7 @@ import { useEffect, useState, useRef, useSyncExternalStore } from "react";
 import { AuthStores } from "./stores/AuthStore";
 import Blocks from "./Blocks";
 import NotificationBox from "./NotificationBox";
+import colorTypes from "@/components/functions/ColorTypes";
 
 const ActionBar = () => {
 	const language = Language("common");
@@ -64,7 +65,7 @@ const ActionBar = () => {
 					{items.map((item, index) => (
 						<li
 							key={index}
-							className="w-1/5 border-l border-slate-300 border-opacity-10 relative"
+							className={`w-1/5  relative`}
 							ref={item.icon === "fa fa-bell" ? notifRef : undefined} // Assign ref to the notification icon
 						>
 							<a
@@ -81,7 +82,7 @@ const ActionBar = () => {
 							</a>
 							{item.hasBadge && (
 								<div className="absolute -top-2 left-1/2">
-									<Badge color={ColorTypes.danger}>{item.badgeCount}</Badge>
+									<Badge color={colorTypes.primary}>{item.badgeCount}</Badge>
 								</div>
 							)}
 							{/* Notification submenu */}
@@ -97,7 +98,7 @@ const ActionBar = () => {
 							)}
 						</li>
 					))}
-					<li className="w-1/5 border-l border-slate-300 border-opacity-10 relative">
+					<li className="w-1/5  relative">
 						<ActionBarBasket />
 					</li>
 				</ul>

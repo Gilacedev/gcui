@@ -58,7 +58,7 @@ const ActionBarDesktop = () => {
               icon={<span className={"far fa-bell"} />}
             />
             <div className={"absolute -top-2 left-1/2"}>
-              <Badge color={ColorTypes.danger}>3</Badge>
+              <Badge color={ColorTypes.primary}>3</Badge>
             </div>
             {isOpen && (
               <div
