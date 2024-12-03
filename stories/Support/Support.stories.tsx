@@ -1,6 +1,6 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
-import Support, { SupportProps } from "../../gcui-main/cards/Support";
+import Support, { SupportProps } from "./Support";
 import ColorTypes from "@/gcui-main/functions/ColorTypes";
 
 const meta: Meta = {

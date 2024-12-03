@@ -29,3 +29,16 @@ Edit.args = {
   type: "edit",
   loading: false,
 };
+
+const formwithcontent: StoryFn<FormProps> = (args) => (
+  <div>
+    <Form {...args}></Form>
+  </div>
+);
+
+export const withcontent = form.bind({});
+withcontent.args = {
+  title: "Edit Form",
+  type: "edit",
+  loading: false,
+};

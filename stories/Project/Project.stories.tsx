@@ -1,5 +1,5 @@
 import React from "react";
-import Project from "@/gcui-main/cards/Project";
+import Project from "./Project";
 import { Meta, StoryFn } from "@storybook/react";
 
 interface Content {
@@ -20,9 +20,8 @@ export default {
   },
 } as Meta;
 
-// Sample data
 const defaultProject: Content = {
-  avatar: "example-avatar.jpg",
+  avatar: "/assets/images/gilace-logo.svg",
   title: "Sample Project",
   short_description: "This is a sample project description.",
   slug: "sample-project",
@@ -35,7 +34,6 @@ const placeholderProject: Content = {
   slug: "placeholder-project",
 };
 
-// Story template
 const project: StoryFn<{ data: Content }> = (args) => <Project {...args} />;
 
 export const Default = project.bind({});

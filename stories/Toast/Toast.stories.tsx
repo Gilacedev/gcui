@@ -4,13 +4,9 @@ import Toast from "./Toast";
 import { ToastStores } from "../../gcui-main/stores/ToastStore";
 import ColorTypes from "@/gcui-main/functions/ColorTypes";
 
-// Define metadata
 const meta: Meta = {
   title: "Components/Toast",
   component: Toast,
-  parameters: {
-    controls: { expanded: true },
-  },
 };
 
 export default meta;

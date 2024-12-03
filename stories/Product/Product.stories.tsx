@@ -1,5 +1,5 @@
 import React from "react";
-import Product from "@/gcui-main/cards/Product";
+import Product from "./Product";
 import { Meta, StoryFn } from "@storybook/react";
 
 // Mocking the `content` type
