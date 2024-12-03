@@ -1,38 +1,31 @@
 import Blocks from "../Blocks";
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Language from "@/locales/Language";
 import Button from "@/components/Button";
-import {getInvoice} from "@/models/InvoiceModel";
+import { getInvoice } from "@/models/InvoiceModel";
 import Loader from "@/components/Loader";
 
-const Invoice = ({invoice}) =>
-{
+const Invoice = ({ invoice }) => {
 
 	const [dbInvoice, setDbInvoice] = React.useState({});
 	const [loading, setLoading] = React.useState(true);
 	const expired = new Date(invoice.expired_at);
-	console.log("expired", expired)
 	let status = "pending";
 	let days_remained = Math.floor((expired - new Date()) / (1000 * 60 * 60 * 24));
-	console.log("days_remained", days_remained)
-	if(days_remained < 30)
-	{
+	if (days_remained < 30) {
 		status = "warning";
 	}
-	if(days_remained < 2)
-	{
+	if (days_remained < 2) {
 		status = "danger";
 	}
-	if(days_remained < 0)
-	{
+	if (days_remained < 0) {
 		status = "expired";
 	}
 	const get = async () => {
 		setLoading(true);
 		let apiInvoice = null;
 		apiInvoice = await getInvoice(invoice.invoice_number);
-		if(apiInvoice !== null)
-		{
+		if (apiInvoice !== null) {
 			setDbInvoice(apiInvoice)
 		}
 		else {
@@ -45,14 +38,14 @@ const Invoice = ({invoice}) =>
 		get()
 	}, []);
 
-	return(
+	return (
 		<Blocks.Dark>
 			<div className="">
 				<div className={"flex justify-between items-center  mb-4"}>
 					<div>
 						<span className={"text-sm pe-2"}>{Language().invoce_number}:</span>
-						<a className={"text-teal-600"} href={`/management/invoice/${invoice.invoce_number}`}>
-							 {invoice.invoice_number}
+						<a className={"text-teal-600"} href={`/management/invoice/${invoice.invoice_number}`}>
+							{invoice.invoice_number}
 						</a>
 					</div>
 					<div>
@@ -96,7 +89,7 @@ const Invoice = ({invoice}) =>
 						})
 					}
 				</div>
-				<div className={"border-y border-white border-opacity-10 py-4 text-end flex gap-2 items-center justify-end" } >
+				<div className={"border-y border-white border-opacity-10 py-4 text-end flex gap-2 items-center justify-end"} >
 					{
 						<span className={"text-slate-400 text-sm"}>
 							{Language().payable_price}
@@ -106,7 +99,7 @@ const Invoice = ({invoice}) =>
 					{
 						<span className={"text-cyan-500 flex gap-1"}>
 							<span>
-								{ Intl.NumberFormat().format(invoice.total) }
+								{Intl.NumberFormat().format(invoice.total)}
 							</span>
 							<span>
 								{Language().price_unit}
@@ -115,7 +108,7 @@ const Invoice = ({invoice}) =>
 					}
 				</div>
 				<div className={"mt-2 flex justify-between items-center"}>
-					<div className={"text-sm"}>
+					{!dbInvoice.is_paid ? <div className={"text-sm"}>
 						{
 							status === "expired" &&
 							<div className={"text-red-400"}>
@@ -134,12 +127,14 @@ const Invoice = ({invoice}) =>
 								{Language().invoice_warning}
 							</div>
 						}
-					</div>
-					<div>
+					</div> : <div className={"text-teal-400 text-sm"}>
+								{Language().invoice_paid}
+							</div>}
+					{days_remained >= 0 && !dbInvoice.is_paid && <div>
 						<Button color={"primary"} tag={"a"} href={`/management/invoice/${invoice.invoice_number}`} icon={<span className={"fa fa-chevron-left"}></span>}>
 							{Language().pay}
 						</Button>
-					</div>
+					</div>}
 				</div>
 			</div>
 		</Blocks.Dark>
