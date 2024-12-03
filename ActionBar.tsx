@@ -7,12 +7,16 @@ import ActionBarBasket from "@/components/ActionBarBasket";
 import { useEffect, useState, useRef, useSyncExternalStore } from "react";
 import { AuthStores } from "./stores/AuthStore";
 import NotificationBox from "./NotificationBox";
+import { getNotificationCount } from "@/models/NotificationModel";
+import Loader from "./Loader";
 
 const ActionBar = () => {
   const language = Language("common");
   const currentPath = usePathname();
   const [authStatus, setAuthStatus] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
   const notifRef = useRef<HTMLDivElement>(null);
 
   const auth = useSyncExternalStore(
@@ -20,6 +24,32 @@ const ActionBar = () => {
     AuthStores.getSnapshot,
     AuthStores.getServerSnapshot
   );
+
+  const fetchNotificationCount = async () => {
+    setLoading(true);
+    try {
+      const dbNotif = await getNotificationCount();
+      if (dbNotif !== null) {
+        setNotificationCount(dbNotif);
+      }
+    } catch (error) {
+      console.error("Failed to fetch notification count:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchNotificationCount();
+    // Set an interval to fetch notifications every 3 minutes
+    const intervalId = setInterval(() => {
+      fetchNotificationCount();
+    }, 180000); 
+
+    return () => {
+      clearInterval(intervalId); 
+    };
+  }, []);
 
   useEffect(() => {
     setAuthStatus(auth);
@@ -51,7 +81,7 @@ const ActionBar = () => {
       icon: "fa fa-bell",
       label: language.events,
       hasBadge: true,
-      badgeCount: 2,
+      badgeCount: notificationCount,
     },
     { path: "/dashboard/support", icon: "fa fa-headset", label: language.support },
   ];
@@ -64,12 +94,13 @@ const ActionBar = () => {
             <li
               key={index}
               className="w-1/5 relative"
-              ref={item.icon === "fa fa-bell" ? notifRef : undefined} 
+              ref={item.icon === "fa fa-bell" ? notifRef : undefined}
             >
               <a
                 href={item.path}
-                className={`flex gap-2 flex-col items-center justify-center h-16 ${currentPath === item.path ? "border-b-4 border-violet-400" : ""
-                  }`}
+                className={`flex gap-2 flex-col items-center justify-center h-16 ${
+                  currentPath === item.path ? "border-b-4 border-violet-400" : ""
+                }`}
                 onClick={
                   item.icon === "fa fa-bell"
                     ? (e) => {
@@ -80,12 +111,15 @@ const ActionBar = () => {
                 }
               >
                 <span
-                  className={`${item.icon
-                    } ${currentPath === item.path ? "text-violet-400" : "text-slate-400"}`}
+                  className={`${
+                    item.icon
+                  } ${
+                    currentPath === item.path ? "text-violet-400" : "text-slate-400"
+                  }`}
                 ></span>
                 <span className="text-xs">{item.label}</span>
               </a>
-              {item.hasBadge && (
+              {item.hasBadge && item.badgeCount > 0 && (
                 <div className="absolute -top-2 left-1/2">
                   <Badge color={ColorTypes.primary}>{item.badgeCount}</Badge>
                 </div>
@@ -93,10 +127,11 @@ const ActionBar = () => {
               {/* Notification submenu */}
               {item.icon === "fa fa-bell" && (
                 <div
-                  className={`absolute bottom-16 left-1/2 transform -translate-x-1/2 w-64 rounded-lg transition-all duration-300 ease-out overflow-hidden ${isNotifOpen
-                    ? "scale-100 opacity-100 translate-y-0"
-                    : "scale-90 opacity-0 translate-y-8 pointer-events-none"
-                    }`}
+                  className={`absolute bottom-16 left-1/2 transform -translate-x-1/2 w-64 rounded-lg transition-all duration-300 ease-out overflow-hidden ${
+                    isNotifOpen
+                      ? "scale-100 opacity-100 translate-y-0"
+                      : "scale-90 opacity-0 translate-y-8 pointer-events-none"
+                  }`}
                 >
                   <NotificationBox />
                 </div>
