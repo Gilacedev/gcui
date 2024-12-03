@@ -46,31 +46,30 @@ const ActionBarDesktop = () => {
   }
 
   return (
-    <div className={"flex gap-2"}>
+    <div className="flex gap-2">
       {authStatus && (
-        <div className={"flex gap-2"}>
+        <div className="flex gap-2">
           <MenuBasketButton />
-          <div className={"relative"} ref={menuRef}>
+          <div className="relative" ref={menuRef}>
             <Button
               color={ColorTypes.default}
-              tag={"button"}
+              tag="button"
               onClick={toggleMenu}
-              icon={<span className={"far fa-bell"} />}
+              icon={<span className="far fa-bell" />}
             />
-            <div className={"absolute -top-2 left-1/2"}>
+            <div className="absolute -top-2 left-1/2">
               <Badge color={ColorTypes.primary}>3</Badge>
             </div>
-            {isOpen && (
-              <div
-                className={`absolute left-0 top-12 w-64 shadow-lg rounded-lg bg-opacity-100 transition-all duration-500 ease-out transform ${
-                  isOpen
-                    ? "scale-100 opacity-100"
-                    : "scale-90 opacity-0"
-                }`}
-              >
-               <NotificationBox/>
-              </div>
-            )}
+            {/* Animated Notification Box */}
+            <div
+              className={`absolute left-0 top-12 w-64 shadow-lg rounded-lg bg-slate-800 bg-opacity-100 transition-all duration-500 ease-out overflow-hidden transform ${
+                isOpen
+                  ? "max-h-96 opacity-100 scale-100 translate-y-0"
+                  : "max-h-0 opacity-0 scale-95 -translate-y-4"
+              }`}
+            >
+              <NotificationBox />
+            </div>
           </div>
           <div>
             <Button
@@ -78,7 +77,7 @@ const ActionBarDesktop = () => {
               onClick={() => {
                 router.replace("/management");
               }}
-              icon={<span className={"far fa-user-gear"} />}
+              icon={<span className="far fa-user-gear" />}
             />
           </div>
         </div>
@@ -86,9 +85,9 @@ const ActionBarDesktop = () => {
 
       {!authStatus && (
         <div>
-          <Button color={ColorTypes.primary} tag={"a"} href={"/auth"}>
+          <Button color={ColorTypes.primary} tag="a" href="/auth">
             <span>{Language().login_to_panel}</span>
-            <span className={"far fa-users ms-2"} />
+            <span className="far fa-users ms-2" />
           </Button>
         </div>
       )}
