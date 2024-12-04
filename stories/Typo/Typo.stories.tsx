@@ -23,7 +23,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// H1 Stories
 export const Heading1: Story = {
   render: (args) => <H1 {...args} />,
   args: {
@@ -31,7 +30,6 @@ export const Heading1: Story = {
   },
 };
 
-// H2 Stories
 export const Heading2: Story = {
   render: (args) => <H2 {...args} />,
   args: {
@@ -39,7 +37,6 @@ export const Heading2: Story = {
   },
 };
 
-// H3 Stories
 export const Heading3: Story = {
   render: (args) => <H3 {...args} />,
   args: {
@@ -47,7 +44,6 @@ export const Heading3: Story = {
   },
 };
 
-// Paragraph Stories
 export const ParagraphDefault: Story = {
   render: (args) => <Paragraph {...args} />,
   args: {

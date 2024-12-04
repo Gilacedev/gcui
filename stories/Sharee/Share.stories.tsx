@@ -2,10 +2,10 @@ import React from "react";
 import Share from "./Share";
 
 export default {
-  title: "Components/Share", // Organize stories in Storybook
+  title: "Components/Share",
   component: Share,
   argTypes: {
-    animation: { control: "boolean" }, // Toggle animation in Storybook controls
+    animation: { control: "boolean" },
   },
 };
 

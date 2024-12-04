@@ -23,12 +23,12 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<PaginationProps> = (args: PaginationProps) => {
+const pagination: StoryFn<PaginationProps> = (args: PaginationProps) => {
   const [currentPage, setCurrentPage] = useState(args.currentPage);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    args.onPageChange(page); // Trigger Storybook action
+    args.onPageChange(page);
   };
 
   return (
@@ -40,7 +40,7 @@ const Template: StoryFn<PaginationProps> = (args: PaginationProps) => {
   );
 };
 
-export const Default = Template.bind({});
+export const Default = pagination.bind({});
 Default.args = {
   totalPages: 10,
 };

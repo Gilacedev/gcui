@@ -36,5 +36,5 @@ Default.args = {
       ],
     }),
   },
-  namads: [], // Add relevant data if necessary
+  namads: [],
 };

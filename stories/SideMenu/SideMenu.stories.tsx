@@ -11,14 +11,14 @@ export default {
   },
 };
 
-const Template = (args) => {
+const sidemenu = (args) => {
   AuthStores.getSnapshot = () => args.isAuthenticated;
   MenuStores.getSnapshot = () => args.open;
 
   return <SideMenu />;
 };
 
-export const MenuOpen = Template.bind({});
+export const MenuOpen = sidemenu.bind({});
 MenuOpen.args = {
   isAuthenticated: false,
   open: true,
@@ -30,7 +30,7 @@ MenuOpen.args = {
 //   open: false,
 // };
 
-export const AuthenticatedUser = Template.bind({});
+export const AuthenticatedUser = sidemenu.bind({});
 AuthenticatedUser.args = {
   isAuthenticated: true,
   open: true,

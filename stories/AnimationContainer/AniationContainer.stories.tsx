@@ -6,9 +6,7 @@ import AnimationContainer from "./AnimationContainer";
 const meta: Meta<typeof AnimationContainer> = {
   title: "Components/AnimationContainer",
   component: AnimationContainer,
-  parameters: {
-    layout: "centered", // Centers the component in the Storybook viewport
-  },
+
   argTypes: {
     children: { control: "text", description: "Content inside the container" },
   },

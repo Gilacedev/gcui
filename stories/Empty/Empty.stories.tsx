@@ -22,6 +22,6 @@ const story = (args) => (
 export const Default = story.bind({});
 Default.args = {
   message: "Loading...",
-  amplitude: 50,
+  amplitude: 20,
   frequency: 1.2,
 };

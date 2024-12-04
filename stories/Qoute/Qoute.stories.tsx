@@ -2,7 +2,6 @@ import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 import Quote from "@/stories/Qoute/Quote";
 
-// Mock data for the story
 const mockData = {
   avatar: null,
   title: "hello hi im mosh",

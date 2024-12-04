@@ -25,7 +25,7 @@ const sampleBlog = {
   title: "Sample Blog Title",
   slug: "sample-blog",
   short_description: "This is a sample blog post used for testing purposes.",
-  avatar: "path/to/sample-image.jpg", // Placeholder path
+  avatar: "",
   created_at: new Date().toISOString(),
   user: {
     name: "John Doe",

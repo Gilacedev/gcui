@@ -39,10 +39,10 @@ export default {
   component: Plans,
 };
 
-const Template = (args) => <Plans {...args} />;
+const plans = (args) => <Plans {...args} />;
 
 // Default Story
-export const Default = Template.bind({});
+export const Default = plans.bind({});
 Default.args = {
   plans: staticPlans,
 };

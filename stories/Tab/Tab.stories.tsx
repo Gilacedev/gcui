@@ -21,7 +21,6 @@ const meta: Meta<typeof Tab> = {
 export default meta;
 type Story = StoryObj<typeof Tab>;
 
-// Basic example with text content
 export const Basic: Story = {
   args: {
     headers: ["Tab 1", "Tab 2", "Tab 3"],
@@ -29,7 +28,6 @@ export const Basic: Story = {
   },
 };
 
-// Example with rich content
 export const RichContent: Story = {
   args: {
     headers: [

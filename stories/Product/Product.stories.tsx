@@ -2,7 +2,6 @@ import React from "react";
 import Product from "./Product";
 import { Meta, StoryFn } from "@storybook/react";
 
-// Mocking the `content` type
 interface Content {
   avatar?: string | null;
   title: string;
@@ -11,7 +10,6 @@ interface Content {
   _featured?: number;
 }
 
-// Storybook configuration
 export default {
   title: "Cards/Product",
   component: Product,

@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import Call from "./Call";
 
-// Meta configuration
 const meta: Meta<typeof Call> = {
   title: "Components/Call",
   component: Call,
@@ -15,7 +14,6 @@ const meta: Meta<typeof Call> = {
 
 export default meta;
 
-// Default story
 type Story = StoryObj<typeof Call>;
 
 export const Default: Story = {
