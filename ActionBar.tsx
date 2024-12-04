@@ -8,7 +8,6 @@ import { useEffect, useState, useRef, useSyncExternalStore } from "react";
 import { AuthStores } from "./stores/AuthStore";
 import NotificationBox from "./NotificationBox";
 import { getNotificationCount } from "@/models/NotificationModel";
-import Loader from "./Loader";
 
 const ActionBar = () => {
   const language = Language("common");
@@ -44,10 +43,10 @@ const ActionBar = () => {
     // Set an interval to fetch notifications every 3 minutes
     const intervalId = setInterval(() => {
       fetchNotificationCount();
-    }, 180000); 
+    }, 180000);
 
     return () => {
-      clearInterval(intervalId); 
+      clearInterval(intervalId);
     };
   }, []);
 
@@ -71,6 +70,25 @@ const ActionBar = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []);
+
+  // Close notification submenu when full URL changes
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setIsNotifOpen(false);
+    };
+
+    const currentUrl = window.location.href; // Full URL including query parameters
+    const observer = new MutationObserver(() => {
+      console.log(window.location.href , currentUrl)
+      if (window.location.href !== currentUrl) {
+        handleRouteChange();
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
   }, []);
 
   const items = [
@@ -120,20 +138,30 @@ const ActionBar = () => {
                 <span className="text-xs">{item.label}</span>
               </a>
               {item.hasBadge && item.badgeCount > 0 && (
-                <div className="absolute -top-2 left-1/2">
+                <div
+                  onClick={
+                    item.icon === "fa fa-bell"
+                      ? (e) => {
+                          e.preventDefault();
+                          handleToggleNotif();
+                        }
+                      : undefined
+                  }
+                  className="absolute -top-2 left-1/2"
+                >
                   <Badge color={ColorTypes.primary}>{item.badgeCount}</Badge>
                 </div>
               )}
               {/* Notification submenu */}
               {item.icon === "fa fa-bell" && (
                 <div
-                  className={`absolute bottom-16 left-1/2 transform -translate-x-1/2 w-64 rounded-lg transition-all duration-300 ease-out overflow-hidden ${
+                  className={`absolute bottom-16 left-1/2 transform -translate-x-1/2 w-72 rounded-lg transition-all duration-300 ease-out overflow-hidden ${
                     isNotifOpen
                       ? "scale-100 opacity-100 translate-y-0"
                       : "scale-90 opacity-0 translate-y-8 pointer-events-none"
                   }`}
                 >
-                  <NotificationBox />
+                  <NotificationBox isOpen={isNotifOpen}/>
                 </div>
               )}
             </li>

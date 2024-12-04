@@ -8,7 +8,7 @@ const Tab = ({ headers, contents }: Readonly<tabProps>) => {
 	const [activeHeaderIndex ,setActiveHeaderIndex] = useState(0);
 
 	return(
-		<div className={"flex flex-col w-full"}>
+		<div className={"flex flex-col w-full "}>
 			<ul className={"flex flex-nowrap w-full h-10"}>
 				{headers.map((item, index) => (
 					<li key={index} onClick={()=>{
@@ -19,9 +19,9 @@ const Tab = ({ headers, contents }: Readonly<tabProps>) => {
 					</li>
 				))}
 			</ul>
-			<ul className={"p-4 min-h-[30dvh]"}>
+			<ul className={"py-4 min-h-[30dvh]"}>
 				{contents.map((item, index) => (
-					<li key={index}  className={`animate-fadeIn pb-4 px-4 ${index !== activeHeaderIndex ? "hidden" : ""}`} >
+					<li key={index}  className={`animate-fadeIn pb-4 px-2 ${index !== activeHeaderIndex ? "hidden" : ""}`} >
 						{item}
 					</li>
 				))}

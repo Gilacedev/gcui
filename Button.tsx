@@ -37,11 +37,13 @@ const Button: React.FC<ComponentProps> = (
 		className += " text-base bg-violet-500 active:bg-violet-600 disabled:bg-violet-300"
 	} else if (color === ColorTypes.success) {
 		className += " text-base bg-green-500 active:bg-green-600 disabled:bg-green-300"
-
 	} else if (color === ColorTypes.dark) {
 		className += " text-base bg-slate-900 active:border border-indigo-600 disabled:bg-slate-300"
-
-	} else if (color) {
+	}
+	else if (color === ColorTypes.light) {
+		className += "text-base bg-indigo-600 disabled:bg-slate-300"
+	}
+	else if (color) {
 		className += ` text-base bg-${color}-500 active:bg-${color}-600 disabled:bg-${color}-300 `
 	}
 
