@@ -17,23 +17,23 @@ const meta: Meta<typeof User> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof User>;
+type user = StoryObj<typeof User>;
 
-export const Default: Story = {
+export const Default: user = {
   args: {
     loading: false,
     user: myUser,
   },
 };
 
-export const Loading: Story = {
+export const Loading: user = {
   args: {
     loading: true,
     user: null,
   },
 };
 
-export const NoName: Story = {
+export const NoName: user = {
   args: {
     loading: false,
     user: {

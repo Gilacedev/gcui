@@ -19,33 +19,33 @@ const meta: Meta<typeof TicketStatus> = {
 
 export default meta;
 
-type Story = StoryObj<typeof TicketStatus>;
+type ticketStatus = StoryObj<typeof TicketStatus>;
 
-export const Closed: Story = {
+export const Closed: ticketStatus = {
   args: {
     status: 0,
   },
 };
 
-export const Open: Story = {
+export const Open: ticketStatus = {
   args: {
     status: 1,
   },
 };
 
-export const Pending: Story = {
+export const Pending: ticketStatus = {
   args: {
     status: 2,
   },
 };
 
-export const Answered: Story = {
+export const Answered: ticketStatus = {
   args: {
     status: 3,
   },
 };
 
-export const Waiting: Story = {
+export const Waiting: ticketStatus = {
   args: {
     status: 4,
   },

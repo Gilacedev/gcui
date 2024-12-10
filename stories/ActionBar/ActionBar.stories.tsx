@@ -9,8 +9,8 @@ const meta: Meta<typeof ActionBar> = {
 
 export default meta;
 
-type Story = StoryObj<typeof ActionBar>;
+type actionBar = StoryObj<typeof ActionBar>;
 
-export const Default: Story = {
+export const Default: actionBar = {
   args: {},
 };

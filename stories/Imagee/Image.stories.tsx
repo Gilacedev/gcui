@@ -27,19 +27,19 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<ImageProps> = (args) => (
+const image: StoryFn<ImageProps> = (args) => (
   <div className="w-60 h-60">
     <Image {...args} />
   </div>
 );
-export const Cover = Template.bind({});
+export const Cover = image.bind({});
 Cover.args = {
   src: "/assets/images/gpro.jpg",
   alt: "Cover image",
   type: "cover",
 };
 
-export const Contain = Template.bind({});
+export const Contain = image.bind({});
 Contain.args = {
   src: "/assets/images/gpro.jpg",
   alt: "Contain image",

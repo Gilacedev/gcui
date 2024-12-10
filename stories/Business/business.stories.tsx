@@ -8,7 +8,7 @@ const sampleBusiness = {
   name: "Tech Innovators Ltd.",
   website: "https://techinnovators.com",
   avatar: "/assets/images/company-logo.png",
-  _status: 1, // Change this value to see different statuses
+  _status: 1,
 };
 
 const business = (args) => (

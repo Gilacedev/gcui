@@ -21,7 +21,6 @@ export default {
   },
 } as Meta;
 
-// Sample data
 const defaultProduct: Content = {
   avatar: "example-image.jpg",
   title: "Sample Product",

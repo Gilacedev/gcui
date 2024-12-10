@@ -1,12 +1,13 @@
-import React from "react";
+import { Meta, StoryObj } from "@storybook/react";
 import ActionBarDesktop from "./ActionBarDesktop";
 
-export default {
+const meta: Meta<typeof ActionBarDesktop> = {
   title: "Components/ActionBarDesktop",
   component: ActionBarDesktop,
 };
 
-const actionbardesktop = (args) => <ActionBarDesktop {...args} />;
+export default meta;
 
-export const Default = actionbardesktop.bind({});
-Default.args = {};
+type actionBarDesktop = StoryObj<typeof ActionBarDesktop>;
+
+export const Default: actionBarDesktop = {};

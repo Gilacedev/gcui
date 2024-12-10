@@ -12,9 +12,11 @@ export default {
   },
 } as Meta<ImageSliderProps>;
 
-const Template: StoryFn<ImageSliderProps> = (args) => <ImageSlider {...args} />;
+const imageSlider: StoryFn<ImageSliderProps> = (args) => (
+  <ImageSlider {...args} />
+);
 
-export const Default = Template.bind({});
+export const Default = imageSlider.bind({});
 Default.args = {
   media: [
     "/assets/images/gpro.jpg",

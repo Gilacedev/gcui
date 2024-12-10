@@ -32,7 +32,6 @@ Disabled.args = {
   disabled: true,
 };
 
-// Story with an icon
 export const WithIcon = input.bind({});
 WithIcon.args = {
   placeholder: "Search...",

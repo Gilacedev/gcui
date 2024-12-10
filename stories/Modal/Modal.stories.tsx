@@ -21,9 +21,9 @@ const meta: Meta<typeof Modal> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Modal>;
+type modal = StoryObj<typeof Modal>;
 
-export const Default: Story = {
+export const Default: modal = {
   render: (args) => {
     const [isOpen, setIsOpen] = useState(args.open);
 

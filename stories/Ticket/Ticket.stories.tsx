@@ -67,9 +67,9 @@ export default {
   },
 } as Meta<typeof Ticket>;
 
-const Template: StoryFn<TicketProps> = (args) => <Ticket {...args} />;
+const ticket: StoryFn<TicketProps> = (args) => <Ticket {...args} />;
 
-export const Default = Template.bind({});
+export const Default = ticket.bind({});
 Default.args = {
   ticket: {
     id: "1",
@@ -82,7 +82,7 @@ Default.args = {
   },
 };
 
-export const LowPriority = Template.bind({});
+export const LowPriority = ticket.bind({});
 LowPriority.args = {
   ticket: {
     id: "1",
@@ -95,7 +95,7 @@ LowPriority.args = {
   },
 };
 
-export const MediumPriority = Template.bind({});
+export const MediumPriority = ticket.bind({});
 MediumPriority.args = {
   ticket: {
     id: "2",
@@ -108,7 +108,7 @@ MediumPriority.args = {
   },
 };
 
-export const HighPriority = Template.bind({});
+export const HighPriority = ticket.bind({});
 HighPriority.args = {
   ticket: {
     id: "3",
@@ -121,7 +121,7 @@ HighPriority.args = {
   },
 };
 
-export const UrgentPriority = Template.bind({});
+export const UrgentPriority = ticket.bind({});
 UrgentPriority.args = {
   ticket: {
     id: "4",

@@ -8,7 +8,7 @@ export default {
   component: MenuBasketButton,
   argTypes: {
     totalBasket: {
-      control: { type: "number" },
+      control: { type: "number" }, // Make the totalBasket value adjustable
       description: "The total number of items in the basket",
     },
   },

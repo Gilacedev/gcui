@@ -21,38 +21,37 @@ const meta = {
 } as Meta<typeof H1>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type typo = StoryObj<typeof meta>;
 
-export const Heading1: Story = {
+export const Heading1: typo = {
   render: (args) => <H1 {...args} />,
   args: {
     children: "Main Heading (H1)",
   },
 };
 
-export const Heading2: Story = {
+export const Heading2: typo = {
   render: (args) => <H2 {...args} />,
   args: {
     children: "Secondary Heading (H2)",
   },
 };
 
-export const Heading3: Story = {
+export const Heading3: typo = {
   render: (args) => <H3 {...args} />,
   args: {
     children: "Tertiary Heading (H3)",
   },
 };
 
-export const ParagraphDefault: Story = {
+export const ParagraphDefault: typo = {
   render: (args) => <Paragraph {...args} />,
   args: {
     children: "Default paragraph with standard text styling.",
   },
 };
 
-// Example with all typography elements
-export const TypographyHierarchy: Story = {
+export const TypographyHierarchy: typo = {
   render: () => (
     <div className="space-y-4">
       <H1>Main Title</H1>

@@ -6,7 +6,6 @@ import AnimationContainer from "./AnimationContainer";
 const meta: Meta<typeof AnimationContainer> = {
   title: "Components/AnimationContainer",
   component: AnimationContainer,
-
   argTypes: {
     children: { control: "text", description: "Content inside the container" },
   },
@@ -14,15 +13,15 @@ const meta: Meta<typeof AnimationContainer> = {
 
 export default meta;
 
-type Story = StoryObj<typeof AnimationContainer>;
+type animationContainer = StoryObj<typeof AnimationContainer>;
 
-export const Default: Story = {
+export const Default: animationContainer = {
   args: {
     children: "  Animated Content",
   },
 };
 
-export const CustomContent: Story = {
+export const CustomContent: animationContainer = {
   args: {
     children: (
       <div className="bg-green-500 text-white p-4 rounded-lg">

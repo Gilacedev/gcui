@@ -26,7 +26,6 @@ Default.args = {
   disabled: false,
 };
 
-// Story with an icon
 export const WithIcon = text.bind({});
 WithIcon.args = {
   placeholder: "Search...",
@@ -36,14 +35,12 @@ WithIcon.args = {
   disabled: false,
 };
 
-// Story for loading state
 export const Loading = text.bind({});
 Loading.args = {
   placeholder: "Loading...",
   loading: true,
 };
 
-// Story for disabled state
 export const Disabled = text.bind({});
 Disabled.args = {
   placeholder: "Disabled...",

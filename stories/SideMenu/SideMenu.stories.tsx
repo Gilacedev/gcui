@@ -24,12 +24,6 @@ MenuOpen.args = {
   open: true,
 };
 
-// export const MenuClosed = Template.bind({});
-// MenuClosed.args = {
-//   isAuthenticated: false,
-//   open: false,
-// };
-
 export const AuthenticatedUser = sidemenu.bind({});
 AuthenticatedUser.args = {
   isAuthenticated: true,

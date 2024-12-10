@@ -19,16 +19,16 @@ const meta: Meta<typeof Tab> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Tab>;
+type tab = StoryObj<typeof Tab>;
 
-export const Basic: Story = {
+export const Basic: tab = {
   args: {
     headers: ["Tab 1", "Tab 2", "Tab 3"],
     contents: ["Content for Tab 1", "Content for Tab 2", "Content for Tab 3"],
   },
 };
 
-export const RichContent: Story = {
+export const RichContent: tab = {
   args: {
     headers: [
       <Badge color={ColorTypes.primary} particular={false}>
@@ -60,8 +60,7 @@ export const RichContent: Story = {
   },
 };
 
-// Example with long content
-export const LongContent: Story = {
+export const LongContent: tab = {
   args: {
     headers: ["Short", "Medium", "Long"],
     contents: [

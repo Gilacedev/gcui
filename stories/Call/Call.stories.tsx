@@ -14,15 +14,15 @@ const meta: Meta<typeof Call> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Call>;
+type call = StoryObj<typeof Call>;
 
-export const Default: Story = {
+export const Default: call = {
   args: {
     phone: "123-456-7890",
   },
 };
 
-export const WithDifferentPhone: Story = {
+export const WithDifferentPhone: call = {
   args: {
     phone: "987-654-3210",
   },

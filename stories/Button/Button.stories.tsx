@@ -17,6 +17,7 @@ export default {
         ColorTypes.danger,
         ColorTypes.success,
         ColorTypes.dark,
+        ColorTypes.light,
       ],
     },
     href: { control: "text" },
@@ -27,8 +28,11 @@ export default {
   },
 } as Meta<typeof Button>;
 
-const button: StoryFn<ComponentProps> = (args) => <Button {...args} />;
-
+const button: StoryFn<ComponentProps> = (args) => (
+  <div className="relative">
+    <Button {...args} />
+  </div>
+);
 export const Default = button.bind({});
 Default.args = {
   children: "Default Button",
@@ -61,6 +65,12 @@ Dark.args = {
   color: ColorTypes.dark,
 };
 
+export const Light = button.bind({});
+Light.args = {
+  children: "Dark Button",
+  color: ColorTypes.light,
+};
+
 export const Loading = button.bind({});
 Loading.args = {
   children: "Loading Button",
@@ -71,17 +81,4 @@ export const Disabled = button.bind({});
 Disabled.args = {
   children: "Disabled Button",
   disabled: true,
-};
-
-export const WithIcon = button.bind({});
-WithIcon.args = {
-  children: "Button with Icon",
-  icon: <span>🚀</span>,
-};
-
-export const LinkButton = button.bind({});
-LinkButton.args = {
-  children: "Link Button",
-  href: "https://example.com",
-  tag: "a",
 };

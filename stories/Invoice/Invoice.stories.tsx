@@ -1,33 +1,70 @@
+// Invoice.stories.js
 import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
 import Invoice from "./Invoice";
+import Language from "@/gcui-main/locales/Language";
 
-interface InvoiceProps {
-  invoice: {
-    invoice_number: string;
-    created_at: string;
-    expired_at: string;
-    total: number;
+// Mock invoice data
+const createMockInvoice = (status) => {
+  const now = new Date();
+  const baseInvoice = {
+    invoice_number: "INV123456",
+    created_at: now.toISOString(),
+    total: 1500,
+    items: [
+      { payable: { short_description: "Sample Item 1", price: 500 } },
+      { payable: { short_description: "Sample Item 2", price: 1000 } },
+    ],
   };
-}
+
+  switch (status) {
+    case "pending":
+      return {
+        ...baseInvoice,
+        expired_at: new Date(
+          now.getTime() + 60 * 60 * 24 * 31 * 1000
+        ).toISOString(),
+      }; // 31 days from now
+    case "warning":
+      return {
+        ...baseInvoice,
+        expired_at: new Date(
+          new Date().getTime() + 5 * 24 * 60 * 60 * 1000
+        ).toISOString(),
+      }; //  now
+    case "danger":
+      return {
+        ...baseInvoice,
+        expired_at: new Date(
+          now.getTime() + 60 * 60 * 24 * 1 * 1000
+        ).toISOString(),
+      }; // 1 day from now
+    case "expired":
+      return {
+        ...baseInvoice,
+        expired_at: new Date(
+          now.getTime() - 60 * 60 * 24 * 1 * 1000
+        ).toISOString(),
+      }; // 1 day in the past
+    default:
+      return baseInvoice;
+  }
+};
 
 export default {
   title: "Cards/Invoice",
   component: Invoice,
-} as Meta;
-
-const invoice: StoryFn<{ invoice: InvoiceProps["invoice"] }> = (args) => (
-  <Invoice {...args} />
-);
-
-export const Default = invoice.bind({});
-Default.args = {
-  invoice: {
-    invoice_number: "INV-123456",
-    created_at: new Date().toISOString(),
-    expired_at: new Date(
-      new Date().getTime() + 5 * 24 * 60 * 60 * 1000
-    ).toISOString(),
-    total: 1500,
-  },
 };
+
+const invoice = (args) => <Invoice {...args} />;
+
+export const Pending = invoice.bind({});
+Pending.args = { invoice: createMockInvoice("pending") };
+
+export const Warning = invoice.bind({});
+Warning.args = { invoice: createMockInvoice("warning") };
+
+export const Danger = invoice.bind({});
+Danger.args = { invoice: createMockInvoice("danger") };
+
+export const Expired = invoice.bind({});
+Expired.args = { invoice: createMockInvoice("expired") };
