@@ -16,7 +16,8 @@ const ActionBar = () => {
   const [loading, setLoading] = useState(false);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
-  const notifRef = useRef<HTMLDivElement>(null);
+  const notifRef = useRef<HTMLLIElement | null>(null);
+
 
   const auth = useSyncExternalStore(
     AuthStores.subscribe,
@@ -80,7 +81,6 @@ const ActionBar = () => {
 
     const currentUrl = window.location.href; // Full URL including query parameters
     const observer = new MutationObserver(() => {
-      console.log(window.location.href , currentUrl)
       if (window.location.href !== currentUrl) {
         handleRouteChange();
       }
@@ -116,24 +116,21 @@ const ActionBar = () => {
             >
               <a
                 href={item.path}
-                className={`flex gap-2 flex-col items-center justify-center h-16 ${
-                  currentPath === item.path ? "border-b-4 border-violet-400" : ""
-                }`}
+                className={`flex gap-2 flex-col items-center justify-center h-16 ${currentPath === item.path ? "border-b-4 border-violet-400" : ""
+                  }`}
                 onClick={
                   item.icon === "fa fa-bell"
                     ? (e) => {
-                        e.preventDefault();
-                        handleToggleNotif();
-                      }
+                      e.preventDefault();
+                      handleToggleNotif();
+                    }
                     : undefined
                 }
               >
                 <span
-                  className={`${
-                    item.icon
-                  } ${
-                    currentPath === item.path ? "text-violet-400" : "text-slate-400"
-                  }`}
+                  className={`${item.icon
+                    } ${currentPath === item.path ? "text-violet-400" : "text-slate-400"
+                    }`}
                 ></span>
                 <span className="text-xs">{item.label}</span>
               </a>
@@ -142,9 +139,9 @@ const ActionBar = () => {
                   onClick={
                     item.icon === "fa fa-bell"
                       ? (e) => {
-                          e.preventDefault();
-                          handleToggleNotif();
-                        }
+                        e.preventDefault();
+                        handleToggleNotif();
+                      }
                       : undefined
                   }
                   className="absolute -top-2 left-1/2"
@@ -155,13 +152,12 @@ const ActionBar = () => {
               {/* Notification submenu */}
               {item.icon === "fa fa-bell" && (
                 <div
-                  className={`absolute bottom-16 left-1/2 transform -translate-x-1/2 w-72 rounded-lg transition-all duration-300 ease-out overflow-hidden ${
-                    isNotifOpen
+                  className={`absolute bottom-16 left-1/2 transform -translate-x-1/2 w-72 rounded-lg transition-all duration-300 ease-out overflow-hidden ${isNotifOpen
                       ? "scale-100 opacity-100 translate-y-0"
                       : "scale-90 opacity-0 translate-y-8 pointer-events-none"
-                  }`}
+                    }`}
                 >
-                  <NotificationBox isOpen={isNotifOpen}/>
+                  <NotificationBox isOpen={isNotifOpen} />
                 </div>
               )}
             </li>
