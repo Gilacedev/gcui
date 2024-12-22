@@ -1,16 +1,14 @@
 import Button from "../Button";
 import colorTypes from "../functions/ColorTypes";
-import {H2, H3, Paragraph} from "../Typo";
+import { H2, H3, Paragraph } from "../Typo";
 import Blocks from "../Blocks";
 import Image from "../Image";
 import ContentType from "@/types/Content";
 import Language from "@/locales/Language";
 
 
-export default function BlogPost({blog,compact}: Readonly<{blog: ContentType,compact:boolean}>)
-{
-	if(!blog)
-	{
+export default function BlogPost({ blog, compact }: Readonly<{ blog: ContentType, compact: boolean }>) {
+	if (!blog) {
 		return null;
 	}
 	const user = blog.user ?? null;
@@ -20,31 +18,32 @@ export default function BlogPost({blog,compact}: Readonly<{blog: ContentType,com
 		avatar: "assets/images/image-placeholder.svg"
 	}
 	const externalLink = {
-		name : "",
-		link : ""
-	}
-	try {
-		let metaData = JSON.parse(blog.meta)
-		if(metaData.menu && metaData.menu.length > 0)
-		{
-			externalLink.name = metaData.menu[0].name
-			externalLink.link = metaData.menu[0].link
-		}
-	}
-	catch (e) {
+		name: "",
+		link: ""
 	}
 
+	if (blog.meta && typeof blog.meta === 'string') {
+		try {
+			let metaData = JSON.parse(blog.meta);
+			if (metaData.menu && metaData.menu.length > 0) {
+				externalLink.name = metaData.menu[0].name || '';
+				externalLink.link = metaData.menu[0].link || '';
+			}
+		} catch (e) {
+			console.error('Failed to parse blog meta:', e);
+		}
+	}
+
+
+
 	let media = "assets/images/image-placeholder.svg"
-	if(blog.avatar)
-	{
-		media = process.env.NEXT_PUBLIC_UPLOAD_URL+"/" + blog.avatar
+	if (blog.avatar) {
+		media = process.env.NEXT_PUBLIC_UPLOAD_URL + "/" + blog.avatar
 	}
-	if (user && user.avatar)
-	{
-		author.name = process.env.NEXT_PUBLIC_UPLOAD_URL+"/" + user.avatar
+	if (user && user.avatar) {
+		author.name = process.env.NEXT_PUBLIC_UPLOAD_URL + "/" + user.avatar
 	}
-	if (user && user.name)
-	{
+	if (user && user.name) {
 		author.name = user.name
 	}
 
@@ -55,17 +54,17 @@ export default function BlogPost({blog,compact}: Readonly<{blog: ContentType,com
 				<div className={"hidden md:block"}>
 					{
 						externalLink && externalLink.name === "instagram" &&
-                        <Button tag={"a"} href={externalLink.link} color={colorTypes.primary}
-                                icon={<span className={"fab fa-instagram"}/>}>
-                            in Instagram
-                        </Button>
+						<Button tag={"a"} href={externalLink.link} color={colorTypes.primary}
+							icon={<span className={"fab fa-instagram"} />}>
+							in Instagram
+						</Button>
 					}
 					{
 						externalLink && externalLink.name === "youtube" &&
-                        <Button tag={"a"} href={externalLink.link} color={colorTypes.primary}
-                                icon={<span className={"fab fa-youtube"}/>}>
-                            in Youtube
-                        </Button>
+						<Button tag={"a"} href={externalLink.link} color={colorTypes.primary}
+							icon={<span className={"fab fa-youtube"} />}>
+							in Youtube
+						</Button>
 					}
 				</div>
 			</div>
@@ -76,8 +75,8 @@ export default function BlogPost({blog,compact}: Readonly<{blog: ContentType,com
 							<H2 className={"h-16 text-slate-300 text-ellipsis w-full overflow-hidden  line-clamp-2 my-4 md:my-0 font-bold text-lg"}>
 								<span className={"fa fa-link-simple me-2 text-indigo-500"}></span>
 								<span>
-							{blog.title}
-						</span>
+									{blog.title}
+								</span>
 							</H2>
 						</a>
 						<Paragraph
@@ -87,18 +86,18 @@ export default function BlogPost({blog,compact}: Readonly<{blog: ContentType,com
 					</div>
 					{
 						blog.avatar && compact &&
-                        <div>
-                            <div className={"w-24 h-24 rounded-xl overflow-hidden shadow-lg shadow-violet-900/30"}>
-                                <Image src={media} alt={blog.title} type={"cover"}></Image>
-                            </div>
-                        </div>
+						<div>
+							<div className={"w-24 h-24 rounded-xl overflow-hidden shadow-lg shadow-violet-900/30"}>
+								<Image src={media} alt={blog.title} type={"cover"}></Image>
+							</div>
+						</div>
 					}
 				</div>
 				{
 					blog.avatar && !compact &&
-                    <div className={" rounded-2xl overflow-hidden"}>
-                        <Image src={media} alt={blog.title} type={"cover"}></Image>
-                    </div>
+					<div className={" rounded-2xl overflow-hidden"}>
+						<Image src={media} alt={blog.title} type={"cover"}></Image>
+					</div>
 
 				}
 			</div>
@@ -116,12 +115,12 @@ export default function BlogPost({blog,compact}: Readonly<{blog: ContentType,com
 				</div>
 				<div className={"flex-1"}></div>
 				<div className={""}>
-					<Button tag={"a"} href={"/blog/" + blog.slug} color={colorTypes.default}
-							className={"justify-center"}>
+					<Button tag={"a"} href={`/blog/${blog.slug}`} color={colorTypes.default}
+						className={"justify-center"}>
 						<span className={"fa fa-link-simple"}> </span>
 						<span>
-								{Language().more}
-							</span>
+							{Language().more}
+						</span>
 					</Button>
 				</div>
 			</div>
