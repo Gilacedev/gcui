@@ -1,7 +1,6 @@
 "use client"
 import Language from "@/locales/Language";
 import { usePathname } from 'next/navigation'
-import Link from "next/link";
 import TransitionLink from "@/components/TransitionLink";
 
 interface MenuItemProps {

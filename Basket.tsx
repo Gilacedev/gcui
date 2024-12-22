@@ -3,7 +3,6 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { BasketStores } from "@/components/stores/BasketStore";
 import Modal from "@/components/Modal";
 import { Get, Remove } from "@/components/functions/Basket";
-import {Paragraph } from "@/components/Typo";
 import { getPayable } from "@/models/PayableModel";
 import Language from "@/locales/Language";
 import ColorTypes from "@/components/functions/ColorTypes";
@@ -17,7 +16,7 @@ const Basket = () => {
 	const open = useSyncExternalStore(BasketStores.subscribe, BasketStores.getSnapshot, BasketStores.getServerSnapshot);
 	const auth = useSyncExternalStore(AuthStores.subscribe, AuthStores.getSnapshot, AuthStores.getServerSnapshot);
 	const [loadingContinue, setLoadingContinue] = useState(false);
-	const [storageBasketItems, setStorageBasketItems] = useState([]);
+	const [storageBasketItems, setStorageBasketItems] = useState<{ id: string }[]>([]);
 	useEffect(() => {
 		const basketItems = Get();
 		setStorageBasketItems(basketItems);
@@ -33,9 +32,12 @@ const Basket = () => {
 	}
 
 
-	const PayableItem = ({ item }) => {
-		const [payable, setPayable] = useState({});
+	const PayableItem: React.FC<{
+		item: string;
+	}> = ({ item }) => {
+		const [payable, setPayable] = useState<any>({});
 		const [loading, setLoading] = useState(true);
+
 		useEffect(() => {
 			if (!item) {
 				return;
@@ -44,67 +46,53 @@ const Basket = () => {
 			getPayable(parseInt(item)).then((res) => {
 				setPayable(res);
 				setLoading(false);
-			})
-		}, [item])
+			});
+		}, [item]);
 
-		return(<div>
-
-			{
-				payable && !loading &&
-				<div className={"flex items-center gap-2 justify-between py-2"}>
-					<div className={"text-green-400"}>
-						{payable.content ? payable.content.title : ""}
-					</div>
-					<div className={"flex items-center"}>
-						<div className={"text-slate-400"}>
-							{payable.title}
+		return (
+			<div>
+				{payable && !loading && (
+					<div className={"flex items-center gap-2 justify-between py-2"}>
+						<div className={"text-green-400"}>
+							{payable.content ? payable.content.title : ""}
 						</div>
-						<div className={"px-1"} >/</div>
-						<div className={"text-slate-400"}>
-							{
-								payable.duration === "monthly" &&
-								<div className={""}>
-									{Language().monthly}
-								</div>
-							}
-							{
-								payable.duration === "yearly" &&
-								<div className={""}>
-									{Language().yearly}
-								</div>
-							}
-							{
-								payable.duration === "lifetime" &&
-								<div className={""}>
-									{Language().lifetime}
-								</div>
-							}
+						<div className={"flex items-center"}>
+							<div className={"text-slate-400"}>{payable.title}</div>
+							<div className={"px-1"}>/</div>
+							<div className={"text-slate-400"}>
+								{payable.duration === "monthly" && (
+									<div className={""}>{Language().monthly}</div>
+								)}
+								{payable.duration === "yearly" && (
+									<div className={""}>{Language().yearly}</div>
+								)}
+								{payable.duration === "lifetime" && (
+									<div className={""}>{Language().lifetime}</div>
+								)}
+							</div>
+						</div>
+						<div className={"flex gap-1"}>
+							<span>{new Intl.NumberFormat("fa-IR").format(payable.price)}</span>
+							<span>{Language().price_unit}</span>
+						</div>
+						<div>
+							<Button
+								color={ColorTypes.danger}
+								icon={<span className={"far fa-trash-alt"} />}
+								onClick={() => {
+									// remove from basket
+									Remove(payable.id);
+									const basketItems = Get();
+									setStorageBasketItems(basketItems);
+								}}
+							/>
 						</div>
 					</div>
-					<div className={"flex gap-1"}>
-						<span>
-							{new Intl.NumberFormat('fa-IR').format(payable.price)}
-						</span>
-						<span>
-							{Language().price_unit}
-						</span>
-					</div>
-					<div>
-						<Button color={ColorTypes.danger} icon={<span className={"far fa-trash-alt"} />} onClick={() => {
-							//remove from basket
-							Remove(payable.id)
-							const basketItems = Get();
-							setStorageBasketItems(basketItems);
-
-						}} />
-					</div>
-				</div>
-			}
-			{
-				loading && <Loader />
-			}
-		</div>)
-	}
+				)}
+				{loading && <Loader />}
+			</div>
+		);
+	};
 	return (
 		<Modal open={open} onClose={() => {
 			BasketStores.setBasket(false)
