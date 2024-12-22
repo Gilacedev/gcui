@@ -15,22 +15,21 @@ const AlertMessage = ({data}: { data:content }) => {
 		reactionText: ""
 	}
 
-	if(data && data.meta)
-	{
-
+	if (data && data.meta) {
 		try {
-			let temp2 = JSON.parse(data.meta)
-			if (temp2 && temp2.menu && temp2.menu.length > 0)
-			{
-				extraFeatures.url = temp2.menu[0].url
-				extraFeatures.icon = temp2.menu[0].icon
-				extraFeatures.btn_title = temp2.menu[0].btn_title
-			}
+		  // Check if data.meta is a string before parsing
+		  let temp2 = typeof data.meta === 'string' ? JSON.parse(data.meta) : data.meta;
+	  
+		  if (temp2 && temp2.menu && Array.isArray(temp2.menu) && temp2.menu.length > 0) {
+			extraFeatures.url = temp2.menu[0].url;
+			extraFeatures.icon = temp2.menu[0].icon;
+			extraFeatures.btn_title = temp2.menu[0].btn_title;
+		  }
+		} catch (e) {
+		  console.log("menu data:", data.meta);
 		}
-		catch (e) {
-			console.log("menu data:",data.meta)
-		}
-	}
+	  }
+	  
 
 	return (
 		<Blocks.Dark>
@@ -57,7 +56,6 @@ const AlertMessage = ({data}: { data:content }) => {
                         </Button>
                     </div>
 				}
-
 			</div>
 		</Blocks.Dark>
 	)

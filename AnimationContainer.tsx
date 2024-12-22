@@ -1,12 +1,10 @@
 "use client";
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useInView } from 'react-intersection-observer';
-const AnimationContainer = (
-	{children}
-)=>{
+const AnimationContainer: React.FC<{ children: ReactNode }> = ({ children }) => {
 	const { ref, inView } = useInView({
-		threshold: 0.5,
-		triggerOnce: false,
+	  threshold: 0.5,
+	  triggerOnce: false,
 	});
 
 
