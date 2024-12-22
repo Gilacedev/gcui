@@ -1,14 +1,30 @@
 import Image from "@/components/Image";
 import Language from "@/locales/Language";
 import Blocks from "@/components/Blocks";
-const Footer = ({settings , menu , namads}) => {
+import SettingType from "@/types/Setting";
+import Menu from "@/types/Menu";
+
+type FooterProps =  {
+	settings: SettingType[];
+	menu: Menu;
+	namads?: any; 
+  }
+
+const Footer: React.FC<FooterProps> = ({ settings, menu }) => {
+
 	let footerMenu = []
-	let footerMenuTitle = ""
+	let footerMenuTitle = "" 
 	try {
-		let data = JSON.parse(menu.meta)
-		footerMenu = data.menu
-		footerMenuTitle = menu.title
-	}
+		// Ensure menu.meta is a string before parsing
+		if (typeof menu.meta === 'string') {
+		  let data = JSON.parse(menu.meta);
+		  footerMenu = data.menu;
+		  footerMenuTitle = menu.title ?? "";
+		} else {
+		  console.error("menu.meta is not a valid string");
+		}
+	  }
+	  
 	catch (e) {
 		console.error("Footer menu error", e)
 	}
@@ -44,7 +60,7 @@ const Footer = ({settings , menu , namads}) => {
 							</h2>
 							<ul className={"text-sm py-4 text-slate-500"}>
 								{
-									footerMenu && footerMenu.map((item, index) => {
+									footerMenu && footerMenu.map((item: Menu) => {
 										return (
 											<li className={"py-1"} key={item.id}>
 												<a href={item.url ?? "#"} className={"flex items-center cursor-pointer hover:ps-2 transition-all"}>

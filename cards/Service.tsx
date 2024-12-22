@@ -3,7 +3,6 @@ import {H2, Paragraph} from "../Typo";
 import Button from "../Button";
 import ColorTypes from "../functions/ColorTypes";
 import content from "@/types/Content";
-import {bool} from "prop-types";
 import Language from "@/locales/Language";
 
 export default function Service({service}: { service: content }) {

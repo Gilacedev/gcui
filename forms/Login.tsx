@@ -74,7 +74,7 @@ const Login = ({ beforShopping = false }: login) => {
 							{Language().mobileHint}
 						</label>
 						<div className={"flex"}>
-							<Button disabled={loading ? 1 : 0} particular={true} className={"justify-evenly"}
+							<Button disabled={loading} particular={true} className={"justify-evenly"}
 								loading={loading ? 1 : 0} color={"primary"}
 								icon={<span className={"far fa-chevron-left"} />} type={"submit"}>
 								{
@@ -104,7 +104,7 @@ const Login = ({ beforShopping = false }: login) => {
 							{Language().otpHint}
 						</label>
 						<div className={"flex"}>
-							<Button disabled={loading ? 1 : 0} particular={true} className={"justify-evenly"}
+							<Button disabled={loading} particular={true} className={"justify-evenly"}
 								loading={loading ? 1 : 0} color={"primary"}
 								icon={<span className={"far fa-chevron-left"} />} type={"submit"}>
 								{
