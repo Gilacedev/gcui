@@ -2,17 +2,27 @@ import Language from "@/locales/Language";
 import Tab from "./Tab";
 import Empty from "./Empty";
 import Loader from "./Loader";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { getNotification, doReadNotification } from "@/models/NotificationModel";
 import Button from "./Button";
 import ColorTypes from "./functions/ColorTypes";
+import { AuthStores } from "./stores/AuthStore";
 
 const NotificationBox = ({ isOpen }) => {
     const [loading, setLoading] = useState(false);
+    const [authStatus, setAuthStatus] = useState(false);
     const [notification, setNotification] = useState([]);
     const [all, setAll] = useState(0);
     const [expStatus, setExpStatus] = useState()
     const [page, setPage] = useState(0);
+    const auth = useSyncExternalStore(
+        AuthStores.subscribe,
+        AuthStores.getSnapshot,
+        AuthStores.getServerSnapshot
+    );
+    useEffect(() => {
+        setAuthStatus(auth);
+    }, [auth]);
 
     // Fetch notifications
     const fetchNotifications = async () => {
@@ -34,8 +44,10 @@ const NotificationBox = ({ isOpen }) => {
     // Effect to fetch notifications when `page` or `all` changes
     useEffect(() => {
         setNotification([])
-        fetchNotifications();
-    }, [page, all]);
+        if (auth) {
+            fetchNotifications();
+        }
+    }, [page, all, auth]);
 
     const DoRead = async () => {
         try {
@@ -54,9 +66,9 @@ const NotificationBox = ({ isOpen }) => {
         }
     }, [isOpen, notification, all])
 
-    const NotificationItem = ({ item , keyProp}) => {
+    const NotificationItem = ({ item, keyProp }) => {
 
-        useEffect(()=>{
+        useEffect(() => {
             const expired = new Date(item.expired_at);
             let status = "pending";
             let days_remained = Math.floor((expired - new Date()) / (1000 * 60 * 60 * 24));
@@ -64,9 +76,9 @@ const NotificationBox = ({ isOpen }) => {
                 status = "expired";
             }
             setExpStatus(status)
-    
-        },[item])
-       
+
+        }, [item])
+
         return (
             <div className="border-b border-slate-700 p-1 py-2">
                 <div className="text-slate-300 flex items-center justify-between">
