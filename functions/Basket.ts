@@ -36,29 +36,34 @@ export default function Add(id: number , content_id:number) {
 	localStorage.setItem("cards", JSON.stringify(cards));
   }
   
-export function Remove(id:number)
-{
-	if(typeof window === "undefined")
-	{
-		return;
+  export function Remove(id: number): void {
+	if (typeof window === "undefined") {
+	  return;
 	}
-
-	//first get the card from localStorage:
+  
+	// First get the card from localStorage:
 	let storageCards = localStorage.getItem("cards");
-	let cards = []
-	if(cards)
-	{
-		try {
-			cards = JSON.parse(storageCards);
-		}
-		catch (e) {
-			return [];
-		}
+	let cards: {id:number}[] = []; // Explicitly type the cards array
+  
+	if (storageCards) { // Fixed condition to use storageCards
+	  try {
+		cards = JSON.parse(storageCards) as {id:number}[]; // Type assertion for parsed JSON
+	  } catch (e) {
+		console.error("Error parsing storage cards:", e);
+		return; // Return here since JSON parsing failed
+	  }
 	}
+  
+	// Filter out the card with the specified id
 	cards = cards.filter((item) => item.id !== id);
-	BasketCountStores.setBasketCount(cards.length)
-	localStorage.setItem("cards",JSON.stringify(cards));
-}
+  
+	// Update the basket count
+	BasketCountStores.setBasketCount(cards.length);
+  
+	// Save updated cards back to localStorage
+	localStorage.setItem("cards", JSON.stringify(cards));
+  }
+  
 export function Get()
 {
 	if(typeof window === "undefined")

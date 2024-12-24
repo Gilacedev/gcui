@@ -1,82 +1,114 @@
-import {ToastStores} from "@/components/stores/ToastStore";
+import { ToastStores } from "@/components/stores/ToastStore";
 import Language from "@/locales/Language";
 import ColorTypes from "@/components/functions/ColorTypes";
 import * as AuthModel from "@/models/AuthModel";
 import * as rdd from 'react-device-detect';
-import {Fetch} from "@/components/functions/Fetch";
+import { Fetch } from "@/components/functions/Fetch";
+import FetchResponse from "@/types/FetchResponse";
+import FetchError from "@/types/FetchError";
+import { AuthStores } from "../stores/AuthStore";
 
-async function Auth_check()
-{
+async function Auth_check() {
 	let result = false
-	await fetch(process.env.NEXT_PUBLIC_APP_BASE_URL+"/webservice/check/api", {
+	await fetch(process.env.NEXT_PUBLIC_APP_BASE_URL + "/webservice/check/api", {
 		method: "get",
-		cache:"no-store",
+		cache: "no-store",
 	}).then((response) => {
 		result = true
 	},
-	(error) => {
-		result = false
-	})
+		(error) => {
+			result = false
+		})
 
 	return result
 }
-const Auth_logout = async ()=>{
-	let result = false
+
+const Auth_logout = async () => {
+	let result = false;
 	const configs = {
-		method: "get",
-		url: process.env.NEXT_PUBLIC_APP_BASE_URL+"/webservice/logout/api",
-		cache:"no-store"
-	}
-	await Fetch(configs, (data) => {
-		console.log("why you said true??!",data)
-		result = true
-	}, (error) => {
-		result = false
-	}
-	)
-	return result
-}
-const Auth_sendSms = async (mobile) =>{
+		method: "get" as const, // Ensure type compatibility
+		url: process.env.NEXT_PUBLIC_APP_BASE_URL + "/webservice/logout/api",
+		cache: "no-store",
+	};
+	await Fetch(
+		configs,
+		(data: FetchResponse) => {
+			console.log("Logout successful", data);
+			result = true;
+			AuthStores.setAuth(false)
+		},
+		(error: FetchError) => {
+			console.error("Logout failed", error);
+			result = false;
+		}
+	);
+	return result;
+};
 
-	//check mobile is not empty
-	if(!mobile){
-		ToastStores.setToast({message: Language().requiredMobile, title: Language().error, type:ColorTypes.danger, icon: "exclamation-circle"})
+
+const Auth_sendSms = async (mobile: string): Promise<boolean> => {
+    if (!mobile) {
+        ToastStores.setToast({
+            message: Language().requiredMobile,
+            title: Language().error,
+            type: ColorTypes.danger,
+            icon: "exclamation-circle",
+        });
+        return false;
+    }
+
+    // Check mobile format absolutely: 09xxxxxxxxx
+    if (!String(mobile).match(/^09\d{9}$/)) {
+        ToastStores.setToast({
+            message: Language().mobileHint,
+            title: Language().error,
+            type: ColorTypes.danger,
+            icon: "exclamation-circle",
+        });
+        return false;
+    }
+
+    const formData = new FormData();
+    formData.append("username", mobile);
+    let response = false;
+    await AuthModel.loginSendSms(
+        formData,
+        (data: unknown) => {
+            ToastStores.setToast({
+                message: Language().otpSent,
+                title: Language().success,
+                type: ColorTypes.success,
+                icon: "check-circle",
+            });
+            response = true;
+        },
+        (error: unknown) => {
+            ToastStores.setToast({
+                message: Language().otpFailed,
+                title: Language().error,
+                type: ColorTypes.danger,
+                icon: "exclamation-circle",
+            });
+            response = false;
+        }
+    );
+
+    return response;
+};
+
+
+const Auth_confirmSms = async (mobile:string, code:any) => {
+	if (!code) {
+		ToastStores.setToast({ message: Language().otpHint, title: Language().error, type: ColorTypes.danger, icon: "exclamation-circle" })
 		return false
 	}
-	//check mobile format absolutely : 09xxxxxxxxx
-	if(!String(mobile).match(/^09\d{9}$/)){
-		ToastStores.setToast({message: Language().mobileHint, title: Language().error, type:ColorTypes.danger, icon: "exclamation-circle"})
-		return false
-	}
-
-	//create a form :
-	let formData = new FormData()
-	formData.append("username", mobile)
-
-	//send to server
-	let response = false
-	await AuthModel.loginSendSms(formData, (data) => {
-		ToastStores.setToast({message: Language().otpSent, title: Language().success, type:ColorTypes.success, icon: "check-circle"})
-		response = true
-	}, (error) => {
-
-		ToastStores.setToast({message: Language().otpFailed, title: Language().error, type:ColorTypes.danger, icon: "exclamation-circle"})
-		response = false})
-	return response
-}
-
-const Auth_confirmSms = async (mobile, code) =>{
-	if(!code){
-		ToastStores.setToast({message: Language().otpHint, title: Language().error, type:ColorTypes.danger, icon: "exclamation-circle"})
-		return false
-	}
-	if(!mobile){
-		ToastStores.setToast({message: Language().requiredMobile, title: Language().error, type:ColorTypes.danger, icon: "exclamation-circle"})
+	if (!mobile) {
+		ToastStores.setToast({ message: Language().requiredMobile, title: Language().error, type: ColorTypes.danger, icon: "exclamation-circle" })
 		return false
 	}
 	// check if code is 4 digit
-	if(!code.match(/^\d{4}$/)){
-		ToastStores.setToast({message: Language().otpHint, title: Language().error, type:ColorTypes.danger, icon: "exclamation-circle"})
+	if (!code.match(/^\d{4}$/)) {
+		ToastStores.setToast({ message: Language().otpHint, title: Language().error, type: ColorTypes.danger, icon: "exclamation-circle" })
 		return false
 	}
 
@@ -95,29 +127,29 @@ const Auth_confirmSms = async (mobile, code) =>{
 
 	let response = false
 	let token = ""
-	await AuthModel.loginConfirmSms(formData, (data) => {
+	await AuthModel.loginConfirmSms(formData, (data:FetchResponse) => {
 		token = data.token
 		response = true
-	}, (error) => {
-		ToastStores.setToast({message: Language().loginFailed, title: Language().error, type:ColorTypes.danger, icon: "exclamation-circle"})
-		response= false
+	}, (error:FetchError) => {
+		ToastStores.setToast({ message: Language().loginFailed, title: Language().error, type: ColorTypes.danger, icon: "exclamation-circle" })
+		response = false
 	})
 	let localResponse = false
-	if(response){
+	if (response) {
 		let formData = new FormData()
 		formData.append("token", token)
 		await Fetch({
-				method: "post",
-				url:  "/webservice/login/api",
-				data: formData,
-				cache:"no-store"
-			}, (data) => {
-				ToastStores.setToast({message: Language().loginSuccess, title: Language().success, type:ColorTypes.success, icon: "check-circle"})
-				localResponse = true
-			},
-			(error) => {
-				ToastStores.setToast({message: Language().loginFailed, title: Language().error, type:ColorTypes.danger, icon: "exclamation-circle"})
-				localResponse = false
+			method: "post",
+			url: "/webservice/login/api",
+			data: formData,
+			cache: "no-store"
+		}, (data:FetchResponse) => {
+			ToastStores.setToast({ message: Language().loginSuccess, title: Language().success, type: ColorTypes.success, icon: "check-circle" })
+			localResponse = true;
+		},
+			(error:FetchError) => {
+				ToastStores.setToast({ message: Language().loginFailed, title: Language().error, type: ColorTypes.danger, icon: "exclamation-circle" })
+				localResponse = false;
 			})
 	}
 	return localResponse;

@@ -16,48 +16,62 @@ const Login = ({ beforShopping = false }: login) => {
 	const [loading, setLoading] = useState(false);
 	const [step, setStep] = useState(1);
 	const [mobile, setMobile] = useState("");
+	
 	const onSubmitFirstForm = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
-		//disable form during request
+	  
+		// Disable form during request
 		if (loading) return;
-
+	  
 		setLoading(true);
-		let data = new FormData(e.currentTarget);
-		let mobile = data.get("mobile");
-		let result = await Auth_sendSms(mobile);
+		const data = new FormData(e.currentTarget);
+		const mobileEntry = data.get("mobile");
+	  
+		if (typeof mobileEntry !== "string") {
+		  setLoading(false);
+		  throw new Error("Invalid mobile number"); // Handle invalid type
+		}
+	  
+		const result = await Auth_sendSms(mobileEntry);
 		setLoading(false);
-		setMobile(String(mobile));
-
+		setMobile(mobileEntry);
+	  
 		if (result) {
-			setStep(2);
+		  setStep(2);
 		}
-
-	}
-	const onSubmitSecondForm = async (e: React.FormEvent<HTMLFormElement>) => {
+	  };
+	  
+	  const onSubmitSecondForm = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
-		//disable form during request
+	  
+		// Disable form during request
 		if (loading) return;
-
+	  
 		setLoading(true);
-		let data = new FormData(e.currentTarget);
-		let mobile = data.get("mobile");
-		let code = data.get("otp-code");
-		const result = await Auth_confirmSms(mobile, code);
+		const data = new FormData(e.currentTarget);
+		const mobileEntry = data.get("mobile");
+		const codeEntry = data.get("otp-code");
+	  
+		if (typeof mobileEntry !== "string" || typeof codeEntry !== "string") {
+		  setLoading(false);
+		  throw new Error("Invalid input"); // Handle invalid type
+		}
+	  
+		const result = await Auth_confirmSms(mobileEntry, codeEntry);
+	  
 		if (result) {
-			AuthStores.setAuth(true)
-			if (beforShopping) {
-				router.push('/management/pay')
-			} else {
-				router.push('/management')
-			}
+		  AuthStores.setAuth(true);
+		  if (beforShopping) {
+			router.push('/management/pay');
+		  } else {
+			router.push('/management');
+		  }
+		} else {
+		  setLoading(false);
 		}
-		else
-		{
-			setLoading(false);
-		}
-	}
+	  };
+	  
+	  
 	return (
 		<div className={"flex flex-col gap-2"}>
 			<div className={"border-b border-black border-opacity-10"}></div>
