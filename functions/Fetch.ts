@@ -11,6 +11,7 @@ type ConfigType = {
 	data?: ReadableStream<any> | Blob | ArrayBufferView | ArrayBuffer | FormData | URLSearchParams | string | object | null,
 } | null
 type ReactionType = undefined | Function
+
 export async function Fetch(config: ConfigType, success: ReactionType, failed: ReactionType) {
 	let rawResponse;
 	try {
@@ -30,26 +31,28 @@ export async function Fetch(config: ConfigType, success: ReactionType, failed: R
 			}
 
 		}
-		const fetchConfigs: RequestInit | undefined = {
-			method: config.method || 'GET',
+		const fetchConfigs: any | undefined = {
+			method: config && config.method || 'GET',
 			withCredentials: config?.authorization ?? false,
-			headers: {
+			headers: config && {
 				Accept: 'application/json',
 				...config.headers,
 			},
-			dataType: config.dataType ?? "application/json",
+			dataType: config && (config.dataType ?? "application/json"),
 			cache: "no-store",
 			strictSSL: false,
 			signal: AbortSignal.timeout(timeOut),
 		}
-		if (config.data) {
+		if (config && config.data) {
 			if (fetchConfigs) {
 				fetchConfigs.body = config.data
 			}
+		}if(config){
+			rawResponse = await fetch(config.url, { ...fetchConfigs, cache: "no-store" });
 		}
-		rawResponse = await fetch(config.url, { ...fetchConfigs, cache: "no-store" });
-		if (rawResponse.ok) {
-			if (config.isFile) {
+		
+		if (rawResponse && rawResponse.ok) {
+			if (config && config.isFile) {
 				if (typeof success === 'function') {
 					let response = await rawResponse.blob();
 					success(response);

@@ -1,5 +1,5 @@
 function persianToFinglishSlug(persianText: string): string {
-	const map = {
+	const map: { [key: string]: string } = {
 		'ا': 'a',
 		'ب': 'b',
 		'پ': 'p',
@@ -42,18 +42,18 @@ function persianToFinglishSlug(persianText: string): string {
 
 	// Create slug: allow only letters and dashes
 	let slug = finglishText
-		.replace(/[^a-zA-Z0-9\s-]/g, '') // Remove non-letter, non-number, non-space, non-dash characters
-		.replace(/\s+/g, '-') // Replace spaces with dashes
-		.toLowerCase(); // Convert to lowercase
+		.replace(/[^a-zA-Z0-9\s-]/g, '') 
+		.replace(/\s+/g, '-') 
+		.toLowerCase(); 
 
 	return slug;
 }
 
-function  validateSlug(input) {
+function validateSlug(input: HTMLInputElement) {
 	input.value = input.value.replace(/[^a-zA-Z-]/g, '');
 }
+
 export {
 	persianToFinglishSlug,
 	validateSlug
-}
-
+};
