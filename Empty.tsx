@@ -6,13 +6,15 @@ const Empty: React.FC<EmptyProps> = ({ message = "", amplitude = 10, frequency =
   let wavingElement = useRef<SVGPathElement | null>(null);
 
   useEffect(() => {
-    WaveSvg({
-      amplitude: amplitude,
-      frequency: frequency,
-      item: wavingElement.current,
-    });
+    if (wavingElement.current) {
+      WaveSvg({
+        amplitude: amplitude,
+        frequency: frequency,
+        item: wavingElement.current,
+      });
+    }
   }, [amplitude, frequency]);
-
+  
   return (
     <div className={"p-8 flex-col items-center justify-center flex relative"}>
       <div

@@ -1,3 +1,5 @@
+import * as flubber from "flubber";
+
 interface WaveSvgProps {
 	amplitude: number;
 	frequency: number;
@@ -5,6 +7,7 @@ interface WaveSvgProps {
 }
 
 const waveSvg = ({ amplitude, frequency, item }: WaveSvgProps): void => {
+	let paths: string[] = []; 
 	const initialPath = "M300,331.72H0V6.71c21.65,0,16.61-4.03,87.17-4.7C157.64,1.34,160.33-.07,206.64,0s82.6,6.71,93.36,6.71v325.01Z";
 	function generatePath(amplitude: number, frequency: number, phase: number): string {
 		const y1 = amplitude * Math.sin(frequency * 0 + phase);
@@ -35,7 +38,7 @@ const waveSvg = ({ amplitude, frequency, item }: WaveSvgProps): void => {
 	function waveIt(element:any) {
 		element.setAttribute("d", paths[0]);
 		setInterval(() => {
-			paths.push(paths.shift());
+			paths.push(paths.shift()!); 
 
 			let interpolator = flubber.interpolate(paths[0], paths[1]);
 			animate(interpolator, element);
