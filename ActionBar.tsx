@@ -17,14 +17,11 @@ const ActionBar = () => {
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
   const notifRef = useRef<HTMLLIElement | null>(null);
-
-
   const auth = useSyncExternalStore(
     AuthStores.subscribe,
     AuthStores.getSnapshot,
     AuthStores.getServerSnapshot
   );
-
   const fetchNotificationCount = async () => {
     setLoading(true);
     try {
@@ -40,16 +37,18 @@ const ActionBar = () => {
   };
 
   useEffect(() => {
-    fetchNotificationCount();
-    // Set an interval to fetch notifications every 3 minutes
-    const intervalId = setInterval(() => {
+    if (auth) {
       fetchNotificationCount();
-    }, 180000);
+      // Set an interval to fetch notifications every 3 minutes
+      const intervalId = setInterval(() => {
+        fetchNotificationCount();
+      }, 180000);
 
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
+  }, [auth]);
 
   useEffect(() => {
     setAuthStatus(auth);
@@ -153,8 +152,8 @@ const ActionBar = () => {
               {item.icon === "fa fa-bell" && (
                 <div
                   className={`absolute bottom-16 left-1/2 transform -translate-x-1/2 w-72 rounded-lg transition-all duration-300 ease-out overflow-hidden ${isNotifOpen
-                      ? "scale-100 opacity-100 translate-y-0"
-                      : "scale-90 opacity-0 translate-y-8 pointer-events-none"
+                    ? "scale-100 opacity-100 translate-y-0"
+                    : "scale-90 opacity-0 translate-y-8 pointer-events-none"
                     }`}
                 >
                   <NotificationBox isOpen={isNotifOpen} />

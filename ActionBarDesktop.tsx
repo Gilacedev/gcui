@@ -12,6 +12,7 @@ import NotificationBox from "./NotificationBox";
 import { getNotificationCount } from "@/models/NotificationModel";
 
 const ActionBarDesktop = () => {
+
   const [loading, setLoading] = useState(false)
   const [notificationCount, setNotificationCount] = useState(0)
   const authStatus = useSyncExternalStore(
@@ -21,25 +22,6 @@ const ActionBarDesktop = () => {
   );
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-
-  // Close notification submenu when full URL changes
-  useEffect(() => {
-    const handleRouteChange = () => {
-      setIsOpen(false);
-    };
-
-    const currentUrl = window.location.href; // Full URL including query parameters
-    const observer = new MutationObserver(() => {
-      if (window.location.href !== currentUrl) {
-        handleRouteChange();
-      }
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    return () => observer.disconnect();
-  }, []);
-
 
   const fetchNotificationCount = async () => {
     setLoading(true);
@@ -56,7 +38,8 @@ const ActionBarDesktop = () => {
   };
 
   useEffect(() => {
-    fetchNotificationCount();
+    if (authStatus)
+      fetchNotificationCount();
     // Set an interval to fetch notifications every 3 minutes
     const intervalId = setInterval(() => {
       fetchNotificationCount();
@@ -65,7 +48,8 @@ const ActionBarDesktop = () => {
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+
+  }, [authStatus]);
 
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
@@ -113,8 +97,8 @@ const ActionBarDesktop = () => {
             {/* Animated Notification Box */}
             <div
               className={`absolute left-0 top-12 w-64 shadow-lg rounded-lg bg-slate-800 bg-opacity-100 transition-all duration-500 ease-out overflow-hidden transform ${isOpen
-                  ? "max-h-96 opacity-100 scale-100 translate-y-0"
-                  : "max-h-0 opacity-0 scale-95 -translate-y-4"
+                ? "max-h-96 opacity-100 scale-100 translate-y-0"
+                : "max-h-0 opacity-0 scale-95 -translate-y-4"
                 }`}
             >
               <NotificationBox isOpen={isOpen} />
