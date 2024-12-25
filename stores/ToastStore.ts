@@ -1,28 +1,33 @@
 
-//menu store :
-let toastListener = [];
-let toast = {};
-
-export const ToastStores = {
-	setToast(status) {
-		toast = status;
-		emitToastChange();
+type Toast = {
+	[key: string]: any; 
+  };
+  
+  type ToastListener = () => void;
+  
+  let toastListener: ToastListener[] = []; 
+  let toast: Toast = {}; 
+  
+  export const ToastStores = {
+	setToast(status: Toast) { 
+	  toast = status;
+	  emitToastChange();
 	},
-	subscribe(listener) {
-		toastListener = [...toastListener, listener];
-		return () => {
-			toastListener = toastListener.filter(l => l !== listener);
-		};
+	subscribe(listener: ToastListener) { 
+	  toastListener = [...toastListener, listener];
+	  return () => {
+		toastListener = toastListener.filter(l => l !== listener);
+	  };
 	},
 	getSnapshot() {
-		return toast;
+	  return toast;
 	},
 	getServerSnapshot: (() => { return toast })
-};
-
-
-function emitToastChange() {
+  };
+  
+  function emitToastChange() {
 	for (let listener of toastListener) {
-		listener();
+	  listener(); 
 	}
-}
+  }
+  
