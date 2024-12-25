@@ -1,5 +1,5 @@
 import Language from "@/locales/Language";
-import PageType from "@/types/PageType";
+import ContentType from "@/types/Content";
 import SettingType from "@/types/Setting";
 
 type metaConfig = {
@@ -7,37 +7,40 @@ type metaConfig = {
 	useOpenGraph?: boolean,
 	useTwitter?: boolean
 } | undefined
-export const meteDataGenerator = (page:PageType, settings:SettingType[], config:metaConfig={
+export const meteDataGenerator = (page:ContentType, settings:SettingType[], config:metaConfig={
 	useSiteName:true,
 	useOpenGraph:true,
 	useTwitter:true
 })=>
 {
-	let title = page.title
+	let title = page? page.title : ""
+
 	let openGraph = {
-			title: page.title,
-			description: page.short_description,
-			image: process.env.NEXT_PUBLIC_UPLOAD_URL + "" + page.avatar,
+			title: page && page.title,
+			description: page && page.short_description,
+			image: page && process.env.NEXT_PUBLIC_UPLOAD_URL + "" +  page.avatar,
 		}
 	let twitter = {
-			title: page.title,
-			description: page.short_description,
-			image: process.env.NEXT_PUBLIC_UPLOAD_URL + "" + page.avatar,
+			title: page && page.title,
+			description: page && page.short_description,
+			image: page && process.env.NEXT_PUBLIC_UPLOAD_URL + "" + page.avatar,
 		}
-	if (config && config.useSiteName && settings)
+	if (config && config.useSiteName && settings && page)
 	{
 		title = settings.find((setting:any) => setting?.name == "site_name")?.value + " | " + page.title
 	}
 
 	return {
 		title,
-		description: page.short_description,
+		description: page && page.short_description,
 		openGraph: config?.useOpenGraph && openGraph,
 		twitter: config?.useTwitter && twitter
 	}
 }
-export const titleCreator = (page:PageType,settings:SettingType[]) => {
-	return settings.find((setting:SettingType) => setting?.name == "site_name")?.value + " | " + page.title
+export const titleCreator = (page:ContentType,settings:SettingType[]) => {
+	if(page){
+		return settings.find((setting:SettingType) => setting?.name == "site_name")?.value + " | " + page.title
+	}
 }
 export const notFound = () => {
 	return {

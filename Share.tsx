@@ -2,7 +2,7 @@
 import { usePathname } from 'next/navigation'
 
 type ShareProps = {
-  animation?: string; 
+  animation?: boolean; 
   text?: string | null;
 }
 

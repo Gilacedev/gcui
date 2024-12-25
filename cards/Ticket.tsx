@@ -2,7 +2,7 @@ import Blocks from "@/components/Blocks";
 import Badge from "@/components/Badge";
 import ColorTypes from "@/components/functions/ColorTypes";
 import TicketStatus from "@/components/TicketStatus";
-import TicketType  from "@/types/Ticket";  
+import TicketType from "@/types/Ticket";
 
 type TicketProps = {
   ticket: TicketType;
@@ -46,7 +46,7 @@ const Ticket = ({ ticket }: TicketProps) => {
       </a>
       <div className={"flex items-center justify-between mt-8"}>
         <div>
-          {ticket && <TicketStatus status={ticket._status} />}
+          {ticket._status !== undefined && <TicketStatus status={ticket._status} />}
         </div>
         <div className={"flex gap-2 text-xs "}>
           <div className={"text-violet-300 myLtr"}>
