@@ -4,12 +4,12 @@ import {useEffect, useRef} from "react";
 import mapboxgl from 'mapbox-gl'
 import Button from "@/components/Button";
 import ColorTypes from "@/components/functions/ColorTypes";
-import MapSettings from '@/types/MapSettings';
 
-const Map: React.FC<{ settings: MapSettings }> = ({ settings }) => {
+const Map: React.FC<{ settings: any }> = ({ settings }) => {
 	const mapRef = useRef<mapboxgl.Map | null>(null);
 	const mapContainerRef = useRef<HTMLDivElement | null>(null);
   
+	console.log(settings)
 	useEffect(() => {
 	  if (settings && settings.mapbox_api) {
 		mapboxgl.accessToken = settings.mapbox_api;
