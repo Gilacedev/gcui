@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import WaveSvg from "@/components/functions/WaveSvg";
-import EmptyProps from "@/types/EmptyPropsType";
+import EmptyProps from "@/types/Empty";
 
 const Empty: React.FC<EmptyProps> = ({ message = "", amplitude = 10, frequency = 0.1 }) => {
   let wavingElement = useRef<SVGPathElement | null>(null);

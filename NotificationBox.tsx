@@ -7,7 +7,7 @@ import { getNotification, doReadNotification } from "@/models/NotificationModel"
 import Button from "./Button";
 import ColorTypes from "./functions/ColorTypes";
 import { AuthStores } from "./stores/AuthStore";
-import Notification from "@/types/NotificationType";
+import Notification from "@/types/Notification";
 
 type NotificationBoxProps =  {
   isOpen: boolean;
