@@ -3,18 +3,7 @@ import { GetFileType } from "@/components/functions/File";
 import Image from "@/components/Image";
 import { useState } from "react";
 
-type FileItem = {
-	slug: string;
-	name: string;
-}
-
-type Content = {
-	avatar?: string;
-	title: string;
-	files: FileItem[];
-}
-
-const MediaPreview: React.FC<{ content: Content }> = ({ content }) => {
+const MediaPreview: React.FC<{ content: any }> = ({ content }) => {
 
 	const items = [
 		{
@@ -24,7 +13,7 @@ const MediaPreview: React.FC<{ content: Content }> = ({ content }) => {
 			text: content.title,
 			type: GetFileType(content.avatar || ""), 
 		},
-		...content.files.map((file) => ({
+		...content.files.map((file:any) => ({
 			file: process.env.NEXT_PUBLIC_UPLOAD_URL + "/" + file.slug,
 			text: file.name,
 			type: GetFileType(file.slug || ""), 
