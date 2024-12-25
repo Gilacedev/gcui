@@ -1,7 +1,15 @@
 import React from "react";
 import Blocks from "@/components/Blocks";
 
-const Radio = ({ name, children, defaultChecked,onChange }) => {
+
+type RadioProps = {
+  name: string; 
+  children: React.ReactNode;
+  defaultChecked?: boolean; 
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; 
+}
+
+const Radio: React.FC<RadioProps> = ({ name, children, defaultChecked, onChange }) => {
   return (
     <Blocks.Dark>
       <label className={`flex items-center justify-start p-1 cursor-pointer`}>
@@ -10,7 +18,7 @@ const Radio = ({ name, children, defaultChecked,onChange }) => {
           className={`opacity-0 w-0 overflow-hidden h-0 peer cursor-pointer`}
           type="radio"
           id={`radio_${name}`}
-          name={name} 
+          name={name}
           onChange={onChange}
         />
         <div className={"w-4 h-4 rounded-full bg-slate-300 peer-checked:bg-indigo-500 peer-checked:shadow-lg peer-checked:shadow-indigo-500 transition-all"}>
@@ -23,3 +31,4 @@ const Radio = ({ name, children, defaultChecked,onChange }) => {
 };
 
 export default Radio;
+
