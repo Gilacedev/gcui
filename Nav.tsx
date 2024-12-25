@@ -1,7 +1,7 @@
 import MenuItem from "./MenuItem";
 import Button from "./Button";
 import SearchForm from "./SearchForm";
-import ColorTypes from "./functions/ColorTypes"; 
+import ColorTypes from "./functions/ColorTypes";
 import Image from "./Image";
 import NavbarBars from "@/components/NavbarBars";
 import ActionBarDesktop from "@/components/ActionBarDesktop";
@@ -43,21 +43,23 @@ const AuthBlock = async () => {
 	return <ActionBarDesktop />;
 };
 
-const Nav = async ({ Language, menu }:NavProps) => {
+const Nav = async ({ Language, menu }: NavProps) => {
 	let isMobile = await Device();
-	let menuItems: Menu[] = []; 
+	let menuItems: Menu[] = [];
 	let activeId = 1;
-	try {
-		if (typeof menu.meta === "string") {
-			let data = JSON.parse(menu.meta);
-			menuItems = data.menu;
-		} else {
-			console.warn("menu.meta is not a string:", menu.meta);
+	if (menu){
+		try {
+			if (typeof menu.meta === "string") {
+				let data = JSON.parse(menu.meta);
+				menuItems = data.menu;
+			} else {
+				console.warn("menu.meta is not a string:", menu.meta);
+			}
+		} catch (e) {
+			console.error("Error parsing menu.meta:", e);
 		}
-	} catch (e) {
-		console.error("Error parsing menu.meta:", e);
 	}
-	
+
 	if (isMobile) {
 		return (
 			<div className={"container mx-auto z-20 sticky top-0"}>
@@ -105,17 +107,19 @@ const Nav = async ({ Language, menu }:NavProps) => {
 				</h1>
 				<div className={"flex justify-between h-16 w-full border-b border-slate-700 mt-2"}>
 					<ul className={"flex items-center gap-2"}>
-						{menuItems.map((item, index) => {
-							return (
-								<div key={item.id}>
-									<MenuItem item={item} />
-								</div>
-							);
+						{menuItems && menuItems.map((item, index) => {
+							if(item){
+								return (
+									<div key={item.id}>
+										<MenuItem item={item} />
+									</div>
+								);
+							}
 						})}
 					</ul>
 					<ul className={"flex items-center"}>
 						<li>
-							<AuthBlock  />
+							<AuthBlock />
 						</li>
 						<li className={"ms-2"}>
 							<SearchForm />
