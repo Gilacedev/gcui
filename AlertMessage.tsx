@@ -26,7 +26,7 @@ const AlertMessage = ({data}: { data:content }) => {
 			extraFeatures.btn_title = temp2.menu[0].btn_title;
 		  }
 		} catch (e) {
-		  console.log("menu data:", data.meta);
+	
 		}
 	  }
 	  

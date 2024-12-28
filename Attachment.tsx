@@ -11,8 +11,8 @@ const Attachment: React.FC<AttachmentType> = ({
   files,
   setFiles,
 }) => {
+  
   useEffect(() => {
-    // Update parent form with the current files
     setFilesInForm(files);
   }, [files, setFilesInForm]);
 
@@ -22,7 +22,7 @@ const Attachment: React.FC<AttachmentType> = ({
   };
 
   const removeFile = (index: number) => {
-    const updatedFiles = files.filter((_, i) => i !== index);
+    const updatedFiles = files.filter((_:any, i:any) => i !== index);
     setFiles(updatedFiles);
   };
 
@@ -56,7 +56,7 @@ const Attachment: React.FC<AttachmentType> = ({
         </div>
       </div>
       <div className="flex gap-2 flex-wrap pt-2">
-        {files.map((file, index) => (
+        {files.map((file:File, index:number) => (
           <div
             key={index}
             className="flex items-center gap-2 bg-indigo-800 p-2 text-xs rounded"

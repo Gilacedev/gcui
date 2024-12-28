@@ -1,3 +1,5 @@
+import { AuthStores } from "../stores/AuthStore";
+
 type ConfigType = {
 	method: "get" | "post" | "put" | "delete" | "patch" | "head" | "options" | "connect" | "trace" | "GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "OPTIONS" | "CONNECT" | "TRACE",
 	headers?: object | object[] | null,
@@ -18,11 +20,15 @@ export async function Fetch(config: ConfigType, success: ReactionType, failed: R
 		const cacheTypesArray = ["no-cache", "default", "reload", "force-cache", "only-if-cached", "no-store"]
 		let timeOut = config?.timeout ? config.timeout : 6000
 		if (config && config.authorization) {
-			let token = ""
+			let token: any = ""
 			if (typeof window !== "undefined") {
 				token = await fetch("/webservice/cookie/api", {}).then((res) => res.json()).then((data) => data.token);
+				const statusCode = await fetch("/webservice/cookie/api", {})
+				if (statusCode.status === 401) {
+					localStorage.removeItem('auth')
+					AuthStores.setAuth(false)
+				}
 			}
-			console.log("client token", token)
 			if (token !== "") {
 				config.headers = {
 					...config.headers,
@@ -39,7 +45,7 @@ export async function Fetch(config: ConfigType, success: ReactionType, failed: R
 				...config.headers,
 			},
 			dataType: config && (config.dataType ?? "application/json"),
-			cache: "no-store",
+			cache: 'no-store',
 			strictSSL: false,
 			signal: AbortSignal.timeout(timeOut),
 		}
@@ -47,10 +53,10 @@ export async function Fetch(config: ConfigType, success: ReactionType, failed: R
 			if (fetchConfigs) {
 				fetchConfigs.body = config.data
 			}
-		}if(config){
-			rawResponse = await fetch(config.url, { ...fetchConfigs, cache: "no-store" });
+		} if (config) {
+			rawResponse = await fetch(config.url, { ...fetchConfigs, cache: 'no-store' });
 		}
-		
+
 		if (rawResponse && rawResponse.ok) {
 			if (config && config.isFile) {
 				if (typeof success === 'function') {
@@ -70,7 +76,6 @@ export async function Fetch(config: ConfigType, success: ReactionType, failed: R
 			}
 		}
 	} catch (error) {
-
 		console.log("Fetch error", error)
 		if (typeof failed == "function") {
 			failed(error)

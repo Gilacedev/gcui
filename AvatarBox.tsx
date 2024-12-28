@@ -10,7 +10,7 @@ type AvatarBoxProps = {
   h?: number;
   realsize: boolean;
   onChange?: (data: string) => void; // Explicitly typing the onChange prop
-  label: string;
+  label?: string;
 };
 
 export default function AvatarBox(props: AvatarBoxProps) {

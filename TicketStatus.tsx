@@ -1,7 +1,7 @@
 import Language from "@/locales/Language";
 
 interface TicketStatusProps {
-  status: number; 
+  status: any; 
 }
 
 const TicketStatus = ({ status }: TicketStatusProps) => {

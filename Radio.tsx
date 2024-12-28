@@ -3,6 +3,7 @@ import Blocks from "@/components/Blocks";
 
 
 type RadioProps = {
+  id?:string;
   name: string; 
   children: React.ReactNode;
   defaultChecked?: boolean; 
