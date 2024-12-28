@@ -12,7 +12,7 @@ async function Auth_check() {
 	let result = false
 	await fetch(process.env.NEXT_PUBLIC_APP_BASE_URL + "/webservice/check/api", {
 		method: "get",
-		cache: "no-store",
+		cache: 'default',
 	}).then((response) => {
 		result = true
 	},
@@ -28,16 +28,16 @@ const Auth_logout = async () => {
 	const configs = {
 		method: "get" as const, // Ensure type compatibility
 		url: process.env.NEXT_PUBLIC_APP_BASE_URL + "/webservice/logout/api",
-		cache: "no-store",
+		cache: 'default',
 	};
 	await Fetch(
 		configs,
 		(data: FetchResponse) => {
-			console.log("Logout successful", data);
 			result = true;
 			AuthStores.setAuth(false)
 		},
 		(error: FetchError) => {
+			localStorage.removeItem('auth')
 			console.error("Logout failed", error);
 			result = false;
 		}
@@ -142,7 +142,7 @@ const Auth_confirmSms = async (mobile:string, code:any) => {
 			method: "post",
 			url: "/webservice/login/api",
 			data: formData,
-			cache: "no-store"
+			cache: 'default'
 		}, (data:FetchResponse) => {
 			ToastStores.setToast({ message: Language().loginSuccess, title: Language().success, type: ColorTypes.success, icon: "check-circle" })
 			localResponse = true;
@@ -150,6 +150,7 @@ const Auth_confirmSms = async (mobile:string, code:any) => {
 			(error:FetchError) => {
 				ToastStores.setToast({ message: Language().loginFailed, title: Language().error, type: ColorTypes.danger, icon: "exclamation-circle" })
 				localResponse = false;
+				localStorage.removeItem('auth')
 			})
 	}
 	return localResponse;
