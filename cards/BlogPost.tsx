@@ -5,6 +5,7 @@ import Blocks from "../Blocks";
 import Image from "../Image";
 import ContentType from "@/types/Content";
 import Language from "@/locales/Language";
+import Link from "next/link";
 
 
 export default function BlogPost({ blog, compact }: Readonly<{ blog: ContentType, compact: boolean }>) {
@@ -33,8 +34,6 @@ export default function BlogPost({ blog, compact }: Readonly<{ blog: ContentType
 			console.error('Failed to parse blog meta:', e);
 		}
 	}
-
-
 
 	let media = "assets/images/image-placeholder.svg"
 	if (blog.avatar) {
@@ -84,21 +83,24 @@ export default function BlogPost({ blog, compact }: Readonly<{ blog: ContentType
 							{blog.short_description}
 						</Paragraph>
 					</div>
-					{
-						blog.avatar && compact &&
-						<div>
-							<div className={"w-24 h-24 rounded-xl overflow-hidden shadow-lg shadow-violet-900/30"}>
-								<Image src={media} alt={blog.title} type={"cover"}></Image>
+					<Link href={`/blog/${blog.slug}`}>
+						{
+							blog.avatar && compact &&
+							<div>
+								<div className={"w-24 h-24 rounded-xl overflow-hidden shadow-lg shadow-violet-900/30"}>
+									<Image src={media} alt={blog.title} type={"cover"}></Image>
+								</div>
 							</div>
-						</div>
-					}
+						}
+					</Link>
 				</div>
 				{
-					blog.avatar && !compact &&
-					<div className={" rounded-2xl overflow-hidden"}>
-						<Image src={media} alt={blog.title} type={"cover"}></Image>
-					</div>
-
+					<Link href={`/blog/${blog.slug}`}>
+						{blog.avatar && !compact &&
+							<div className={" rounded-2xl overflow-hidden"}>
+								<Image src={media} alt={blog.title} type={"cover"}></Image>
+							</div>}
+					</Link>
 				}
 			</div>
 			<div className={"flex gap-2 border-t border-white border-opacity-10 pt-4 mt-4"}>
@@ -124,8 +126,6 @@ export default function BlogPost({ blog, compact }: Readonly<{ blog: ContentType
 					</Button>
 				</div>
 			</div>
-
-
-		</Blocks.Dark>
+		</Blocks.Dark >
 	);
 }
