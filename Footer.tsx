@@ -3,6 +3,7 @@ import Language from "@/locales/Language";
 import Blocks from "@/components/Blocks";
 import SettingType from "@/types/Setting";
 import Menu from "@/types/Menu";
+import Link from "next/link";
 
 type FooterProps = {
 	settings: SettingType[];
@@ -15,16 +16,11 @@ const Footer: React.FC<FooterProps> = ({ settings, menu }) => {
 	let footerMenu = []
 	let footerMenuTitle = ""
 	if (menu) {
-		try{
-			if(typeof menu.meta === 'string') {
-				let data = JSON.parse(menu.meta);
-				footerMenu = data.menu;
+		try {
+				footerMenu = menu.meta.menu;
 				footerMenuTitle = menu.title ?? "";
-			} else {
-				console.error("menu.meta is not a valid string");
-			}
 		}
-		catch (e){
+		catch (e) {
 			console.error("Footer menu error", e)
 		}
 	}
@@ -35,14 +31,18 @@ const Footer: React.FC<FooterProps> = ({ settings, menu }) => {
 				<div className={"container mx-auto p-4"}>
 					<div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"}>
 						<div className={"flex items-center gap-2 flex-wrap"}>
-							<div className={"w-20"}>
-								<Image type={'contain'} src={"/assets/images/gilace-logo.svg"}
-									alt={"gilace logo"} />
-							</div>
-							<div>
-								<div className={"font-bold text-3xl"}>
-									{settings.find((setting) => setting?.name == "footer_site_name")?.value}
+							<Link href={'/'}>
+								<div className={"w-20"}>
+									<Image type={'contain'} src={"/assets/images/gilace-logo.svg"}
+										alt={"gilace logo"} />
 								</div>
+							</Link>
+							<div>
+								<Link href={'/'}>
+									<div className={"font-bold text-3xl"}>
+										{settings.find((setting) => setting?.name == "footer_site_name")?.value}
+									</div>
+								</Link>
 								<div className={"text-slate-700"}>
 									{settings.find((setting) => setting?.name == "footer_site_slogan")?.value}
 								</div>
