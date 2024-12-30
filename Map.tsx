@@ -8,6 +8,11 @@ import ColorTypes from "@/components/functions/ColorTypes";
 const Map: React.FC<{ settings: any }> = ({ settings }) => {
 	const mapRef = useRef<mapboxgl.Map | null>(null);
 	const mapContainerRef = useRef<HTMLDivElement | null>(null);
+
+	const handleClickGeo = () => {
+		window.location.href = `geo:${settings.latitude},${settings.longitude}`;
+	}
+
 	useEffect(() => {
 		if (settings && settings.mapbox_api) {
 			mapboxgl.accessToken = settings.mapbox_api;
@@ -17,7 +22,6 @@ const Map: React.FC<{ settings: any }> = ({ settings }) => {
 				null,
 				false
 			);
-
 			mapRef.current = new mapboxgl.Map({
 				style: "mapbox://styles/mapbox/dark-v10",
 				container: mapContainerRef.current!,
@@ -27,7 +31,6 @@ const Map: React.FC<{ settings: any }> = ({ settings }) => {
 				bearing: -45,
 				antialias: true,
 			});
-
 			mapRef.current.on("load", () => {
 				mapRef.current && mapRef.current.flyTo({
 					center: [settings.longitude, settings.latitude],
@@ -37,12 +40,10 @@ const Map: React.FC<{ settings: any }> = ({ settings }) => {
 					curve: 1,
 					pitch: 80,
 				});
-
 				mapRef.current && mapRef.current.addSource("mapbox", {
 					type: "vector",
 					url: "mapbox://mapbox.3d-buildings",
 				});
-
 				mapRef.current && mapRef.current.addLayer({
 					id: "3d-buildings",
 					source: "mapbox",
@@ -92,8 +93,8 @@ const Map: React.FC<{ settings: any }> = ({ settings }) => {
 					className={"!gap-0"}
 					particular={true}
 					color={ColorTypes.primary}
-					tag={"a"}
-					href={`geo:${settings.latitude},${settings.longitude}`}
+					tag={"span"}
+					onClick={() => handleClickGeo()}
 				>
 					<span className={"fa fa-location-arrow-up"} />
 				</Button>
