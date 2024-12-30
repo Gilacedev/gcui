@@ -15,9 +15,8 @@ const Footer: React.FC<FooterProps> = ({ settings, menu }) => {
 	let footerMenu = []
 	let footerMenuTitle = ""
 	if (menu) {
-		try {
-			// Ensure menu.meta is a string before parsing
-			if (typeof menu.meta === 'string') {
+		try{
+			if(typeof menu.meta === 'string') {
 				let data = JSON.parse(menu.meta);
 				footerMenu = data.menu;
 				footerMenuTitle = menu.title ?? "";
@@ -25,8 +24,7 @@ const Footer: React.FC<FooterProps> = ({ settings, menu }) => {
 				console.error("menu.meta is not a valid string");
 			}
 		}
-
-		catch (e) {
+		catch (e){
 			console.error("Footer menu error", e)
 		}
 	}

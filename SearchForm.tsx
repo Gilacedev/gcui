@@ -22,7 +22,7 @@ export default function SearchForm() {
       ></Button>
       <Modal open={open} onClose={() => setOpen(false)} name={"search-modal"} zindex={10}>
         <div className={"p-4"}>
-          <Search setSearch={handleSearchChange} />
+          <Search show_title={true} />
         </div>
       </Modal>
     </div>

@@ -21,7 +21,6 @@ type LanguageType = {
 };
 
 type NavProps = {
-	Language: LanguageType;
 	menu: Menu;
 }
 const AuthBlock = async () => {
@@ -43,18 +42,15 @@ const AuthBlock = async () => {
 	return <ActionBarDesktop />;
 };
 
-const Nav = async ({ Language, menu }: NavProps) => {
+const Nav = async ({menu }: NavProps) => {
+
 	let isMobile = await Device();
 	let menuItems: Menu[] = [];
 	let activeId = 1;
-	if (menu){
+	if (menu) {
 		try {
-			if (typeof menu.meta === "string") {
-				let data = JSON.parse(menu.meta);
-				menuItems = data.menu;
-			} else {
-				console.warn("menu.meta is not a string:", menu.meta);
-			}
+			let data = menu.meta;
+			menuItems = data && data.menu;
 		} catch (e) {
 			console.error("Error parsing menu.meta:", e);
 		}
@@ -108,7 +104,7 @@ const Nav = async ({ Language, menu }: NavProps) => {
 				<div className={"flex justify-between h-16 w-full border-b border-slate-700 mt-2"}>
 					<ul className={"flex items-center gap-2"}>
 						{menuItems && menuItems.map((item, index) => {
-							if(item){
+							if (item) {
 								return (
 									<div key={item.id}>
 										<MenuItem item={item} />

@@ -1,3 +1,5 @@
+
+'use client'
 import { useEffect, useRef } from "react";
 import WaveSvg from "@/components/functions/WaveSvg";
 import EmptyProps from "@/types/Empty";
