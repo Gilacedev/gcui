@@ -9,10 +9,6 @@ export default function SearchForm() {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState<string>("");
 
-  const handleSearchChange = (search: string | null) => {
-    setSearch(search ?? ""); 
-  };
-
   return (
     <div>
       <Button
