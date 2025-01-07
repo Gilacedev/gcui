@@ -13,12 +13,16 @@ interface PlansProps {
 	plans: Payable[];
 }
 
-const Plans: ({plans}: { plans: Payable }) => JSX.Element = ({ plans }:{plans:Payable}) => {
+const Plans = ({plans}: { plans: Payable[] }) =>{
 
 	const [activePlan, setActivePlan] = useState("monthly");
 	let dbPlansMonthly: Payable[] = [];
 	let dbPlansYearly: Payable[] = [];
 	let dbPlansLifetime: Payable[] = [];
+	if(!plans)
+	{
+		return ;
+	}
 	plans.map((item: Payable) => {
 		if (!item) return;
 		let itemMeta = [];
@@ -49,7 +53,7 @@ const Plans: ({plans}: { plans: Payable }) => JSX.Element = ({ plans }:{plans:Pa
 		isActive: string;
 	}
 
-	const DurationSelect: React.FC<DurationSelectProps> = ({ duration, isActive }) => {
+	const DurationSelect: React.FC<DurationSelectProps> = ({ duration:string, isActive }) => {
 		return (
 			<div
 				onClick={() => {
