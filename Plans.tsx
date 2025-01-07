@@ -53,7 +53,7 @@ const Plans = ({plans}: { plans: Payable[] }) =>{
 		isActive: string;
 	}
 
-	const DurationSelect: React.FC<DurationSelectProps> = ({ duration:string, isActive }) => {
+	const DurationSelect: React.FC<DurationSelectProps> = ({ duration, isActive }) => {
 		return (
 			<div
 				onClick={() => {
