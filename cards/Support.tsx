@@ -1,5 +1,6 @@
-import {H3, Paragraph} from "../Typo";
+import {H3} from "../Typo";
 import colorTypes from "../functions/ColorTypes";
+
 interface SupportProps {
 	color: colorTypes;
 	title: string;
@@ -38,10 +39,10 @@ return (
 				</H3>
 			</div>
 		</div>
-		<div className={"text-slate-300"}>
-			<Paragraph>
+		<div className={"text-slate-500 text-sm leading-6"}>
+			<div>
 				{description}
-			</Paragraph>
+			</div>
 		</div>
 	</div>
 

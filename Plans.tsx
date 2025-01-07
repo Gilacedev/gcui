@@ -13,7 +13,7 @@ interface PlansProps {
 	plans: Payable[];
 }
 
-const Plans: React.FC<PlansProps> = ({ plans }) => {
+const Plans: ({plans}: { plans: Payable }) => JSX.Element = ({ plans }:{plans:Payable}) => {
 
 	const [activePlan, setActivePlan] = useState("monthly");
 	let dbPlansMonthly: Payable[] = [];
@@ -23,7 +23,7 @@ const Plans: React.FC<PlansProps> = ({ plans }) => {
 		if (!item) return;
 		let itemMeta = [];
 		try {
-			if (item.meta) {
+			if (typeof item.meta === "string") {
 				const parsedMeta = JSON.parse(item.meta);
 				itemMeta = parsedMeta.menu || [];
 			}
