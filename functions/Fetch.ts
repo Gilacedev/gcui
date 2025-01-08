@@ -17,7 +17,7 @@ type ReactionType = undefined | Function
 export async function Fetch(config: ConfigType, success: ReactionType, failed: ReactionType) {
 	let rawResponse;
 	try {
-		const cacheTypesArray = ["no-cache", "default", "reload", "force-cache", "only-if-cached", "no-store"]
+		const cacheTypesArray = ["auto", "default-cache", "only-cache", "force-cache", "force-no-store", "default-no-store", "only-no-store"]
 		let timeOut = config?.timeout ? config.timeout : 6000
 		if (config && config.authorization) {
 			let token: any = ""
@@ -45,7 +45,7 @@ export async function Fetch(config: ConfigType, success: ReactionType, failed: R
 				...config.headers,
 			},
 			dataType: config && (config.dataType ?? "application/json"),
-			cache: 'no-store',
+			cache: config && (cacheTypesArray.includes(config.cache ?? "") ? config.cache : "force-no-store"),
 			strictSSL: false,
 			signal: AbortSignal.timeout(timeOut),
 		}
