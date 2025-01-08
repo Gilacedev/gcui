@@ -1,3 +1,5 @@
+import {func} from "ts-interface-checker";
+
 function persianToFinglishSlug(persianText: string): string {
 	const map: { [key: string]: string } = {
 		'ا': 'a',
@@ -52,8 +54,17 @@ function persianToFinglishSlug(persianText: string): string {
 function validateSlug(input: HTMLInputElement) {
 	input.value = input.value.replace(/[^a-zA-Z-]/g, '');
 }
+function makeMeta(response: any):any {
+	if(response && response.meta) {
+		if(typeof response.meta === 'string') {
+			response.meta = JSON.parse(response.meta);
+		}
+	}
+	return response;
+}
 
 export {
 	persianToFinglishSlug,
-	validateSlug
+	validateSlug,
+	makeMeta
 };
