@@ -8,7 +8,7 @@ interface SupportProps {
 }
 export default function Support({color, title, description}: Readonly<SupportProps>) {
 return (
-	<div className={"bg-slate-900 flex sm:inline-flex gap-4 bg-opacity-50 rounded-xl p-4 flex-wrap sm:flex-nowrap justify-center sm:justify-start sm:text-start"}>
+	<div className={"bg-slate-900 flex sm:inline-flex gap-4 bg-opacity-50 rounded-xl p-4 flex-nowrap justify-center sm:justify-start items-center sm:text-start backdrop-blur-xl"}>
 		<div className={"ps-2 flex gap-2"}>
 			<div>
 				{
@@ -33,14 +33,12 @@ return (
 				}
 
 			</div>
-			<div className={""}>
-				<H3 element={"div"}>
-					{title}
-				</H3>
-			</div>
 		</div>
-		<div className={"text-slate-500 text-sm leading-6"}>
-			<div>
+		<div className={""}>
+			<H3 element={"div"}>
+				{title}
+			</H3>
+			<div className={"text-slate-500 text-sm leading-6 pt-4"}>
 				{description}
 			</div>
 		</div>
