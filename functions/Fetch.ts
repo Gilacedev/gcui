@@ -1,4 +1,5 @@
 import { AuthStores } from "../stores/AuthStore";
+import {redirect} from "next/navigation";
 
 type ConfigType = {
 	method: "get" | "post" | "put" | "delete" | "patch" | "head" | "options" | "connect" | "trace" | "GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "OPTIONS" | "CONNECT" | "TRACE",
@@ -17,6 +18,7 @@ type ReactionType = undefined | Function
 export async function Fetch(config: ConfigType, success: ReactionType, failed: ReactionType) {
 	let rawResponse;
 	try {
+		let localFetch = fetch;
 		const cacheTypesArray = ["auto", "default-cache", "only-cache", "force-cache", "force-no-store", "default-no-store", "only-no-store"]
 		let timeOut = config?.timeout ? config.timeout : 6000
 		if (config && config.authorization) {
@@ -71,6 +73,16 @@ export async function Fetch(config: ConfigType, success: ReactionType, failed: R
 				});
 			}
 		} else {
+			console.log("try logout ",rawResponse.status)
+
+			if(rawResponse.status === 401){
+				try {
+					redirect("/management/logout");
+				}
+				catch (error) {
+					console.error("Redirect failed", error);
+				}
+			}
 			if (typeof failed == "function") {
 				failed(rawResponse)
 			}
