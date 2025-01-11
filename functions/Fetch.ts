@@ -73,8 +73,6 @@ export async function Fetch(config: ConfigType, success: ReactionType, failed: R
 				});
 			}
 		} else {
-			console.log("try logout ",rawResponse.status)
-
 			if(rawResponse.status === 401){
 				try {
 					redirect("/management/logout");
