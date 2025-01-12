@@ -121,7 +121,7 @@ export default function BlogPost({ blog, compact }: Readonly<{ blog: ContentType
 						className={"justify-center"}>
 						<span className={"fa fa-link-simple"}> </span>
 						<span>
-							{Language().more}
+							{Language().seePost}
 						</span>
 					</Button>
 				</div>
