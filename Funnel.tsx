@@ -9,16 +9,14 @@ import {redirect} from "next/navigation";
 import { useRouter } from 'next/navigation';
 
 const Funnel = () => {
-	const submitProposal_url = "https://forms.gle/k8ntxuX5kkUNEnwV7";
-	const requestACall_url = "https://forms.gle/xNFSMzqzeait3hxG6";
+	const submitProposal_url:string = "https://forms.gle/k8ntxuX5kkUNEnwV7";
+	const requestACall_url:string = "https://forms.gle/xNFSMzqzeait3hxG6";
 	const [temporarySelected, setTemporarySelected] = useState(1);
 	const [step, setStep] = useState(1);
-	const [selected, setSelected] = useState(1);
 	const [modalOpen, setModalOpen] = useState(false);
 	const router = useRouter();
 
-	const onChangeRadio = (requestedStep)=>{
-		console.log(requestedStep, temporarySelected)
+	const onChangeRadio = (requestedStep:number)=>{
 		if(requestedStep == 1 && temporarySelected == 1){
 			setStep(2)
 		}
@@ -50,15 +48,18 @@ const Funnel = () => {
 		}
 		if(requestedStep == 3 && temporarySelected == 2){
 			setModalOpen(false)
-			window.open(requestACall_url, '_blank').focus();
+			let url = window.open(requestACall_url, '_blank')
+			url && url.focus();
 		}
 		if(requestedStep == 4 && temporarySelected == 1){
 			setModalOpen(false)
-			window.open(requestACall_url, '_blank').focus();
+			let url = window.open(requestACall_url, '_blank');
+			url && url.focus();
 		}
 		if(requestedStep == 4 && temporarySelected == 2){
 			setModalOpen(false)
-			window.open(submitProposal_url, '_blank').focus();
+			let url = window.open(submitProposal_url, '_blank');
+			url && url.focus();
 		}
 	}
 	return (
