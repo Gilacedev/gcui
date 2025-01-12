@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 
 type TransitionLinkProps = {
   href: string;
@@ -9,8 +9,11 @@ type TransitionLinkProps = {
 
 const TransitionLink = ({ href, children, ...props }: TransitionLinkProps) => {
   const router = useRouter();
+  const path = usePathname()
   
   const handleTransition = async (e: React.MouseEvent) => {
+    console.log(path);
+    if(path === href) return;
     e.preventDefault();
     document.querySelector(".page-transition")?.classList.add("bye");
     router.push(href);
