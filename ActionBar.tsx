@@ -8,6 +8,7 @@ import { useEffect, useState, useRef, useSyncExternalStore } from "react";
 import { AuthStores } from "./stores/AuthStore";
 import NotificationBox from "./NotificationBox";
 import { getNotificationCount } from "@/models/NotificationModel";
+import TransitionLink from "@/components/TransitionLink";
 
 const ActionBar = () => {
   const language = Language("common");
@@ -90,80 +91,62 @@ const ActionBar = () => {
     return () => observer.disconnect();
   }, []);
 
-  const items = [
-    { path: "/dashboard/businesses", icon: "fa fa-briefcase", label: language.businesses },
-    { path: "/dashboard/invoices", icon: "fa fa-credit-card", label: language.invoices },
-    {
-      path: "/dashboard/invoices",
-      icon: "fa fa-bell",
-      label: language.events,
-      hasBadge: true,
-      badgeCount: notificationCount,
-    },
-    { path: "/dashboard/support", icon: "fa fa-headset", label: language.support },
-  ];
-
   if (authStatus) {
     return (
       <div className="fixed bottom-2 left-4 rounded-2xl w-[calc(100dvw-2rem)] bg-violet-900 bg-opacity-20 backdrop-blur-3xl h-16 text-slate-300 z-40">
-        <ul className="flex justify-stretch">
-          {items.map((item, index) => (
-            <li
-              key={index}
-              className="w-1/5 relative"
-              ref={item.icon === "fa fa-bell" ? notifRef : undefined}
-            >
-              <a
-                href={item.path}
-                className={`flex gap-2 flex-col items-center justify-center h-16 ${currentPath === item.path ? "border-b-4 border-violet-400" : ""
-                  }`}
-                onClick={
-                  item.icon === "fa fa-bell"
-                    ? (e) => {
-                      e.preventDefault();
-                      handleToggleNotif();
-                    }
-                    : undefined
-                }
-              >
-                <span
-                  className={`${item.icon
-                    } ${currentPath === item.path ? "text-violet-400" : "text-slate-400"
-                    }`}
-                ></span>
-                <span className="text-xs">{item.label}</span>
-              </a>
-              {item.hasBadge && item.badgeCount > 0 && (
-                <div
-                  onClick={
-                    item.icon === "fa fa-bell"
-                      ? (e) => {
-                        e.preventDefault();
-                        handleToggleNotif();
-                      }
-                      : undefined
-                  }
-                  className="absolute -top-2 left-1/2"
-                >
-                  <Badge color={ColorTypes.primary}>{item.badgeCount}</Badge>
-                </div>
-              )}
-              {/* Notification submenu */}
-              {item.icon === "fa fa-bell" && (
-                <div
-                  className={`absolute bottom-16 left-1/2 transform -translate-x-1/2 w-72 rounded-lg transition-all duration-300 ease-out overflow-hidden ${isNotifOpen
-                    ? "scale-100 opacity-100 translate-y-0"
-                    : "scale-90 opacity-0 translate-y-8 pointer-events-none"
-                    }`}
-                >
-                  <NotificationBox isOpen={isNotifOpen} />
-                </div>
-              )}
-            </li>
-          ))}
-          <li className="w-1/5 relative">
-            <ActionBarBasket />
+        <ul className="grid grid-cols-5">
+          <li className="">
+            <TransitionLink href={"/management/business"}
+                            className={`flex gap-2 flex-col items-center justify-center h-16 ${currentPath === "/management/business" ? "border-b-4 border-violet-400" : ""}`}>
+              <span
+                  className={`fa fa-briefcase ${currentPath === "management/business" ? "text-violet-400" : "text-slate-400"}`}/>
+              <span className="text-xs">{language.businesses}</span>
+            </TransitionLink>
           </li>
+          <li>
+            <TransitionLink href={"/management/invoice"}
+                            className={`flex gap-2 flex-col items-center justify-center h-16 ${currentPath === "/management/invoice" ? "border-b-4 border-violet-400" : ""}`}>
+              <span
+                  className={`fa fa-credit-card ${currentPath === "/management/invoice" ? "text-violet-400" : "text-slate-400"}`}/>
+              <span className="text-xs">{language.invoices}</span>
+            </TransitionLink>
+          </li>
+          <li className={"relative"} onClick={(e) => {
+            e.preventDefault();
+            handleToggleNotif();}} ref={notifRef}
+          >
+            <div className={`flex gap-2 flex-col items-center justify-center h-16 ${isNotifOpen ? "border-b-4 border-violet-400" : ""}`}>
+              <span className={`fa fa-bell ${currentPath === "/dashboard/invoice" ? "text-violet-400" : "text-slate-400"}`}/>
+              <span className="text-xs">{language.events}</span>
+            </div>
+            {
+                notificationCount && notificationCount > 0 &&
+                <div className={"absolute -top-2 left-1/2"}>
+                  <Badge color={ColorTypes.primary}>{notificationCount}</Badge>
+                </div>
+
+            }
+
+            {
+              <div
+                  className={`absolute bottom-16 left-1/2 transform -translate-x-1/2 w-72 rounded-lg transition-all duration-300 ease-out overflow-hidden ${isNotifOpen
+                            ? "scale-100 opacity-100 translate-y-0"
+                            : "scale-90 opacity-0 translate-y-8 pointer-events-none"
+                        }`} >
+                      <NotificationBox isOpen={isNotifOpen}/>
+                    </div>
+                }
+          </li>
+          <li>
+            <TransitionLink href={"/management/ticket"}
+                            className={`flex gap-2 flex-col items-center justify-center h-16 ${currentPath === "/management/ticket" ? "border-b-4 border-violet-400" : ""}`}>
+              <span className={`fa fa-headset ${currentPath === "/management/ticket" ? "text-violet-400" : "text-slate-400"}`}/>
+              <span className="text-xs">{language.support}</span>
+            </TransitionLink>
+          </li>
+            <li className="relative">
+                <ActionBarBasket/>
+            </li>
         </ul>
       </div>
     );
