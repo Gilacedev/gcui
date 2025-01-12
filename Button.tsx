@@ -29,7 +29,7 @@ const Button: React.FC<ComponentProps> = ({
   let loading = props.loading ? true : false;
   const disabled = props.disabled || false; // Handle disabled prop here
 
-  let className = "text-slate-50 h-10 px-4 rounded-xl  items-center transition-all duration-500  inline-flex gap-4 whitespace-nowrap";
+  let className = "relative text-slate-50 h-10 px-4 rounded-xl  items-center transition-all  origin-center duration-300  inline-flex gap-4 whitespace-nowrap active:scale-y-95 active:scale-x-105 active:shadow-none ";
 
   // Color class assignments
   if (color === ColorTypes.default) {
