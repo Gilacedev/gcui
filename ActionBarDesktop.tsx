@@ -40,10 +40,10 @@ const ActionBarDesktop = () => {
   useEffect(() => {
     if (authStatus)
       fetchNotificationCount();
-    // Set an interval to fetch notifications every 3 minutes
+    // Set an interval to fetch notifications every 5 minutes
     const intervalId = setInterval(() => {
       fetchNotificationCount();
-    }, 180000);
+    }, 300000);
 
     return () => {
       clearInterval(intervalId);
