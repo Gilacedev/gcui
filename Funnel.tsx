@@ -8,8 +8,8 @@ import {useState} from "react";
 import {useRouter} from "next/navigation";
 
 const Funnel = () => {
-	const submitProposal_url:string = "https://forms.gle/k8ntxuX5kkUNEnwV7";
-	const requestACall_url:string = "https://forms.gle/xNFSMzqzeait3hxG6";
+	const submitProposal_url:string = "https://forms.gle/xNFSMzqzeait3hxG6";
+	const requestACall_url:string = "https://forms.gle/k8ntxuX5kkUNEnwV7";
 	const [temporarySelected, setTemporarySelected] = useState(1);
 	const [step, setStep] = useState(1);
 	const [modalOpen, setModalOpen] = useState(false);
@@ -94,7 +94,7 @@ const Funnel = () => {
 									<li>
 										<Radio name={"funnel"} onChange={() => {
 											setTemporarySelected(1)
-										}} defaultChecked={true}>
+										}} >
 											<div className={"ps-2"}>
 												<div>
 													فروشگاه اینترنتی
@@ -167,7 +167,7 @@ const Funnel = () => {
                                     <li>
                                         <Radio name={"funnel"} onChange={() => {
 											setTemporarySelected(1)
-										}} defaultChecked={true}>
+										}} >
                                             <div className={"ps-2"}>
                                                 <div>
                                                     فروشگاه اینترنتی G-SHOP 2.0
@@ -262,7 +262,7 @@ const Funnel = () => {
                                     <li>
                                         <Radio name={"funnel"} onChange={() => {
 											setTemporarySelected(1)
-										}} defaultChecked={true}>
+										}} >
                                             <div className={"ps-2"}>
                                                 <div>
                                                     محصول وبسایت شرکتی G-PRO LITE
@@ -330,7 +330,7 @@ const Funnel = () => {
                                     <li>
                                         <Radio name={"funnel"} onChange={() => {
 											setTemporarySelected(1)
-										}} defaultChecked={true}>
+										}} >
                                             <div className={"ps-2"}>
                                                 <div>
                                                     یک پروپوزال آماده به صورت مستند دارم
