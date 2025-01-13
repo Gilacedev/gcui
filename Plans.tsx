@@ -12,7 +12,13 @@ import Payable from "@/types/Payable";
 interface PlansProps {
 	plans: Payable[];
 }
-
+type metaType = {
+	customStructure: any[];
+	menu: any[]
+}
+function isMetaType(meta: any): meta is metaType {
+	return meta && Array.isArray(meta.menu) && Array.isArray(meta.customStructure);
+}
 const Plans = ({plans}: { plans: Payable[] }) =>{
 
 	const [activePlan, setActivePlan] = useState("monthly");
@@ -25,15 +31,20 @@ const Plans = ({plans}: { plans: Payable[] }) =>{
 	}
 	plans.map((item: Payable) => {
 		if (!item) return;
-		let itemMeta = [];
+		let itemMeta:any[] = [];
+
 		try {
 			if (typeof item.meta === "string") {
 				const parsedMeta = JSON.parse(item.meta);
 				itemMeta = parsedMeta.menu || [];
 			}
+			if (isMetaType(item.meta)) {
+				itemMeta = item.meta.menu;
+			}
 		} catch (e) {
 			console.error("Error parsing meta:", e);
 		}
+		console.log(itemMeta)
 		item.checkList = itemMeta;
 
 		if (item.duration === "monthly") {
@@ -78,15 +89,15 @@ const Plans = ({plans}: { plans: Payable[] }) =>{
 				<H1 element={"div"}>
 					{item.title}
 				</H1>
-				<Paragraph element={"div"} className={"leading-8 text-sm text-slate-400 pt-4"}>
+				<Paragraph element={"div"} className={"leading-8 text-sm text-slate-500 pt-4"}>
 					<div dangerouslySetInnerHTML={{ __html: item.description }}></div>
 				</Paragraph>
 			</div>
-			<div className={"flex-1 sm:min-h-[40dvh]"}>
+			<div className={"flex-1 sm:min-h-[40dvh] text-slate-200"}>
 				<div>
 					{item.checkList && item.checkList.length>0 && item.checkList.map((item, index) => {
 						return (
-							<div key={index} className={"flex gap-2 items-center"}>
+							<div key={index} className={"flex gap-2 items-center pb-4 leading-6"}>
 								<span className={"far fa-check-circle text-indigo-500"}></span>
 								<span className={"text-slate-400"}>
 									{item.feature}
