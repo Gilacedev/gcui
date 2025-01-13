@@ -11,7 +11,7 @@ const Dust = () => {
 				"value": 200,
 				"density": {
 					"enable": true,
-					"value_area": 300
+					"value_area": 500
 				}
 			},
 			"color": {
@@ -43,7 +43,7 @@ const Dust = () => {
 				}
 			},
 			"size": {
-				"value": 2,
+				"value": 1,
 				"random": true,
 				"anim": {
 					"enable": false,
@@ -61,9 +61,9 @@ const Dust = () => {
 			},
 			"move": {
 				"enable": true,
-				"speed": 2,
+				"speed": 1,
 				"direction": "bottom",
-				"random": false,
+				"random": true,
 				"straight": false,
 				"out_mode": "out",
 				"bounce": false,
@@ -89,7 +89,7 @@ const Dust = () => {
 			},
 			"modes": {
 				"grab": {
-					"distance": 400,
+					"distance": 280.1507129632639,
 					"line_linked": {
 						"opacity": 0.5
 					}
