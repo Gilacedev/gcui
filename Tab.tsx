@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from "react";
+import React, {ReactNode, useState} from "react";
 interface tabProps {
 	headers: React.ReactNode[]
 	contents: React.ReactNode[]
@@ -20,7 +20,7 @@ const Tab = ({ headers, contents }: Readonly<tabProps>) => {
 				))}
 			</ul>
 			<ul className={"py-4 min-h-[30dvh]"}>
-				{contents.map((item, index) => (
+				{contents.map((item:ReactNode, index) => (
 					<li key={index}  className={`animate-fadeIn pb-4 px-2 ${index !== activeHeaderIndex ? "hidden" : ""}`} >
 						{item}
 					</li>
