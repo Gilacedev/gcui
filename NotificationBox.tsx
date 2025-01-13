@@ -142,7 +142,9 @@ const NotificationBox: React.FC<NotificationBoxProps> = ({ isOpen }) => {
   );
 
   return (
-    <div className="bg-slate-900 rounded-2xl flex justify-center items-center p-2">
+    <div
+    className="bg-slate-900 rounded-2xl flex justify-center items-center p-2"
+    onClick={(e) => e.stopPropagation()}>
       <Tab
         headers={[
           <div key="unseen" className="flex gap-2 cursor-pointer" onClick={() => setAll(0)}>
