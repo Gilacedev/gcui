@@ -4,9 +4,8 @@ import ColorTypes from "@/components/functions/ColorTypes";
 import Language from "@/locales/Language";
 import Radio from "@/components/Radio";
 import Modal from "@/components/Modal";
-import {useEffect, useState} from "react";
-import {redirect} from "next/navigation";
-import { useRouter } from 'next/navigation';
+import {useState} from "react";
+import {useRouter} from "next/navigation";
 
 const Funnel = () => {
 	const submitProposal_url:string = "https://forms.gle/k8ntxuX5kkUNEnwV7";
