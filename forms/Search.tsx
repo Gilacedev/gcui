@@ -18,10 +18,13 @@ const Search = ({ show_title }: {
 		e.preventDefault();
 		let data = new FormData(e.currentTarget);
 		let search = data.get("search");
+		setTimeout(() => {
+			setLoading(false)
+		}, 1000);
 		if (typeof search === "string" || search === null) {
 			return redirect("/search?keyword=" + search);
 		} else {
-			console.error("Invalid input, 'search' is a file");
+
 		}
 	};
 
