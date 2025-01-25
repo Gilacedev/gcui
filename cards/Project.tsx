@@ -24,7 +24,7 @@ export default function Project({data}: {data:Content})
 							{data.title}
 						</H3>
 					</a>
-					<Paragraph className={"text-sm text-slate-400"}>
+					<Paragraph className={"text-sm text-slate-400 line-clamp-3"}>
 						{data.short_description}
 					</Paragraph>
 				</div>

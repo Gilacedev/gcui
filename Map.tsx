@@ -17,11 +17,13 @@ const Map: React.FC<{ settings: any }> = ({ settings }) => {
 		if (settings && settings.mapbox_api) {
 			mapboxgl.accessToken = settings.mapbox_api;
 
-			mapboxgl.setRTLTextPlugin(
-				"https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.3.0/mapbox-gl-rtl-text.js",
-				null,
-				false
-			);
+			if (mapboxgl.getRTLTextPluginStatus() === 'unavailable') {
+				mapboxgl.setRTLTextPlugin(
+					'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
+					(): void => {},
+					true // Lazy load the plugin only when text is in arabic
+				)
+			}
 			mapRef.current = new mapboxgl.Map({
 				style: "mapbox://styles/mapbox/dark-v10",
 				container: mapContainerRef.current!,

@@ -23,7 +23,7 @@ const Quote = ({ data }: QuoteProps) => {
 					<H3 className={"text-violet-200 text-lg mb-2"}>{data.title}</H3>
 					<Paragraph className={"text-slate-400 font-light"}>{data.short_description}</Paragraph>
 					<span className={"fa fa-quote-left float-left text-indigo-500"}></span>
-					<Paragraph className={"text-slate-300 mt-6"} element={"div"}>
+					<Paragraph className={"text-slate-300 mt-6 min-h-24"} element={"div"}>
 						<div dangerouslySetInnerHTML={{ __html: description }} />
 					</Paragraph>
 					<span className={"fa fa-quote-right float-right text-indigo-500"}></span>
