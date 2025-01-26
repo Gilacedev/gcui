@@ -1,6 +1,5 @@
 "use client"
 import {useCookies} from 'react-cookie';
-import {useState} from "react";
 import Language from "@/locales/Language";
 import Button from "@/components/Button";
 import ColorTypes from "@/components/functions/ColorTypes";
@@ -9,8 +8,6 @@ import ColorTypes from "@/components/functions/ColorTypes";
 const ConsentBanner = ({settings}: {settings: {
 		[key: string]: string
 	}}) => {
-
-	const [consentModal, setConsentModal] = useState(false);
 	const [cookies, setCookie] = useCookies(['consent']);
 	const acceptCookie = () => {
 		setCookie('consent', 'true', { path: '/' });
@@ -18,6 +15,7 @@ const ConsentBanner = ({settings}: {settings: {
 	const rejectCookie = () => {
 		setCookie('consent', 'false', { path: '/' });
 	}
+	console.log("cookies",cookies.consent)
 	return (
 		<div>
 			{
@@ -41,10 +39,11 @@ const ConsentBanner = ({settings}: {settings: {
 					</div>
 				</div>
 			}
+			<div>{cookies.consent}</div>
 			{
-				cookies.consent === "true" &&
+				cookies.consent === true &&
 				settings && settings.google_analytics &&
-                <div id={"google_analytics"}  dangerouslySetInnerHTML={{__html: settings.google_analytics}}/>
+                <div id={"google_analytics_container"}  dangerouslySetInnerHTML={{__html: settings.google_analytics}}/>
 			}
 		</div>
 	);
