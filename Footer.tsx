@@ -4,14 +4,16 @@ import Blocks from "@/components/Blocks";
 import SettingType from "@/types/Setting";
 import Menu from "@/types/Menu";
 import Link from "next/link";
+import ContentType from "@/types/ContentType";
+import Content from "@/types/Content";
 
 type FooterProps = {
 	settings: SettingType[];
 	menu: Menu;
-	namads?: any;
+	namads: ContentType;
 }
 
-const Footer: React.FC<FooterProps> = ({ settings, menu }) => {
+const Footer = ({ settings, menu ,namads  }: FooterProps) => {
 
 	let footerMenu = []
 	let footerMenuTitle = ""
@@ -81,41 +83,54 @@ const Footer: React.FC<FooterProps> = ({ settings, menu }) => {
 
 						</div>
 						<div>
-							<h2 className={"text-violet-400 font-bold"}>
-								{Language().follow_us}
-							</h2>
-							<ul className={"text-sm py-4 text-slate-500 flex gap-4"}>
-								<li>
-									{
-										<a target={"_blank"} href={settings.find((setting) => setting?.name == "instagram")?.value}>
-											<span className={"fa fab fa-instagram text-3xl"} />
-										</a>
-									}
-								</li>
-								<li>
-									{
-										<a target={"_blank"} href={settings.find((setting) => setting?.name == "telegram")?.value}>
-											<span className={"fa fab fa-telegram text-3xl"} />
-										</a>
-									}
-								</li>
-								<li>
-									{
-										<a target={"_blank"}
-											href={settings.find((setting) => setting?.name == "whatsapp")?.value}>
-											<span className={"fa fab fa-whatsapp text-3xl"} />
-										</a>
-									}
-								</li>
-								<li>
-									{
-										<a target={"_blank"}
-											href={settings.find((setting) => setting?.name == "youtube")?.value}>
-											<span className={"fa fab fa-youtube text-3xl"} />
-										</a>
-									}
-								</li>
-							</ul>
+							<div>
+								<h2 className={"text-violet-400 font-bold"}>
+									{Language().follow_us}
+								</h2>
+								<ul className={"text-sm py-4 text-slate-500 flex gap-4"}>
+									<li>
+										{
+											<a target={"_blank"}
+											   href={settings.find((setting) => setting?.name == "instagram")?.value}>
+												<span className={"fa fab fa-instagram text-3xl"}/>
+											</a>
+										}
+									</li>
+									<li>
+										{
+											<a target={"_blank"}
+											   href={settings.find((setting) => setting?.name == "telegram")?.value}>
+												<span className={"fa fab fa-telegram text-3xl"}/>
+											</a>
+										}
+									</li>
+									<li>
+										{
+											<a target={"_blank"}
+											   href={settings.find((setting) => setting?.name == "whatsapp")?.value}>
+												<span className={"fa fab fa-whatsapp text-3xl"}/>
+											</a>
+										}
+									</li>
+									<li>
+										{
+											<a target={"_blank"}
+											   href={settings.find((setting) => setting?.name == "youtube")?.value}>
+												<span className={"fa fab fa-youtube text-3xl"}/>
+											</a>
+										}
+									</li>
+								</ul>
+							</div>
+							<div className={"grid grid-cols-3 gap-2"}>
+								{
+									namads && namads.contents && namads.contents.map((item: Content) => {
+										if(item && item.meta) {
+											return <div className={"bg-slate-600 rounded-3xl"} dangerouslySetInnerHTML={{__html: item.meta}}/>
+										}
+									})
+								}
+							</div>
 						</div>
 					</div>
 				</div>
