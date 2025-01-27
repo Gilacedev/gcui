@@ -125,7 +125,7 @@ const Footer = ({ settings, menu ,namads  }: FooterProps) => {
 							<div className={"grid grid-cols-3 gap-2"}>
 								{
 									namads && namads.contents && namads.contents.map((item: Content) => {
-										if(item && item.meta) {
+										if(item && item.short_description) {
 											return <div className={"bg-slate-600 rounded-3xl"} dangerouslySetInnerHTML={{__html: item.short_description}}/>
 										}
 									})
