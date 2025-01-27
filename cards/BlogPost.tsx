@@ -23,24 +23,12 @@ export default function BlogPost({ blog, compact }: Readonly<{ blog: ContentType
 		link: ""
 	}
 
-	if (blog.meta && typeof blog.meta === 'string') {
-		try {
-			let metaData = JSON.parse(blog.meta);
-			if (metaData.menu && metaData.menu.length > 0) {
-				externalLink.name = metaData.menu[0].name || '';
-				externalLink.link = metaData.menu[0].link || '';
-			}
-		} catch (e) {
-			console.error('Failed to parse blog meta:', e);
-		}
-	}
-
 	let media = "assets/images/image-placeholder.svg"
 	if (blog.avatar) {
 		media = process.env.NEXT_PUBLIC_UPLOAD_URL + "/" + blog.avatar
 	}
 	if (user && user.avatar) {
-		author.name = process.env.NEXT_PUBLIC_UPLOAD_URL + "/" + user.avatar
+		author.avatar = process.env.NEXT_PUBLIC_UPLOAD_URL + "/" + user.avatar
 	}
 	if (user && user.name) {
 		author.name = user.name
