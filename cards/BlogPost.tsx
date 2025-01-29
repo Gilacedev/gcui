@@ -34,6 +34,7 @@ export default function BlogPost({ blog, compact }: Readonly<{ blog: ContentType
 		author.name = user.name
 	}
 
+	console.log(blog)
 	return (
 		<Blocks.Dark className={"relative"}>
 			<div className={"absolute bottom-0 left-0 w-full h-full bg-bg-cherry v-mask rotate-180 rounded-xl -z-[1]"} />
@@ -92,8 +93,10 @@ export default function BlogPost({ blog, compact }: Readonly<{ blog: ContentType
 				}
 			</div>
 			<div className={"flex gap-2 border-t border-white border-opacity-10 pt-4 mt-4"}>
-				<div className={"w-10 h-10"}>
-					<Image src={author.avatar} alt={author.name} type={"cover"}></Image>
+				<div>
+					<div className={"w-10 h-10 rounded-full"}>
+						<Image src={author.avatar} alt={author.name} type={"cover"}></Image>
+					</div>
 				</div>
 				<div className={"flex flex-col"}>
 					<H3 element={"div"} className={"text-slate-400 text-sm"}>
