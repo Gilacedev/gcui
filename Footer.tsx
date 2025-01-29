@@ -19,12 +19,14 @@ const Footer = ({ settings, menu ,namads  }: FooterProps) => {
 	let footerMenuTitle = ""
 	if (menu) {
 		try {
-				footerMenu = menu.meta.menu;
-				footerMenuTitle = menu.title ?? "";
+			footerMenuTitle = menu.title ?? "";
+			if (typeof menu.meta === "string") {
+				let pageMeta = JSON.parse(menu.meta)
+				footerMenu = pageMeta.menu
+			}
 		}
-		catch (e) {
-			console.error("Footer menu error", e)
-		}
+		catch (e) {}
+
 	}
 
 	return (
