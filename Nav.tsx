@@ -49,11 +49,12 @@ const Nav = async ({menu }: NavProps) => {
 	let activeId = 1;
 	if (menu) {
 		try {
-			let data = menu.meta;
-			menuItems = data && data.menu;
-		} catch (e) {
-			console.error("Error parsing menu.meta:", e);
+			if (typeof menu.meta === "string") {
+				let pageMeta = JSON.parse(menu.meta)
+				menuItems = pageMeta.menu
+			}
 		}
+		catch (e) {}
 	}
 
 	if (isMobile) {
