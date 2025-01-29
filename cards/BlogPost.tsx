@@ -60,7 +60,7 @@ export default function BlogPost({ blog, compact }: Readonly<{ blog: ContentType
 				<div className={"flex items-start justify-between gap-2"}>
 					<div>
 						<a href={"/blog/" + blog.slug}>
-							<H2 className={"h-16 text-slate-300 text-ellipsis w-full overflow-hidden  line-clamp-2 my-4 md:my-0 font-bold text-lg"}>
+							<H2 className={" text-slate-300 text-ellipsis w-full overflow-hidden  line-clamp-2 my-4 md:my-0 font-bold text-lg"}>
 								<span className={"fa fa-link-simple me-2 text-indigo-500"}></span>
 								<span>
 									{blog.title}
@@ -68,7 +68,7 @@ export default function BlogPost({ blog, compact }: Readonly<{ blog: ContentType
 							</H2>
 						</a>
 						<Paragraph
-							className={"text-slate-400 mb-4 text-sm font-light leading-12 h-10 text-ellipsis w-full overflow-hidden  line-clamp-2"}>
+							className={"text-slate-400 my-4 text-sm font-light leading-12 h-10 w-full overflow-hidden line-clamp-2"}>
 							{blog.short_description}
 						</Paragraph>
 					</div>
