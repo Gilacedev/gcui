@@ -136,7 +136,7 @@ const AvatarSelector: React.FC<AvatarSelectorProps> = (props) => {
   }
 
   return (
-    <div className="absolute w-full h-full z-[1]">
+    <div className="absolute w-full h-full z-[99]">
       <label
         className="flex items-center justify-center w-full h-full absolute top-0 left-0"
         htmlFor="fileSelect"
@@ -157,7 +157,7 @@ const AvatarSelector: React.FC<AvatarSelectorProps> = (props) => {
 
       <Modal name="cropModal" zindex={30} onClose={handleCancel} open={isModalOpen}>
         <div>
-          <div className="h-[calc(100vh-200px)] overflow-hidden">
+          <div className="h-[50vh] flex items-center justify-center overflow-hidden">
             {/* Render the image directly as a child */}
             {cropImageInput && (
               <ReactCrop
@@ -174,7 +174,7 @@ const AvatarSelector: React.FC<AvatarSelectorProps> = (props) => {
               </ReactCrop>
             )}
           </div>
-          <div className="p-4 flex gap-2 items-center">
+          <div className="p-4 flex gap-2 items-center justify-center">
             <Button
               type="button"
               color={ColorTypes.primary}
