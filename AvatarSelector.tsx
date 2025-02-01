@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import ReactCrop, { Crop, PixelCrop } from "react-image-crop"; 
+import ReactCrop, { Crop } from "react-image-crop"; 
 import "react-image-crop/dist/ReactCrop.css";
 import Modal from "@/components/Modal";
 import Button from "@/components/Button";
 import Language from "@/locales/Language";
 import ColorTypes from "@/components/functions/ColorTypes";
 
-// Define the type for props
 type AvatarSelectorProps = {
   w?: number;
   h?: number;
@@ -14,160 +13,128 @@ type AvatarSelectorProps = {
   onChange: (data: string) => void;
 };
 
-const AvatarSelector: React.FC<AvatarSelectorProps> = (props) => {
+const AvatarSelector: React.FC<AvatarSelectorProps> = ({ w = 1080, h = 1080, realsize, onChange }) => {
   const dynamicImageName = "id" + Math.random().toString(36).slice(2, 12);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  let localW = props.w ? props.w : 1080;
-  let localH = props.h ? props.h : 1080;
-  if (localW >= localH) {
-    localH = (localH / localW) * 300;
-    localW = 300;
-  } else {
-    localW = (localW / localH) * 300;
-    localH = 300;
-  }
-  let aspect = localW / localH;
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
-  const onchange = (e: string) => {
-    props.onChange(e);
-  };
-
-  // Crop handlers
   const [cropImageInput, setCropImageInput] = useState<string | undefined>();
   const [crop, setCrop] = useState<Crop>({
     unit: "px",
     x: 25,
     y: 25,
-    width: localW,
-    height: localH,
+    width: 300,
+    height: 300,
   });
+
+  // Adjust dimensions based on aspect ratio
+  const aspect = w >= h ? 300 / ((h / w) * 300) : ((w / h) * 300) / 300;
+
+  const handleCancel = () => setIsModalOpen(false);
 
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+
       const reader = new FileReader();
-      reader.addEventListener("load", () => {
+      reader.onload = () => {
         setCropImageInput(reader.result as string);
         setIsModalOpen(true);
-      });
-      reader.readAsDataURL(e.target.files[0]);
+        e.target.value = ""; // Fix for iOS: Reset input field to allow re-upload of same file
+      };
+      reader.readAsDataURL(file);
     }
   };
 
-  async function confirmCrop() {
-    const image = document.querySelector<HTMLImageElement>("#" + dynamicImageName);
+  const confirmCrop = async () => {
+    const image = document.querySelector<HTMLImageElement>(`#${dynamicImageName}`);
     if (image) {
       await getCroppedImage(image, crop, Math.random() + ".jpg");
     }
-  }
+  };
 
-  const setImageUrl = (e: string) => {
-    onchange(e);
+  const setImageUrl = (data: string) => {
+    onChange(data);
     setIsModalOpen(false);
   };
 
-  const cancelCrop = () => {
-    setIsModalOpen(false);
-  };
-
-  function getCroppedImage(image: HTMLImageElement, crop: any, fileName: string) {
-    const imageCanvas = document.createElement("canvas");
+  const getCroppedImage = (image: HTMLImageElement, crop: Crop, fileName: string) => {
+    const canvas = document.createElement("canvas");
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
 
-    if (props.realsize) {
-      imageCanvas.width = props.w || 1080;
-      imageCanvas.height = props.h || 1080;
-      const imgCx = imageCanvas.getContext("2d");
-      if (imgCx) {
-        imgCx.drawImage(
-          image,
-          crop.x * scaleX,
-          crop.y * scaleY,
-          crop.width * scaleX,
-          crop.height * scaleY,
-          0,
-          0,
-          props.w || 1080,
-          props.h || 1080
-        );
-      }
+    if (realsize) {
+      canvas.width = w;
+      canvas.height = h;
     } else {
-      imageCanvas.width = crop.width;
-      imageCanvas.height = crop.height;
-      const imgCx = imageCanvas.getContext("2d");
-      if (imgCx) {
-        imgCx.drawImage(
-          image,
-          crop.x * scaleX,
-          crop.y * scaleY,
-          crop.width * scaleX,
-          crop.height * scaleY,
-          0,
-          0,
-          crop.width,
-          crop.height
-        );
-      }
+      canvas.width = crop.width;
+      canvas.height = crop.height;
     }
 
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
     return new Promise<void>((resolve, reject) => {
-      imageCanvas.toBlob((blob) => {
-        if (!blob) {
-          reject(new Error("The image canvas is empty"));
-          return;
-        }
+      // Fix for iOS: Use `toDataURL` as a fallback if `toBlob` is not supported
+      if (canvas.toBlob) {
+        canvas.toBlob((blob) => {
+          if (!blob) {
+            reject(new Error("The image canvas is empty"));
+            return;
+          }
 
-        // Create a File object from the Blob
-        const file = new File([blob], fileName, { type: "image/jpeg" });
+          const file = new File([blob], fileName, { type: "image/jpeg" });
 
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = function () {
-          setImageUrl(reader.result as string);
-          resolve();
-        };
-      }, "image/jpeg");
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onloadend = () => {
+            setImageUrl(reader.result as string);
+            resolve();
+          };
+        }, "image/jpeg");
+      } else {
+        // iOS Fallback
+        const dataUrl = canvas.toDataURL("image/jpeg");
+        setImageUrl(dataUrl);
+        resolve();
+      }
     });
-  }
+  };
 
   return (
     <div className="absolute w-full h-full z-[99]">
       <label
-        className="flex items-center justify-center w-full h-full absolute top-0 left-0"
+        className="flex items-center justify-center w-full h-full absolute top-0 left-0 cursor-pointer"
         htmlFor="fileSelect"
-        onClick={(e) => {
-          onSelectFile(e as unknown as React.ChangeEvent<HTMLInputElement>);
-        }}
       >
         <span className="fa fa-cloud-arrow-up" />
         <input
-          style={{ width: "100%", height: "40px" }}
           type="file"
           className="hidden"
           id="fileSelect"
           accept="image/*"
           onChange={onSelectFile}
-        ></input>
+        />
       </label>
 
       <Modal name="cropModal" zindex={30} onClose={handleCancel} open={isModalOpen}>
         <div>
           <div className="h-[50vh] flex items-center justify-center overflow-hidden">
-            {/* Render the image directly as a child */}
             {cropImageInput && (
-              <ReactCrop
-                crop={crop}
-                onChange={(c) => setCrop(c)}
-                aspect={aspect}
-              >
+              <ReactCrop crop={crop} onChange={(c) => setCrop(c)} aspect={aspect}>
                 <img
                   src={cropImageInput}
-                  alt="Crop me"
+                  alt="Crop"
                   id={dynamicImageName}
                   style={{ width: "100%" }}
                 />
@@ -175,19 +142,10 @@ const AvatarSelector: React.FC<AvatarSelectorProps> = (props) => {
             )}
           </div>
           <div className="p-4 flex gap-2 items-center justify-center">
-            <Button
-              type="button"
-              color={ColorTypes.primary}
-              onClick={confirmCrop}
-              icon={<span className="fa fa-crop" />}
-            >
+            <Button type="button" color={ColorTypes.primary} onClick={confirmCrop} icon={<span className="fa fa-crop" />}>
               {Language().crop}
             </Button>
-            <Button
-              color={ColorTypes.default}
-              onClick={cancelCrop}
-              icon={<span className="fa fa-times" />}
-            >
+            <Button color={ColorTypes.default} onClick={handleCancel} icon={<span className="fa fa-times" />}>
               {Language().cancel}
             </Button>
           </div>
