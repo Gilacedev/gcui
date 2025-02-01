@@ -15,7 +15,7 @@ type FormProps = {
 
 const Form = ({ children, title , onSubmit ,loading ,type }: FormProps) => {
 	return (
-		<Blocks.Dark className={"flex flex-col overflow-clip"}>
+		<Blocks.Dark className={"flex flex-col "}>
 
 			<form className={"flex-1"} onSubmit={(e) => {
 				e.preventDefault();
