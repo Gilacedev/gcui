@@ -50,7 +50,7 @@ export default function AvatarBox(props: AvatarBoxProps) {
       <span className="TextInput-Lable">
         {props.label ? props.label : Language().image}
       </span>
-      <div className="w-24 h-24 overflow-hidden relative">
+      <div className="w-24 h-24 relative">
         <div
           className="absolute top-0 left-0 w-full h-full overflow-hidden rounded-3xl bg-cover bg-center"
           style={{
