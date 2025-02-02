@@ -31,7 +31,6 @@ export const meteDataGenerator = (page:ContentType, settings:SettingType[], conf
 			title: "",
 			description: "",
 			images: "",
-			logo:"",
 			type: "website",
 			url: ""
 		},
