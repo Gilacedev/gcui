@@ -33,8 +33,6 @@ export default function BlogPost({ blog, compact }: Readonly<{ blog: ContentType
 	if (user && user.name) {
 		author.name = user.name
 	}
-
-	console.log(blog)
 	return (
 		<Blocks.Dark className={"relative"}>
 			<div className={"absolute bottom-0 left-0 w-full h-full bg-bg-cherry v-mask rotate-180 rounded-xl -z-[1]"} />

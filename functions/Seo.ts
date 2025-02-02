@@ -6,35 +6,92 @@ type metaConfig = {
 	useSiteName?: boolean,
 	useOpenGraph?: boolean,
 	useTwitter?: boolean
+	url?: string,
+	canonicals: string
 } | undefined
 export const meteDataGenerator = (page:ContentType, settings:SettingType[], config:metaConfig={
 	useSiteName:true,
 	useOpenGraph:true,
-	useTwitter:true
+	useTwitter:true,
+	url:"",
+	canonicals:""
 })=>
 {
-	let title = page? page.title : ""
-	let openGraph = {
-			title: page && page.title,
-			description: page && page.short_description,
-			image: page && process.env.NEXT_PUBLIC_UPLOAD_URL + "/" +  page.avatar,
+	const exportData = {
+		title: page? page.title : "",
+		description: page? page.short_description : "",
+		applicationName: 'Gilace',
+		authors: [{ name: 'Hoceyn Mohsenkhah' }],
+		publisher: 'Hoceyn Mohsenkhah',
+		alternates: {
+			canonical: '/',
+		},
+		openGraph: {
+			title: "",
+			description: "",
+			image: "",
+			logo:"",
+			type: "website",
+			url: ""
+		},
+		twitter: {
+			title: "",
+			description: "",
+			image: "",
+			cardType: "summary_large_image",
+		},
+		robots:{
+			index:true,
+			follow:true,
+			googleBot:{
+				index: true,
+				follow: true
+			}
 		}
+
+	}
+	if(!page)
+	{
+		return exportData;
+	}
+	if(config && config.canonicals )
+	{
+		exportData.alternates.canonical = config.canonicals
+	}
+	let openGraph = {
+			title:  page.title,
+			description:  page.short_description ??"",
+			images: page.avatar ? process.env.NEXT_PUBLIC_UPLOAD_URL + "/" +  page.avatar :"",
+			logo:"/assets/images/gilace-logo.svg",
+			type: "website",
+			url: ""
+	}
 	let twitter = {
-			title: page && page.title,
-			description: page && page.short_description,
-			image: page && process.env.NEXT_PUBLIC_UPLOAD_URL + "/" + page.avatar,
+			title:  page.title,
+			description:  page.short_description??"",
+			image: page.avatar ? process.env.NEXT_PUBLIC_UPLOAD_URL + "/" + page.avatar:"",
+			cardType: "summary_large_image",
+
 		}
 	if (config && config.useSiteName && settings && page)
 	{
-		title = settings.find((setting:any) => setting?.name == "site_name")?.value + " | " + page.title
+		exportData.title = settings.find((setting:any) => setting?.name == "site_name")?.value + " | " + page.title
+	}
+	if (config && config.url)
+	{
+		openGraph.url = config.url;
 	}
 
-	return {
-		title,
-		description: page && page.short_description,
-		openGraph: config?.useOpenGraph && openGraph,
-		twitter: config?.useTwitter && twitter
+	if(config && config.useOpenGraph)
+	{
+		exportData.openGraph = openGraph;
 	}
+	if(config && config.useTwitter)
+	{
+		exportData.twitter = twitter;
+	}
+
+	return exportData;
 }
 export const titleCreator = (page:ContentType,settings:SettingType[]) => {
 	if(page){
