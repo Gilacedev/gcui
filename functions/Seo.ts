@@ -14,16 +14,15 @@ export const meteDataGenerator = (page:ContentType, settings:SettingType[], conf
 })=>
 {
 	let title = page? page.title : ""
-
 	let openGraph = {
 			title: page && page.title,
 			description: page && page.short_description,
-			image: page && process.env.NEXT_PUBLIC_UPLOAD_URL + "" +  page.avatar,
+			image: page && process.env.NEXT_PUBLIC_UPLOAD_URL + "/" +  page.avatar,
 		}
 	let twitter = {
 			title: page && page.title,
 			description: page && page.short_description,
-			image: page && process.env.NEXT_PUBLIC_UPLOAD_URL + "" + page.avatar,
+			image: page && process.env.NEXT_PUBLIC_UPLOAD_URL + "/" + page.avatar,
 		}
 	if (config && config.useSiteName && settings && page)
 	{
