@@ -27,6 +27,7 @@ export const meteDataGenerator = (page:ContentType, settings:SettingType[], conf
 			canonical: '/',
 		},
 		openGraph: {
+			logo: "/assets/images/gilace-logo.svg",
 			title: "",
 			description: "",
 			images: "",
