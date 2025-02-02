@@ -29,7 +29,7 @@ export const meteDataGenerator = (page:ContentType, settings:SettingType[], conf
 		openGraph: {
 			title: "",
 			description: "",
-			image: "",
+			images: "",
 			logo:"",
 			type: "website",
 			url: ""
