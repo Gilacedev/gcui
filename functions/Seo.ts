@@ -62,7 +62,7 @@ export const meteDataGenerator = (page:ContentType, settings:SettingType[], conf
 			title:  page.title,
 			description:  page.short_description ??"",
 			images: page.avatar ? process.env.NEXT_PUBLIC_UPLOAD_URL + "/" +  page.avatar :"",
-			logo:"/assets/images/gilace-logo.svg",
+			logo:process.env.NEXT_PUBLIC_APP_BASE_URL + "/assets/images/gilace-logo.svg",
 			type: "website",
 			url: ""
 	}
@@ -91,6 +91,7 @@ export const meteDataGenerator = (page:ContentType, settings:SettingType[], conf
 		exportData.twitter = twitter;
 	}
 
+	console.log(exportData)
 	return exportData;
 }
 export const titleCreator = (page:ContentType,settings:SettingType[]) => {
