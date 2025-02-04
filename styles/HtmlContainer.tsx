@@ -13,7 +13,7 @@ type HtmlContainerProps = {
 		  [&_img]:animate-onTheEarth
 		  [&_img]:m-4
 		  [&_h2]:text-violet-100 [&_h2]:mb-2 [&_h2]:text-3xl [&_h2]:font-light [&_h2]:mt-8
-		  [&_h3]:text-slate-400 [&_h3]:mb-4 [&_h3]:text-lg [&_h3]:font-light
+		  [&_h3]:text-amber-400 [&_h3]:mb-4 [&_h3]:text-2xl [&_h3]:font-light
 		  [&_.alert]:p-8 [&_.alert]:bg-slate-900 [&_.alert]:my-8 [&_.alert]:bg-opacity-20
 		  [&_.alert]:rounded-lg [&_.alert]:text-sm [&_.alert]:text-slate-400 [&_.alert]:flex
 		`}
