@@ -90,8 +90,6 @@ export const meteDataGenerator = (page:ContentType, settings:SettingType[], conf
 	{
 		exportData.twitter = twitter;
 	}
-
-	console.log(exportData)
 	return exportData;
 }
 export const titleCreator = (page:ContentType,settings:SettingType[]) => {
