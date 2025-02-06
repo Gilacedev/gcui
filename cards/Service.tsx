@@ -21,7 +21,7 @@ export default function Service({service}: { service: content }) {
 					{service.short_description}
 				</Paragraph>
 				<div className={"my-4 w-full"}>
-					<Button color={ColorTypes.default} icon={<span className={"fas fa-shopping-cart lg:flex hidden"}></span>} href={"/services/" +"/"+ service.slug} tag={"a"}>
+					<Button color={ColorTypes.default} icon={<span className={"fas fa-shopping-cart lg:flex hidden"}></span>} href={"/services/" + service.slug} tag={"a"}>
 						{Language().view_and_buy}
 					</Button>
 				</div>
