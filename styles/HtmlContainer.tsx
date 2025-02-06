@@ -4,20 +4,25 @@ type HtmlContainerProps = {
   
   const HtmlContainer = ({ html }: HtmlContainerProps) => {
 	return (
-	  <div
-		className={`
-		leading-8 text-slate-300
-		  [&_img]:inline-block [&_img]:md:max-w-96 [&_img]:w-full [&_img]:h-auto
-		  [&_img]:rounded-2xl [&_img]:overflow-hidden
-		  [&_img]:shadow-lg [&_img]:shadow-slate-900/50
-		  [&_img]:animate-onTheEarth
-		  [&_img]:m-4
-		  [&_h2]:text-violet-100 [&_h2]:mb-2 [&_h2]:text-3xl [&_h2]:font-light [&_h2]:mt-8
-		  [&_h3]:text-amber-400 [&_h3]:mb-4 [&_h3]:text-2xl [&_h3]:font-light
-		  [&_.alert]:p-8 [&_.alert]:bg-slate-900 [&_.alert]:my-8 [&_.alert]:bg-opacity-20
-		  [&_.alert]:rounded-lg [&_.alert]:text-sm [&_.alert]:text-slate-400 [&_.alert]:flex
-		`}
-		dangerouslySetInnerHTML={{ __html: html }}
+	  <div className={`
+			leading-8 text-slate-300
+			[&_img]:inline-block  [&_img]:w-full [&_img]:h-auto
+			[&_img]:rounded-2xl [&_img]:overflow-hidden
+			[&_img.animated]:animate-onTheEarth
+			[&_img]:px-4
+			[&_img]:my-4
+			[&_h2]:text-slate-400 
+			[&_h2]:mb-3 
+			[&_h2]:text-6xl 
+			[&_h2]:font-bold 
+			[&_h2]:mt-10 
+			[&_h2]:tracking-wide 
+			[&_h2]:uppercase 
+			[&_h2]:pb-2
+			[&_h3]:text-amber-400 [&_h3]:mb-4 [&_h3]:text-2xl [&_h3]:font-light
+			[&_.alert]:p-8 [&_.alert]:bg-slate-900 [&_.alert]:my-8 [&_.alert]:bg-opacity-20
+			[&_.alert]:rounded-lg [&_.alert]:text-sm [&_.alert]:text-slate-400 [&_.alert]:flex
+		`} dangerouslySetInnerHTML={{ __html: html }}
 	  ></div>
 	);
   };
