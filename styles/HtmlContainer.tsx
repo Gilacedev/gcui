@@ -11,9 +11,12 @@ type HtmlContainerProps = {
 			[&_img.animated]:animate-onTheEarth
 			[&_img]:px-4
 			[&_img]:my-4
+			[&_h1]:text-amber-300
+			[&_h1]:my-4
+			[&_h1]:text-4xl
 			[&_h2]:text-slate-400 
 			[&_h2]:mb-3 
-			[&_h2]:text-6xl 
+			[&_h2]:text-4xl 
 			[&_h2]:font-bold 
 			[&_h2]:mt-10 
 			[&_h2]:tracking-wide 
