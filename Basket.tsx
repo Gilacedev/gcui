@@ -117,7 +117,7 @@ const Basket = () => {
 					!auth && <Login login-for-shopping={true} />
 				}
 				{
-					auth && <div className={"flex justify-end"}>
+					auth && storageBasketItems.length > 0 && <div className={"flex justify-end"}>
 						<Button
 							onClick={() => { setLoadingContinue(true) }}
 							loading={loadingContinue ? 1 : 0}
