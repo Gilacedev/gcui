@@ -123,7 +123,7 @@ const NotificationBox: React.FC<NotificationBoxProps> = ({ isOpen }) => {
         </div>
       )}
       {notification.length > 0 ? (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 max-h-[30dvh] overflow-y-auto">
           {!loading &&
             notification.map((item, index) => (
               <div key={index}>
