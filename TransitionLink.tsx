@@ -12,7 +12,6 @@ const TransitionLink = ({ href, children, ...props }: TransitionLinkProps) => {
   const path = usePathname()
   
   const handleTransition = async (e: React.MouseEvent) => {
-    console.log(path);
     if(path === href) return;
     e.preventDefault();
     document.querySelector(".page-transition")?.classList.add("bye");
