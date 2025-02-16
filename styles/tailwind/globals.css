@@ -1,11 +1,11 @@
-@import "utilities/fix.css";
-@import "utilities/icons.css";
-@import "utilities/fonts.css";
-@import "utilities/animations.css";
-@import "utilities/contents.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@import "./utilities/fix.css";
+@import "./utilities/icons.css";
+@import "./utilities/fonts.css";
+@import "./utilities/animations.css";
+@import "./utilities/contents.css";
+
 @layer utilities {
     .hidden-body
     {

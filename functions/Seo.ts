@@ -18,6 +18,9 @@ export const meteDataGenerator = (page:ContentType, settings:SettingType[], conf
 })=>
 {
 	const exportData = {
+		width: 'device-width',
+		minimumScale: 1,
+		initialScale: 1,
 		title: page? page.title : "",
 		description: page? page.short_description : "",
 		applicationName: 'Gilace',

@@ -1,5 +1,4 @@
-import { AuthStores } from "../stores/AuthStore";
-import {redirect} from "next/navigation";
+import {AuthStores} from "../stores/AuthStore";
 
 type ConfigType = {
 	method: "get" | "post" | "put" | "delete" | "patch" | "head" | "options" | "connect" | "trace" | "GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "OPTIONS" | "CONNECT" | "TRACE",
@@ -47,9 +46,13 @@ export async function Fetch(config: ConfigType, success: ReactionType, failed: R
 				...config.headers,
 			},
 			dataType: config && (config.dataType ?? "application/json"),
-			cache: config && (cacheTypesArray.includes(config.cache ?? "") ? config.cache : "force-no-store"),
 			strictSSL: false,
 			signal: AbortSignal.timeout(timeOut),
+			revalidation:3600
+		}
+		if(config && config.cache && cacheTypesArray.includes(config.cache))
+		{
+			fetchConfigs.cache = config.cache
 		}
 		if (config && config.data) {
 			if (fetchConfigs) {
@@ -83,7 +86,7 @@ export async function Fetch(config: ConfigType, success: ReactionType, failed: R
 			}
 		}
 	} catch (error) {
-		console.log("Fetch error", error)
+		//console.log("Fetch error", error)
 		if (typeof failed == "function") {
 			failed(error)
 		}
