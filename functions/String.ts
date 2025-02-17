@@ -1,5 +1,3 @@
-import {func} from "ts-interface-checker";
-
 function persianToFinglishSlug(persianText: string): string {
 	const map: { [key: string]: string } = {
 		'ا': 'a',
