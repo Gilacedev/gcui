@@ -73,19 +73,19 @@ const Modal: React.FC<ModalProps> = ({ open, onClose, children, name, zindex = 3
             }}
             className="group-[.show]:animate-comeFromBottom group-[.hiding]:animate-goToBottom flex items-center justify-center relative z-10 bg-slate-900 rounded-2xl w-[calc(100vw-20px)] sm:w-1/3"
           >
-            <div className="relative w-full max-h-[calc(100vh-20px)]">
+            <div className="relative w-full max-h-[calc(100dvh-20px)]">
               <div
                 className="absolute fa fa-times p-3 left-0 top-0 text-slate-50 opacity-40 z-10 cursor-pointer"
                 onClick={closeAction}
               />
-              <div className="max-h-[calc(100vh-20px)] overflow-y-scroll">
+              <div className="max-h-[calc(100dvh-20px)] overflow-y-scroll">
                 {children}
               </div>
             </div>
           </div>
           <div
             onClick={closeAction}
-            className="group-[.show]:animate-fadeIn group-[.hiding]:animate-fadeOut absolute top-0 left-0 w-full h-full backdrop-blur-3xl bg-black bg-opacity-10"
+            className="group-[.show]:animate-fadeIn group-[.hiding]:animate-fadeOut absolute top-0 left-0 w-full h-full backdrop-blur-3xl bg-black/10"
           ></div>
         </div>
       </div>

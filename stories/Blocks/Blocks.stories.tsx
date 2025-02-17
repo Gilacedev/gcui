@@ -91,7 +91,7 @@ export const WithLongContent: block = {
 
 export const CustomStyling: block = {
   render: (args) => (
-    <Block.Dark {...args} className="bg-opacity-75 p-6">
+    <Block.Dark {...args} className="p-6">
       Custom styled content with different padding and opacity
     </Block.Dark>
   ),

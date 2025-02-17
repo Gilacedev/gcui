@@ -44,7 +44,7 @@ const MediaPreview: React.FC<{ content: any }> = ({ content }) => {
 				<div className={"relative"}>
 					<div
 						className={
-							"absolute top-1/2 left-1  bg-black bg-opacity-50 p-3 text-3xl rounded-lg flex items-center justify-center -translate-y-1/2 z-10 cursor-pointer hover:text-violet-400 transition-all"
+							"absolute top-1/2 left-1  bg-black/50 p-3 text-3xl rounded-lg flex items-center justify-center -translate-y-1/2 z-10 cursor-pointer hover:text-violet-400 transition-all"
 						}
 						onClick={() => {
 							prevItem();
@@ -54,7 +54,7 @@ const MediaPreview: React.FC<{ content: any }> = ({ content }) => {
 					</div>
 					<div
 						className={
-							"absolute top-1/2 right-1 bg-black bg-opacity-50 p-3 text-3xl rounded-lg flex items-center justify-center -translate-y-1/2 z-10 cursor-pointer hover:text-violet-400 transition-all"
+							"absolute top-1/2 right-1 bg-black/50 p-3 text-3xl rounded-lg flex items-center justify-center -translate-y-1/2 z-10 cursor-pointer hover:text-violet-400 transition-all"
 						}
 						onClick={() => {
 							nextItem();

@@ -33,7 +33,7 @@ const Quote = ({ data }: QuoteProps) => {
 				className={"absolute scale-x-110 left-0 top-0 w-full h-full object-cover blur-md rounded-xl saturate-50 brightness-75 contrast-75"}>
 				<Image src={process.env.NEXT_PUBLIC_UPLOAD_URL + "/" + data.avatar} alt={data.title} type={"cover"} />
 			</div>
-			<div className={"absolute left-0 top-0 w-full h-full object-cover mix-blend-overlay bg-slate-800 opacity-80"}></div>
+			<div className={"absolute left-0 top-0 w-full h-full object-cover mix-blend-overlay bg-slate-800/80"}></div>
 			<div
 				className={"absolute bottom-2 left-2 origin-top-left opacity-10 -rotate-90 text-4xl uppercase text-center text-nowrap font-black"}>
 				{data.slug}

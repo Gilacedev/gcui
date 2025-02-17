@@ -70,7 +70,7 @@ const Plans = ({plans}: { plans: Payable[] }) =>{
 				onClick={() => {
 					setActivePlan(duration)
 				}}
-				className={`box-border transition-all cursor-pointer bg-slate-900 bg-opacity-50 p-4 rounded-xl mt-4 group ${isActive === duration ? "active border border-indigo-500" : ""}`}>
+				className={`box-border transition-all cursor-pointer bg-slate-900/50 p-4 rounded-xl mt-4 group ${isActive === duration ? "active border border-indigo-500" : ""}`}>
 				<div>
 					<div
 						className={"transition-all duration-500 group-[.active]:bg-indigo-500 bg-slate-500 w-4 h-4 rounded-full inline-block me-2"}></div>
@@ -84,7 +84,7 @@ const Plans = ({plans}: { plans: Payable[] }) =>{
 	}
 	const PlanItem: React.FC<{ item: Payable }> = ({ item }) => {
 		if (!item) return;
-		return (<div className={`bg-slate-900 bg-opacity-20 p-4 rounded-xl flex flex-col gap-4 ${activePlan !== item.duration ? "hidden" : ""} ${item._featured ? "animate-onTheEarth" : "animate-dropDown"}`}>
+		return (<div className={`bg-slate-900/20 p-4 rounded-xl flex flex-col gap-4 ${activePlan !== item.duration ? "hidden" : ""} ${item._featured ? "animate-onTheEarth" : "animate-dropDown"}`}>
 			<div className={"text-center"}>
 				<H1 element={"div"}>
 					{item.title}

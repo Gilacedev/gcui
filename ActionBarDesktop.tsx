@@ -96,7 +96,7 @@ const ActionBarDesktop = () => {
             </div>}
             {/* Animated Notification Box */}
             <div
-              className={`absolute left-0 top-12 w-64 shadow-lg rounded-lg bg-slate-800 bg-opacity-100 transition-all duration-500 ease-out overflow-hidden transform ${isOpen
+              className={`absolute left-0 top-12 w-64 shadow-lg rounded-lg bg-slate-800 transition-all duration-500 ease-out overflow-hidden transform ${isOpen
                 ? "max-h-96 opacity-100 scale-100 translate-y-0"
                 : "max-h-0 opacity-0 scale-95 -translate-y-4"
                 }`}

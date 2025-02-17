@@ -52,12 +52,12 @@ const Funnel = () => {
 		}
 		if(requestedStep == 4 && temporarySelected == 1){
 			setModalOpen(false)
-			let url = window.open(requestACall_url, '_blank');
+			let url = window.open(submitProposal_url, '_blank');
 			url && url.focus();
 		}
 		if(requestedStep == 4 && temporarySelected == 2){
 			setModalOpen(false)
-			let url = window.open(submitProposal_url, '_blank');
+			let url = window.open(requestACall_url, '_blank');
 			url && url.focus();
 		}
 	}
@@ -73,7 +73,7 @@ const Funnel = () => {
 				setModalOpen(false)
 			}} name={"funnle-modal"} zindex={20}>
 				<div className={"p-4"}>
-					<header className={" flex gap-2 text-2xl pb-4 font-light border-b border-b-white border-opacity-10 "}>
+					<header className={" flex gap-2 text-2xl pb-4 font-light border-b border-b-white/10 "}>
 						<div>
 							<span className={"far fa-robot text-violet-400"}></span>
 						</div>

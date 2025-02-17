@@ -16,7 +16,7 @@ const Business = ({ business, editable = false }: BusinessProps) => {
 	  }
   return (
     <Blocks.Dark className={"p-4 rounded-2xl"}>
-      <div className={"rounded-2xl rounded-tl-[100px] bg-slate-900 bg-opacity-60 absolute z-[2] top-0 left-0 w-full h-full backdrop-blur-3xl"}></div>
+      <div className={"rounded-2xl rounded-tl-[100px] bg-slate-900/60 absolute z-[2] top-0 left-0 w-full h-full backdrop-blur-3xl"}></div>
       <div className={"absolute top-3 left-3 "}>
         {business._status === 0 && <span className={"text-red-500 ps-2 far fa-times"}></span>}
         {business._status === 1 && <span className={"text-teal-500 ps-2 far fa-check"}></span>}

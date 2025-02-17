@@ -80,7 +80,7 @@ const ActionBar = () => {
 
   if (authStatus) {
     return (
-      <div className="fixed bottom-2 left-4 rounded-2xl w-[calc(100dvw-2rem)] bg-violet-900 bg-opacity-20 backdrop-blur-3xl h-16 text-slate-300 z-40">
+      <div className="fixed bottom-2 left-4 rounded-2xl w-[calc(100dvw-2rem)] bg-violet-900/20 backdrop-blur-3xl h-16 text-slate-300 z-40">
         <ul className="grid grid-cols-5">
           <li>
             <TransitionLink

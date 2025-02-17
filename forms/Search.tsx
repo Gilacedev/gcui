@@ -36,7 +36,7 @@ const Search = ({ show_title }: {
 						{Language().search}
 					</H2>
 				)}
-				<div className="border-b border-black border-opacity-10"></div>
+				<div className="border-b border-black/10"></div>
 				<Input
 					defaultValue={keyword && `${keyword}`}
 					type="search"

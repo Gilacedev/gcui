@@ -86,7 +86,7 @@ const InvoiceComponent = ({ invoice }: InvoiceProps) => {
 						))
 					}
 				</div>
-				<div className={"border-y border-white border-opacity-10 py-4 text-end flex gap-2 items-center justify-end"}>
+				<div className={"border-y border-white/10 py-4 text-end flex gap-2 items-center justify-end"}>
 					<span className={"text-slate-400 text-sm"}>{Language().payable_price}:</span>
 					<span className={"text-cyan-500 flex gap-1"}>
 						<span>{Intl.NumberFormat().format(invoice.total)}</span>

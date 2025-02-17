@@ -93,7 +93,7 @@ const Login = ({ beforShopping = false }: login) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="border-b border-black border-opacity-10"></div>
+      <div className="border-b border-black/10"></div>
       <div>
         {
           step === 1 &&

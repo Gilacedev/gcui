@@ -47,9 +47,7 @@ const PageTransition = () => {
 					</div>
 				</div>
 			</div>
-			<div
-				className="group-[.bying]:opacity-0 group-[.bye]:opacity-100 opacity-0 transition-all duration-500 top-0 left-2 w-full h-full z-10 bg-slate-950 bg-opacity-10 backdrop-blur-3xl"
-			></div>
+			<div className="group-[.bying]:opacity-0 group-[.bye]:opacity-100 opacity-0 transition-all duration-500 top-0 left-2 w-full h-full z-10 bg-slate-950/10 backdrop-blur-3xl"></div>
 		</div>
 	);
 };

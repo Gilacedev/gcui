@@ -24,7 +24,7 @@ const SideMenu = () => {
 	const open = useSyncExternalStore(MenuStores.subscribe, MenuStores.getSnapshot, MenuStores.getServerSnapshot);
 	return (
 		<aside className={`md:hidden transition-all duration-500 origin-top-right ease-slip w-screen h-screen p-4 fixed top-0 start-0 z-50 group ${open ? "menu-open scale-x-100 translate-y-0" : "scale-x-0 -translate-y-full"}  peer `}>
-			<div className={"absolute top-0 start-0 w-full h-full bg-opacity-10 bg-slate-900"} onClick={() => {
+			<div className={"absolute top-0 start-0 w-full h-full bg-slate-900/10"} onClick={() => {
 				MenuStores.setMenu(false)
 			}}></div>
 			<div className={"sticky w-3/4 bg-slate-900 z-10 h-auto p-4 rounded-xl shadow-2xl text-slate-900 text-center "}>

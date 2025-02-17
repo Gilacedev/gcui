@@ -22,8 +22,8 @@ const Spec = ({item,direction,expand}:specProps)=>{
 
 
 	return (
-		<div className={`mt-8 sm:mt-2 sm:w-1/2 flex flex-col ${direction==="odd"?"sm:items-end sm:pe-4":"sm:items-start sm:start-1/2 sm:ps-4"} relative`}>
-			<div className={`absolute w-6 h-6 bg-violet-400  sm:translate-x-0 ${direction==="odd"?"-translate-x-1/2 end-1/2 sm:-end-3":"translate-x-1/2 start-1/2 sm:-start-3"} top-1 rounded-3xl`}></div>
+		<div className={`sm:-translate-y-16 not:first-child:opacity-10 mt-8 sm:mt-2 sm:w-1/2 flex flex-col ${direction==="odd"?"sm:items-end sm:pe-4":"sm:items-start sm:start-1/2 sm:ps-4"} relative`}>
+			<div className={`absolute w-6 h-6 bg-violet-300  sm:translate-x-0 ${direction==="odd"?"-translate-x-1/2 end-1/2 sm:-end-3":"translate-x-1/2 start-1/2 sm:-start-3"} top-1 rounded-3xl`}></div>
 			<div className={"flex gap-1 items-center mb-3 "}>
 				<div className={"text-slate-500"}>
 					{createdAt.toLocaleDateString("fa-IR", {day:"2-digit"})}
@@ -35,11 +35,11 @@ const Spec = ({item,direction,expand}:specProps)=>{
 					{createdAt.toLocaleDateString("fa-IR", {year:"numeric"})}
 				</div>
 			</div>
-			<Blocks.Dark className={"rounded-3xl bg-slate-700 p-4 w-full sm:w-2/3"}>
-				<div className={"text-amber-300 text-xl pb-3"}>
+			<Blocks.Dark className={"rounded-3xl bg-slate-700 p-4 w-full sm:w-2/3 backdrop-blur-md"}>
+				<h2 className={"text-amber-300 text-xl pb-3"}>
 					{item.title}
-				</div>
-				<div className={"text-xs leading-6"}>
+				</h2>
+				<div className={"text-xs text-slate-400 leading-6"}>
 					{item.short_description}
 				</div>
 				<div className={`transition-all ${open?"max-h-screen overflow-y-scroll":"max-h-0 overflow-hidden"}`}>

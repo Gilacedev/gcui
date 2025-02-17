@@ -38,7 +38,7 @@ const Confirm: React.FC<ConfirmProps> = ({ message, onConfirm, children }) => {
         className={"peer hidden"}
       />
       <div
-        className={`backdrop-blur-3xl transition-all origin-bottom-right rounded-2xl bg-slate-950 bg-opacity-20 p-4 absolute bottom-full 
+        className={`backdrop-blur-3xl transition-all origin-bottom-right rounded-2xl bg-slate-950/20 p-4 absolute bottom-full 
                 opacity-0 scale-0  
                 peer-checked:opacity-100 peer-checked:scale-100`}
       >

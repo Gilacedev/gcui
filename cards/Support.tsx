@@ -8,7 +8,7 @@ interface SupportProps {
 }
 export default function Support({color, title, description}: Readonly<SupportProps>) {
 return (
-	<div className={"bg-slate-900 flex sm:inline-flex gap-4 bg-opacity-50 rounded-xl p-4 flex-nowrap justify-center sm:justify-start items-center sm:text-start backdrop-blur-xl"}>
+	<div className={"bg-slate-900/50 flex sm:inline-flex gap-4 rounded-xl p-4 flex-nowrap justify-center sm:justify-start items-center sm:text-start backdrop-blur-xl"}>
 		<div className={"ps-2 flex gap-2"}>
 			<div>
 				{

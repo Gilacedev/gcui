@@ -90,7 +90,7 @@ export default function BlogPost({ blog, compact }: Readonly<{ blog: ContentType
 					</Link>
 				}
 			</div>
-			<div className={"flex gap-2 border-t border-white border-opacity-10 pt-4 mt-4"}>
+			<div className={"flex gap-2 border-t border-white/10 pt-4 mt-4"}>
 				<div>
 					<div className={"w-10 h-10 rounded-full"}>
 						<Image src={author.avatar} alt={author.name} type={"cover"}></Image>
