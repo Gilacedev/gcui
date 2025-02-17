@@ -1,22 +1,171 @@
 @import "tailwindcss";
-
 @import "./utilities/fix.css";
 @import "./utilities/icons.css";
 @import "./utilities/fonts.css";
 @import "./utilities/animations.css";
 @import "./utilities/contents.css";
+@config "../../../tailwind.config.ts";
 
 @layer utilities {
-    .hidden-body
-    {
-        transform: translate3d(-20%,40dvh,0) scale(0.8);
-        filter: blur(5px);
-        transform-origin: left top;
-        opacity: 0.5;
-    }
-    .hidden-body-parent
-    {
-        perspective: 1500px;
-        transform-style: preserve-3d;
+
+    /*some utilities*/
+}
+@layer theme {
+    :root {
+        --color-violet-50: #e93cb3;
+        --color-violet-100: #d837a3;
+        --color-violet-200: #c63293;
+        --color-violet-300: #b42d83;
+        --color-violet-400: #a12873;
+        --color-violet-500: #8e2363;
+        --color-violet-600: #7b1e52;
+        --color-violet-700: #610f36;
+        --color-violet-800: #4a0c2c;
+        --color-violet-900: #340822;
+
+        --ease-slip: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+
+        --font-sans: "Vazirmatn", "Inter var", "Inter", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     }
 }
+
+@layer base {
+    body {
+        font-family: var(--font-sans);
+    }
+}
+
+@layer utilities {
+    /*animations*/
+    .animate-comeFromBottom {
+        animation: comeFromBottom 0.32s var(--ease-slip) forwards;
+    }
+    .animate-goToBottom {
+        animation: goToBottom 0.32s var(--ease-slip);
+    }
+    .animate-comeFromRight {
+        animation: comeFromRight 0.3s cubic-bezier(.03,.56,.59,1.23);
+    }
+    .animate-backToRight {
+        animation: backToRight 0.3s cubic-bezier(.03,.56,.59,1.23) forwards;
+    }
+    .animate-fadeIn {
+        animation: fadeIn 0.3s linear;
+    }
+    .animate-fadeOut {
+        animation: fadeOut 0.3s linear forwards;
+    }
+    .animate-flashUp {
+        animation: flashUp 0.3s linear;
+    }
+    .animate-flashDown {
+        animation: flashDown 0.3s linear forwards;
+    }
+    .animate-dropDown {
+        animation: dropDown 0.3s cubic-bezier(.68,.04,.61,1.16);
+    }
+    .animate-dropUp {
+        animation: dropUp 0.3s cubic-bezier(.68,.04,.61,1.16);
+    }
+    .animate-bounceToBottom {
+        animation: bounceToBottom 0.3s cubic-bezier(.53,-0.61,.82,.91);
+    }
+    .animate-bounceFromBottom {
+        animation: bounceFromBottom 0.3s cubic-bezier(.03,.56,.8,1.67);
+    }
+    .animate-dampingSwing {
+        animation: dampingSwing 3s ease-in-out alternate;
+    }
+    .animate-onTheEarth {
+        animation: onTheEarth 5s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+    }
+    .animate-perfectLanding {
+        animation: fall 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+
+    .bg-gradient-shadow {
+        background-image: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    .bg-gradient-light {
+        background-image: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    .bg-bg-svg {
+        background-image: url('/assets/images/bg.svg');
+    }
+
+    .bg-bg-cherry {
+        background-image: url('/assets/images/cherry-pattern.png');
+    }
+
+    .bg-bg-gilace {
+        background-image: linear-gradient(135deg, #7E1B56 0%, #3E0340 100%);
+    }
+}
+
+/*const config: Config = {*/
+/*    content: [*/
+/*    "./app!**!*.{js,ts,jsx,tsx,mdx}",*/
+/*    "./gcui!**!*.{js,ts,jsx,tsx,mdx}",*/
+/*    "./pages!**!*.{js,ts,jsx,tsx,mdx}",*/
+/*    "./components!**!*.{js,ts,jsx,tsx,mdx}",*/
+/*    "./components!*",*/
+/*    "./containers!*.{js,ts,jsx,tsx,mdx}",*/
+/*    "./Layout!*.{js,ts,jsx,tsx,mdx",*/
+
+/*    // Or if using `src` directory:*/
+/*"./src!**!*.{js,ts,jsx,tsx,mdx}",*/
+/*],*/
+/*    theme: {*/
+/*    extend: {*/
+/*    colors: {*/
+/*    violet: {*/
+/*    700: "#610f36",*/
+/*    800: "#4a0c2c",*/
+/*    900: "#340822",*/
+/*    600: "#7b1e52",*/
+/*    500: "#8e2363",*/
+/*    400: "#a12873",*/
+/*    300: "#b42d83",*/
+/*    200: "#c63293",*/
+/*    100: "#d837a3",*/
+/*    50: "#e93cb3"*/
+/*}*/
+/*},*/
+/*transitionTimingFunction: {*/
+/*'slip': 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',*/
+/*'out-expo': 'cubic-bezier(0.19, 1, 0.22, 1)',*/
+/*},*/
+/*backgroundImage: {*/
+/*"gradient-shadow" : "radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%)",*/
+/*"gradient-light" : "radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%)",*/
+/*"bg-svg" : "url('/assets/images/bg.svg')",*/
+/*"bg-cherry": "url('/assets/images/cherry-pattern.png')",*/
+/*"bg-gilace":"linear-gradient(135deg, #7E1B56 0%, #3E0340 100%)",*/
+/*},*/
+/*animation: {*/
+/*'comeFromBottom': 'comeFromBottom 0.32s cubic-bezier(.24,1.32,.87,1.04) forwards',*/
+/*"goToBottom": 'goToBottom 0.32s cubic-bezier(.24,1.32,.87,1.04)',*/
+/*"comeFromRight": 'comeFromRight 0.3s cubic-bezier(.03,.56,.59,1.23)',*/
+/*"backToRight": 'backToRight 0.3s cubic-bezier(.03,.56,.59,1.23) forwards',*/
+/*'fadeIn': 'fadeIn 0.3s linear',*/
+/*'fadeOut': 'fadeOut 0.3s linear forwards',*/
+/*"flashUp" : "flashUp 0.3s linear",*/
+/*"flashDown" : "flashDown 0.3s linear forwards",*/
+/*"dropDown" : "dropDown 0.3s cubic-bezier(.68,.04,.61,1.16)",*/
+/*"dropUp" : "dropUp 0.3s cubic-bezier(.68,.04,.61,1.16)",*/
+/*"bounceToBottom": 'bounceToBottom 0.3s cubic-bezier(.53,-0.61,.82,.91)',*/
+/*"bounceFromBottom": 'bounceFromBottom 0.3s cubic-bezier(.03,.56,.8,1.67)',*/
+/*"dampingSwing" : "dampingSwing 3s ease-in-out alternate",*/
+/*"onTheEarth" : "onTheEarth 5s cubic-bezier(0.42, 0, 0.58, 1) infinite",*/
+/*"perfectLanding" : "fall 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",*/
+/*},*/
+/*fontFamily: {*/
+/*    sans: ["Vazirmatn", "Inter var", "Inter", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"]*/
+/*},*/
+/*}*/
+/*}*/
+/*}*/

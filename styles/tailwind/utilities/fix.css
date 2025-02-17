@@ -2,6 +2,29 @@ html {
     -webkit-user-select: none;
     -webkit-touch-callout: none;
 }
+.hidden-body
+{
+    transform: translate3d(-20%,40dvh,0) scale(0.8);
+    filter: blur(5px);
+    transform-origin: left top;
+    opacity: 0.5;
+}
+.hidden-body-parent
+{
+    perspective: 1500px;
+    transform-style: preserve-3d;
+}
+.no-spinner {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .myLtr
 {
     text-align: left;
