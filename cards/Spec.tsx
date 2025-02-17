@@ -4,8 +4,9 @@ import Blocks from "@/components/Blocks";
 import Image from "@/components/Image";
 import Button from "@/components/Button";
 import ColorTypes from "@/components/functions/ColorTypes";
-import {ReactNode, useState} from "react";
+import {useState} from "react";
 import HtmlContainer from "@/components/styles/HtmlContainer";
+import {useParallax} from "react-scroll-parallax";
 
 type specProps = {
 	item:Content,
@@ -13,6 +14,12 @@ type specProps = {
 	expand?:Function
 };
 const Spec = ({item,direction,expand}:specProps)=>{
+	const parallax = useParallax<HTMLDivElement>({
+		easing: [1, 0.5, 0.5, 1],
+		translateY: [20, 60],
+		opacity:[0.4,1],
+	});
+
 	const [open,setOpen] = useState(false)
 	if(!item)
 	{
@@ -22,7 +29,7 @@ const Spec = ({item,direction,expand}:specProps)=>{
 
 
 	return (
-		<div className={`sm:-translate-y-16 not:first-child:opacity-10 mt-8 sm:mt-2 sm:w-1/2 flex flex-col ${direction==="odd"?"sm:items-end sm:pe-4":"sm:items-start sm:start-1/2 sm:ps-4"} relative`}>
+		<div ref={parallax.ref} className={`not:first-child:opacity-10 mt-8 sm:mt-2 sm:w-1/2 flex flex-col ${direction==="odd"?"sm:items-end sm:pe-4":"sm:items-start sm:start-1/2 sm:ps-4"} relative`}>
 			<div className={`absolute w-6 h-6 bg-violet-300  sm:translate-x-0 ${direction==="odd"?"-translate-x-1/2 end-1/2 sm:-end-3":"translate-x-1/2 start-1/2 sm:-start-3"} top-1 rounded-3xl`}></div>
 			<div className={"flex gap-1 items-center mb-3 "}>
 				<div className={"text-slate-500"}>
