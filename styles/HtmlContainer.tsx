@@ -25,6 +25,8 @@ type HtmlContainerProps = {
 			[&_h3]:text-amber-400 [&_h3]:mb-4 [&_h3]:text-2xl [&_h3]:font-light
 			[&_.alert]:p-8 [&_.alert]:bg-slate-900 [&_.alert]:my-8 [&_.alert]:bg-opacity-20
 			[&_.alert]:rounded-lg [&_.alert]:text-sm [&_.alert]:text-slate-400 [&_.alert]:flex
+			[&_a]:text-amber-300 [&_a]:hover:text-amber-400
+			[&_a]:before:content-['🔗'] [&_a]:before:ml-2
 		`} dangerouslySetInnerHTML={{ __html: html }}
 	  ></div>
 	);
