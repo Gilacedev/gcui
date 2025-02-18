@@ -34,19 +34,14 @@ const SpecsList = ({specs}) =>{
 
 			<div className={"py-10 sm:block sm:w-96 sticky top-8 z-40"}>
 				<Blocks.Dark className={"bg-slate-100 backdrop-blur-md"}>
-					<div className={"py-4"}>
-						<Paragraph className={"pb-8"}>
-							{Language().specs_search_text}
-						</Paragraph>
-						<Input onInput={localSearch} className={""} icon={<span className={"far fa-search"} /> as ReactNode} placeholder={Language().search}/>
-					</div>
+					<Input onInput={localSearch} className={""} icon={<span className={"far fa-search"} /> as ReactNode} placeholder={Language().specs_search_text}/>
 				</Blocks.Dark>
 			</div>
 			<ParallaxProvider>
-				<div className={"py-8 px-2 sm:px-0 relative min-h-screen"}>
+				<div className={"py-8 px-2 sm:px-0 relative overflow-x-hidden"}>
 					<div
 						className={"h-full w-4 rounded-3xl bg-violet-800/30 absolute top-12 left-1/2 -translate-x-1/2"}/>
-					<div className={"py-8 px-2 sm:px-0 relative min-h-screen"}>
+					<div className={"py-8 px-2 sm:px-0 relative "}>
 						{
 							localSpecs.data && localSpecs.data.length > 0 &&
 							localSpecs.data.map((item, index) => {

@@ -15,9 +15,9 @@ type specProps = {
 };
 const Spec = ({item,direction,expand}:specProps)=>{
 	const parallax = useParallax<HTMLDivElement>({
-		easing: [1, 0.5, 0.5, 1],
-		translateY: [20, 60],
-		opacity:[0.4,1],
+		easing:[0.6,0,0.45,1],
+		translateY:[0,-100],
+		opacity:[1,0.5]
 	});
 
 	const [open,setOpen] = useState(false)
@@ -43,7 +43,7 @@ const Spec = ({item,direction,expand}:specProps)=>{
 				</div>
 			</div>
 			<Blocks.Dark className={"rounded-3xl bg-slate-700 p-4 w-full sm:w-2/3 backdrop-blur-md"}>
-				<h2 className={"text-amber-300 text-xl pb-3"}>
+				<h2 className={`${(item && item._featured)?"text-amber-300 text-xl":"text-slate-100"}  pb-3`}>
 					{item.title}
 				</h2>
 				<div className={"text-xs text-slate-400 leading-6"}>
