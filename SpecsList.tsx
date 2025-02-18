@@ -6,17 +6,22 @@ import {Paragraph} from "@/components/Typo";
 import Language from "@/locales/Language";
 import Input from "@/components/Input";
 import {ReactNode, useState} from "react";
+import Content from "@/types/Content";
 
-const SpecsList = ({specs}) =>{
+const SpecsList = ({specs}:{specs:any}) =>{
 	const [localSpecs,setLocalSpecs] = useState(specs)
-	const localSearch = (e)=>{
+	const localSearch = (e:React.ChangeEvent<HTMLInputElement>) =>{
 		let search = e.target.value
 		if(!search || search === "")
 		{
 			setLocalSpecs(specs)
 			return
 		}
-		let newSpecs = specs.data.filter((item)=>{
+		let newSpecs = specs.data.filter((item:Content)=>{
+			if(!item)
+			{
+				return false
+			}
 			let result = false;
 			if(item.title && item.title.includes(search))
 			{
@@ -44,7 +49,11 @@ const SpecsList = ({specs}) =>{
 					<div className={"py-8 px-2 sm:px-0 relative "}>
 						{
 							localSpecs.data && localSpecs.data.length > 0 &&
-							localSpecs.data.map((item, index) => {
+							localSpecs.data.map((item:Content, index:number) => {
+								if(!item)
+								{
+									return
+								}
 								return (<Spec key={index} item={item} direction={index % 2 == 0 ? "odd" : "even"}/>)
 							})
 						}
