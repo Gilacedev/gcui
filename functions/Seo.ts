@@ -74,6 +74,7 @@ export const meteDataGenerator = (page:ContentType, settings:SettingType[], conf
 			description:  page.short_description??"",
 			image: page.avatar ? process.env.NEXT_PUBLIC_UPLOAD_URL + "/" + page.avatar:"",
 			cardType: "summary_large_image",
+			site:"@GilaceDev"
 
 		}
 	if (config && config.useSiteName && settings && page)
