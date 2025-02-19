@@ -32,7 +32,7 @@ const Search = ({ show_title }: {
 		<div className="search">
 			<form id="form-search" className="flex flex-col gap-2" onSubmit={onSubmit}>
 				{show_title && (
-					<H2 element="h3">
+					<H2 element="div">
 						{Language().search}
 					</H2>
 				)}
