@@ -67,7 +67,7 @@ const Nav = async ({menu }: NavProps) => {
 								<NavbarBars />
 							</li>
 							<li>
-								<h1 className={"relative overflow-hidden"}>
+								<div className={"relative overflow-hidden"}>
 									<a href={"/"} className={"relative h-12 w-12 block"}>
 										<Image
 											type={"contain"}
@@ -76,7 +76,7 @@ const Nav = async ({menu }: NavProps) => {
 										/>
 										<span className={"absolute top-40"}>گیلاس</span>
 									</a>
-								</h1>
+								</div>
 							</li>
 						</ul>
 						<ul className={"flex gap-2 items-center"}>
@@ -96,12 +96,12 @@ const Nav = async ({menu }: NavProps) => {
 	return (
 		<div className={"container mx-auto z-20 sticky top-0"}>
 			<nav className={"flex gap-3"}>
-				<h1 className={"overflow-hidden h-20 w-20"}>
+				<div className={"overflow-hidden h-20 w-20"}>
 					<Link href={"/"} className={"relative h-20 w-auto"}>
 						<Image type={"contain"} src={"/assets/images/gilace-logo.svg"} alt={"gilace logo"} />
 						<span className={"absolute top-40"}>گیلاس</span>
 					</Link>
-				</h1>
+				</div>
 				<div className={"flex justify-between h-16 w-full border-b border-slate-700 mt-2"}>
 					<ul className={"flex items-center gap-2"}>
 						{menuItems && menuItems.map((item, index) => {
