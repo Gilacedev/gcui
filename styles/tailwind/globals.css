@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "./utilities/fix.css";
 @import "./utilities/icons.css";
-@import "./utilities/fonts.css";
 @import "./utilities/animations.css";
 @import "./utilities/contents.css";
 @config "../../../tailwind.config.ts";
@@ -25,8 +24,6 @@
 
         --ease-slip: cubic-bezier(0.68, -0.55, 0.27, 1.55);
         --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-
-        --font-sans: "Vazirmatn", "Inter var", "Inter", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     }
 }
 
