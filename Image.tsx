@@ -1,5 +1,6 @@
 "use client";
 import {useEffect, useRef, useState} from "react";
+import NextImage  from 'next/image'
 
 type ImageProps = {
 	src: string;
@@ -17,7 +18,7 @@ const Image = ({src, alt, type}: ImageProps) => {
 
 	return (
 		<div className={`w-full h-full  relative rounded-[inherit] overflow-hidden  ${loading ? "bg-slate-700/50" : ""}`}>
-			<img ref={imgRef} onLoad={() => {
+			<NextImage width={1024} height={1024} onLoad={() => {
 				setLoading(false)
 			}}
 				className={`w-full h-full transition-all duration-1000 ${type === "cover" ? "object-cover" : "object-contain"} ${loading ? "opacity-0 scale-75" : "opacity-100 scale-100" }`}
