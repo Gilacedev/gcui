@@ -1,3 +1,4 @@
+"use client"
 import Image from "@/components/Image";
 import Language from "@/locales/Language";
 import Blocks from "@/components/Blocks";
@@ -6,14 +7,26 @@ import Menu from "@/types/Menu";
 import Link from "next/link";
 import ContentType from "@/types/ContentType";
 import Content from "@/types/Content";
+import {useEffect, useState} from "react";
+import {getContentType} from "@/models/ContentTypeModel";
+import Loader from "@/components/Loader";
 
 type FooterProps = {
 	settings: SettingType[];
 	menu: Menu;
-	namads: ContentType;
 }
 
-const Footer = ({ settings, menu ,namads  }: FooterProps) => {
+const Footer = ({ settings, menu   }: FooterProps) => {
+
+	const [namads ,setNamads] = useState(null as ContentType)
+	const [namadLoading ,setNamadLoading] = useState(true)
+	useEffect(() => {
+		setNamadLoading(true)
+		getContentType({slug: "namad"}).then((data) => {
+			setNamads(data)
+			setNamadLoading(false)
+		})
+	},[])
 
 	let footerMenu = []
 	let footerMenuTitle = ""
@@ -125,6 +138,9 @@ const Footer = ({ settings, menu ,namads  }: FooterProps) => {
 								</ul>
 							</div>
 							<div className={"grid grid-cols-3 gap-2"}>
+								{
+									namadLoading && <Loader />
+								}
 								{
 									namads && namads.contents && namads.contents.map((item: Content) => {
 										if(item && item.short_description) {
