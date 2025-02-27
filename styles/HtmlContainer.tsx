@@ -27,6 +27,20 @@ type HtmlContainerProps = {
 			[&_.alert]:rounded-lg [&_.alert]:text-sm [&_.alert]:text-slate-400 [&_.alert]:flex
 			[&_a]:text-amber-300 [&_a]:hover:text-amber-400
 			[&_a]:before:content-['🔗'] [&_a]:before:ml-2
+[&_table]:w-full [&_table]:my-4 [&_table]:block [&_table]:overflow-x-auto sm:[&_table]:table
+sm:[&_table_thead]:table-header-group [&_table_thead]:block
+[&_table_tbody]:block sm:[&_table_tbody]:table-row-group
+[&_table_tr]:block sm:[&_table_tr]:table-row [&_table_tr]:border [&_table_tr]:border-slate-700 [&_table_tr]:mb-4 sm:[&_table_tr]:mb-0
+[&_table_td]:block sm:[&_table_td]:table-cell [&_table_td]:sm:border [&_table_td]:border-slate-700 [&_table_td]:p-2 sm:[&_table_td]:p-4 [&_table_td]:before:font-bold [&_table_td]:before:content-[attr(data-label) ": "] [&_table_td]:before:block sm:[&_table_td]:before:hidden
+[&_table_th]:p-2 [&_table_th]:text-violet-400 sm:[&_table_th]:p-4 [&_table_th]:block sm:[&_table_th]:table-cell [&_table_th]:font-bold [&_table_th]:bg-slate-950		
+			
+			[&_ul]:list-disc [&_ul]:list-inside [&_ul]:pl-4
+			[&_ol]:list-decimal [&_ol]:list-inside [&_ol]:pl-4
+			[&_li]:my-2
+			[&_code]:bg-slate-950 [&_code]:text-slate-300 [&_code]:p-2 [&_code]:rounded-lg
+			[&_pre]:bg-slate-950 [&_pre]:text-slate-300 [&_pre]:p-4 [&_pre]:rounded-lg
+			[&_blockquote]:border-l-4 [&_blockquote]:border-amber-300 [&_blockquote]:pl-4 [&_blockquote]:my-4
+			[&_hr]:border-0 [&_hr]:border-t-2 [&_hr]:border-slate-400
 		`} dangerouslySetInnerHTML={{ __html: html }}
 	  ></div>
 	);
