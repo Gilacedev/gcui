@@ -60,9 +60,22 @@ function makeMeta(response: any):any {
 	}
 	return response;
 }
+function numberFixer(number: number): string {
+	if (number < 10) {
+		return `0${number}`;
+	}
+	if(number > 999 && number < 999999) {
+		return Math.floor(number/1000) + 'K';
+	}
+	if(number > 999999) {
+		return Math.floor(number / 100000) + 'M';
+	}
+	return ""
+}
 
 export {
 	persianToFinglishSlug,
 	validateSlug,
-	makeMeta
+	makeMeta,
+	numberFixer
 };
