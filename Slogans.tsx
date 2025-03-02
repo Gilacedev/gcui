@@ -38,7 +38,7 @@ const Slogans = ({slogans}:{slogans:Content}) => {
 			{
 				metaData.meta.menu.map((slogan:any, index:number) =>{
 					return (<div
-						className={"shadow-2xl border border-slate-600/10 bg-radial to-slate-950/10 from-slate-950/30 rounded-2xl p-4 relative overflow-x-hidden"}>
+						className={"shadow-2xl border border-slate-600/10 bg-slate-900 rounded-2xl p-4 relative overflow-x-hidden"}>
 						<h3 className={" font-light"}>
 					<span className={`text-8xl font-bold block ${colors[index][0]}`}>
 						<NumberIncrementor maxNumber={slogan.number} speed={speed[index]}/>
