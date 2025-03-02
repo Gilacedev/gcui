@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Image from "@/components/Image";
 
 const PageTransition = () => {
 	const pathname = usePathname();
@@ -40,8 +41,8 @@ const PageTransition = () => {
 				<div className="w-40 h-40 absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2">
 					<div className="group-[.bying]:animate-bounceToBottom animate-bounceFromBottom animation-fill-forwards">
 						<div className="animate-dampingSwing">
-							<div>
-								<img src="/assets/images/gilace-logo.svg" alt="earth" />
+							<div className={"w-40 h-40"}>
+								<Image priority={true} type={"cover"}  src="/assets/images/gilace-logo.svg" alt="earth" />
 							</div>
 						</div>
 					</div>
