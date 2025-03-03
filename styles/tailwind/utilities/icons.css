@@ -4,7 +4,7 @@
  * Copyright 2023 Fonticons, Inc.
  */
 .fa {
-    font-family: var(--fa-style-family, "Font Awesome 6 Pro");
+    font-family: var(--font-fa-icons);
     font-weight: var(--fa-style, 900); }
 
 .fa,
@@ -43,26 +43,13 @@
 .fa-light,
 .fat,
 .fa-thin {
-    font-family: 'Font Awesome 6 Pro'; }
+    font-family: var(--font-fa-icons); }
 
 .fab,
 .fa-brands {
-    font-family: 'Font Awesome 6 Brands'; }
+    font-family: var(--font-fa-brands); }
 
-.fad,
-.fa-classic.fa-duotone,
-.fa-duotone {
-    font-family: 'Font Awesome 6 Duotone'; }
 
-.fass,
-.fasr,
-.fasl,
-.fa-sharp {
-    font-family: 'Font Awesome 6 Sharp'; }
-
-.fass,
-.fa-sharp {
-    font-weight: 900; }
 
 .fa-1x {
     font-size: 1em; }
@@ -14607,30 +14594,38 @@ readers do not read off random characters that represent icons */
     content: "\f3f6"; }
 
 :root, :host {
-    --fa-style-family-classic: 'Font Awesome 6 Pro';
-    --fa-font-light: normal 300 1em/1 'Font Awesome 6 Pro'; }
+    --fa-style-family-classic: var(--font-fa-icons);
+    --fa-font-light: normal 300 1em/1 var(--font-fa-icons); }
 .fal,
 .fa-light {
-    font-weight: 300; }
+    font-weight: 300;
+    font-family: var(--font-fa-icons);
+}
 :root, :host {
-    --fa-style-family-classic: 'Font Awesome 6 Pro';
-    --fa-font-regular: normal 400 1em/1 'Font Awesome 6 Pro'; }
+    --fa-style-family-classic: var(--font-fa-icons);
+    --fa-font-regular: normal 400 1em/1 var(--font-fa-icons); }
 
 .far,
 .fa-regular {
-    font-weight: 400; }
+    font-family: var(--font-fa-icons);
+    font-weight: 400;
+}
 :root, :host {
-    --fa-style-family-classic: 'Font Awesome 6 Pro';
-    --fa-font-solid: normal 900 1em/1 'Font Awesome 6 Pro'; }
+    --fa-style-family-classic: var(--font-fa-icons);
+    --fa-font-solid: normal 900 1em/1 var(--font-fa-icons); }
 
 
 .fas,
 .fa-solid {
-    font-weight: 900; }
+    font-weight: 900;
+    font-family: var(--font-fa-icons);
+}
 :root, :host {
-    --fa-style-family-classic: 'Font Awesome 6 Pro';
-    --fa-font-thin: normal 100 1em/1 'Font Awesome 6 Pro'; }
+    --fa-style-family-classic: var(--font-fa-icons);
+    --fa-font-thin: normal 100 1em/1 var(--font-fa-icons); }
 
 .fat,
 .fa-thin {
-    font-weight: 100; }
+    font-weight: 100;
+    font-family: var(--font-fa-icons);
+}

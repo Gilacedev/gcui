@@ -42,7 +42,7 @@ const PageTransition = () => {
 					<div className="group-[.bying]:animate-bounceToBottom animate-bounceFromBottom animation-fill-forwards">
 						<div className="animate-dampingSwing">
 							<div className={"w-40 h-40"}>
-								<Image priority={true} type={"cover"}  src="/assets/images/gilace-logo.svg" alt="earth" />
+								<Image priority={true} type={"cover"}  src="/assets/images/gilace-logo.svg" alt="Gilace logo" />
 							</div>
 						</div>
 					</div>
