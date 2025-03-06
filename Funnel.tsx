@@ -78,7 +78,7 @@ const Funnel = () => {
 							<span className={"far fa-robot text-violet-400"}></span>
 						</div>
 						<div>
-							راهنمای تهیه سرویس
+							خرید سریع وبسایت
 						</div>
 					</header>
 					{
@@ -87,7 +87,7 @@ const Funnel = () => {
 							<div className={"py-4"}>
 								<div>
 									<div className={"text-slate-400"}>
-										شما به دنبال چه سرویسی هستید ؟
+										شما به دنبال چه نوع وبسایت / اپلیکیشنی هستید ؟
 									</div>
 								</div>
 								<ul>
