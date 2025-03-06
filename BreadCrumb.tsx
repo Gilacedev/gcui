@@ -6,7 +6,7 @@ const BreadCrumb = ({items}:{items:BreadCrumbType[]})=>
 		<span className={"text-violet-400"}></span>
 		{
 			items.map((item,index)=>{
-				return (<div>
+				return (<div key={index}>
 					<a href={item.url??""} className={" cursor-pointer hover:text-white flex items-center gap-1"} >
 						{
 							item.icon && <span className={`far fa-${item.icon}`}></span>
