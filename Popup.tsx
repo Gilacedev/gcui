@@ -15,9 +15,7 @@ const Popup = () => {
     useEffect(() => {
         const modalState = localStorage.getItem("hidePopup");
         if (modalState !== "true") {
-            setTimeout(() => {
-                setIsOpen(true);
-            }, 100);
+            setIsOpen(true);
         }
     }, []);
 
@@ -43,9 +41,8 @@ const Popup = () => {
             <Modal open={isOpen} onClose={handleClose} name="modal-popup" zindex={50}>
                 <div className="py-12 px-8 flex flex-col items-center justify-center">
                     <div className="py-4" />
-
                     <div className="flex flex-col items-center gap-2">
-                        <Image src="" alt="" type="contain" />
+                        {/* <Image src="" alt="" type="contain" /> */}
                         <span className="font-bold text-white text-lg mt-2">جشنواره تخفیف بهاری</span>
                         <div className="flex items-center mt-4 gap-1">
                             <input
@@ -60,7 +57,7 @@ const Popup = () => {
                             </label>
                         </div>
                         <div className="flex justify-center items-center w-full mt-5 cursor-pointer">
-                            <Button type="button" onClick={handleClose}>
+                            <Button color="default" type="button" onClick={handleClose}>
                                 {lang.close}
                             </Button>
                         </div>

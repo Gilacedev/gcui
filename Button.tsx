@@ -33,7 +33,7 @@ const Button: React.FC<ComponentProps> = ({
 
   // Color class assignments
   if (color === ColorTypes.default) {
-    className += "text-base bg-slate-700 active:bg-slate-500 disabled:bg-slate-300 shadow-black/10 shadow-lg hover:shadow-xl hover:shadow-black/20 ";
+    className += "text-base bg-slate-700 active:bg-slate-500 disabled:bg-slate-300 shadow-black/10 shadow-lg hover:shadow-xl hover:shadow-black/20 cursor-pointer";
   } else if (color === ColorTypes.primary) {
     className += "text-base bg-bg-gilace active:bg-violet-600 shadow-violet-800/30 shadow-lg hover:shadow-xl hover:shadow-violet-800/40   disabled:bg-violet-300";
   } else if (color === ColorTypes.danger) {
