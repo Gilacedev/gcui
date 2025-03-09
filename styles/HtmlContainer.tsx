@@ -39,7 +39,7 @@ sm:[&_table_thead]:table-header-group [&_table_thead]:block
 			[&_li]:my-2
 			[&_code]:bg-slate-950 [&_code]:text-slate-300 [&_code]:p-2 [&_code]:rounded-lg
 			[&_pre]:bg-slate-950 [&_pre]:text-slate-300 [&_pre]:p-4 [&_pre]:rounded-lg
-			[&_blockquote]:border-l-4 [&_blockquote]:border-amber-300 [&_blockquote]:pl-4 [&_blockquote]:my-4
+			[&_]:border-l-4 [&_blockquote]:border-amber-300 [&_blockquote]:pl-4 [&_blockquote]:my-4
 			[&_hr]:border-0 [&_hr]:border-t-2 [&_hr]:border-slate-400
 		`} dangerouslySetInnerHTML={{ __html: html }}
 	  ></div>
