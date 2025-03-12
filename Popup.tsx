@@ -6,16 +6,15 @@ import Language from "@/locales/Language";
 import Modal from "./Modal";
 import Image from "./Image";
 import ContentType from "@/types/ContentType";
-import {useRouter} from "next/navigation";
 import ColorTypes from "@/components/functions/ColorTypes";
 import content from "@/types/Content";
+
 
 
 const Popup = ({ popups }:{popups:ContentType}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [doNotShowAgain, setDoNotShowAgain] = useState<boolean>(false);
     const [currentPopup, setCurrentPopup] = useState<any>(null);
-    const router = useRouter();
 
     useEffect(() => {
         const contents = (popups && popups.contents) ? popups.contents: [] as content[] ;
@@ -49,7 +48,7 @@ const Popup = ({ popups }:{popups:ContentType}) => {
                 hiddenPopups.push(currentPopup.id);
                 localStorage.setItem("hiddenPopups", JSON.stringify(hiddenPopups));
             }
-            router.push(`/${currentPopup.slug}`);
+            window.open(`${currentPopup.slug}`, "_blank");
         }
     };
 
