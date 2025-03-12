@@ -1,4 +1,4 @@
-import BusinessType from "@/types/Business"; 
+import BusinessType from "@/types/Business";
 import Image from "@/components/Image";
 import Button from "@/components/Button";
 import Language from "@/locales/Language";
@@ -11,9 +11,9 @@ interface BusinessProps {
 }
 
 const Business = ({ business, editable = false }: BusinessProps) => {
-	if (!business) {
-		return null;  
-	  }
+  if (!business) {
+    return null;
+  }
   return (
     <Blocks.Dark className={"p-4 rounded-2xl"}>
       <div className={"rounded-2xl rounded-tl-[100px] bg-slate-900/60 absolute z-[2] top-0 left-0 w-full h-full backdrop-blur-3xl"}></div>
@@ -31,8 +31,9 @@ const Business = ({ business, editable = false }: BusinessProps) => {
       <div className={"flex flex-col gap-4 relative z-[3]"}>
         <div className={"flex items-center gap-2"}>
           <div className={"w-16 h-16 bg-slate-400 rounded-full overflow-hidden"}>
+
             <Image
-              src={business.avatar ? process.env.NEXT_PUBLIC_UPLOAD_URL + "/"+business.avatar : "/assets/images/image-placeholder.svg"}
+              src={business.avatar ? process.env.NEXT_PUBLIC_UPLOAD_URL + "/" + business.avatar : "/assets/images/image-placeholder.svg"}
               alt={"business"}
               type={"cover"}
             />
