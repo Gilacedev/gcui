@@ -8,6 +8,7 @@
         opacity: 1;
     }
 }
+
 @keyframes goToBottom {
     0% {
         transform: translateY(0);
@@ -195,4 +196,18 @@
 
 @keyframes fall {
     0% { transform: translateY(-800px); } 60% { transform: translateY(0); } 70% { transform: translateY(-50px); } 80% { transform: translateY(-20px); } 90% { transform: translateY(-10px); } 100% { transform: translateY(0); }
+}
+
+:root {
+    --animate-come-from-bottom: comeFromBottom 0.32s cubic-bezier(0.24, 1.32, 0.87, 1.04);
+    --animate-go-to-bottom: goToBottom 0.32s cubic-bezier(0.24, 1.32, 0.87, 1.04);
+    --animate-fade-in: fadeIn 0.3s linear;
+    --animate-fade-out: fadeOut 0.3s linear;
+    --animate-drop-down: dropDown 0.3s cubic-bezier(0.68, 0.04, 0.61, 1.16);
+    --animate-drop-up: dropUp 0.3s cubic-bezier(0.68, 0.04, 0.61, 1.16);
+    --animate-bounce-to-bottom: bounceToBottom 0.3s cubic-bezier(0.53, -0.61, 0.82, 0.91);
+    --animate-bounce-from-bottom: bounceFromBottom 0.3s cubic-bezier(0.03, 0.56, 0.8, 1.67);
+    --animate-damping-swing: dampingSwing 3s ease-in-out alternate;
+    --animate-on-the-earth: onTheEarth 5s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+    --animate-perfect-landing: fall 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }

@@ -22,7 +22,7 @@ export default function Product({ product }: { product: content }) {
 	return (
 		<Blocks.Gradient className={"relative mt-8 w-full"}>
 			<div className={"relative z-10 -my-8 text-center pb-10 px-4 "}>
-				<div className={"animate-onTheEarth"}>
+				<div className={"animate-(--animate-on-the-earth)"}>
 					<Link href={"/products/" + product.slug}>
 						<div className={"w-3/4 mx-auto rounded-md"} >
 							<Image src={localMedia} alt={product.title} type={"contain"} />
@@ -30,7 +30,7 @@ export default function Product({ product }: { product: content }) {
 					</Link>
 				</div>
 				<div className={"rotate-180"}>
-					<div className={" animate-onTheEarth bg-gradient-shadow w-full h-12"}></div>
+					<div className={" animate-(--animate-on-the-earth) bg-gradient-shadow w-full h-12"}></div>
 				</div>
 				<Link href={"/products/" + product.slug}>
 					<H2 element={"h3"} className={"my-2"}>

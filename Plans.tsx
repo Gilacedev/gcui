@@ -84,7 +84,7 @@ const Plans = ({plans}: { plans: Payable[] }) =>{
 	}
 	const PlanItem: React.FC<{ item: Payable }> = ({ item }) => {
 		if (!item) return;
-		return (<div className={`bg-slate-950/20 p-4 rounded-xl flex flex-col gap-4 ${activePlan !== item.duration ? "hidden" : ""} ${item._featured ? "animate-onTheEarth" : "animate-dropDown"}`}>
+		return (<div className={`bg-slate-950/20 p-4 rounded-xl flex flex-col gap-4 ${activePlan !== item.duration ? "hidden" : ""} ${item._featured ? "animate-(--animate-on-the-earth)" : "animate-(--animate-drop-down)"}`}>
 			<div className={"text-center"}>
 				<H1 element={"div"}>
 					{item.title}

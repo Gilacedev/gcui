@@ -5,12 +5,12 @@ import ColorTypes from "@/components/functions/ColorTypes";
 import ToastMessage from "@/types/ToastMessage";
 
 const ToastElement = ({ message }: { message: ToastMessage }) => {
-	const [animation, setAnimation] = useState("animate-bounceFromBottom");
+	const [animation, setAnimation] = useState("animate-(--animate-bounce-from-bottom)");
 	const [destroy, setDestroy] = useState(false);
 	const [localMessage, setLocalMessage] = useState(message);
 
 	setTimeout(() => {
-		setAnimation("animate-bounceToBottom");
+		setAnimation("animate-(--animate-bounce-to-bottom)");
 	}, 5000);
 
 	setTimeout(() => {

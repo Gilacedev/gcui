@@ -8,7 +8,7 @@ type HtmlContainerProps = {
 			leading-8 text-slate-300
 			[&_img]:inline-block  [&_img]:w-full [&_img]:h-auto
 			[&_img]:rounded-2xl [&_img]:overflow-hidden
-			[&_img.animated]:animate-onTheEarth
+			[&_img.animated]:animate-(--animate-on-the-earth)
 			[&_img]:px-4
 			[&_img]:my-4
 			[&_h1]:text-amber-300

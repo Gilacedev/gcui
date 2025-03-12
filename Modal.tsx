@@ -71,7 +71,7 @@ const Modal: React.FC<ModalProps> = ({ open, onClose, children, name, zindex = 3
               e.stopPropagation();
               e.preventDefault();
             }}
-            className="group-[.show]:animate-comeFromBottom group-[.hiding]:animate-goToBottom flex items-center justify-center relative z-10 bg-slate-900 rounded-2xl w-[calc(100vw-20px)] sm:w-1/3"
+            className="group-[.show]:animate-(--animate-come-from-bottom) group-[.hiding]:animate-(--animate-go-to-bottom) flex items-center justify-center relative z-10 bg-slate-900 rounded-2xl w-[calc(100vw-20px)] sm:w-1/3"
           >
             <div className="relative w-full max-h-[calc(100dvh-20px)]">
               <div
@@ -85,7 +85,7 @@ const Modal: React.FC<ModalProps> = ({ open, onClose, children, name, zindex = 3
           </div>
           <div
             onClick={closeAction}
-            className="group-[.show]:animate-fadeIn group-[.hiding]:animate-fadeOut absolute top-0 left-0 w-full h-full backdrop-blur-3xl bg-black/10"
+            className="group-[.show]:animate-(--animate-fade-in) group-[.hiding]:animate-(--animate-fade-out) absolute top-0 left-0 w-full h-full backdrop-blur-3xl bg-black/10"
           ></div>
         </div>
       </div>
