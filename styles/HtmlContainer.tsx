@@ -37,8 +37,8 @@ sm:[&_table_thead]:table-header-group [&_table_thead]:block
 			[&_ul]:list-disc [&_ul]:list-inside [&_ul]:pl-4
 			[&_ol]:list-decimal [&_ol]:list-inside [&_ol]:pl-4
 			[&_li]:my-2
-			[&_code]:bg-slate-950 [&_code]:text-slate-300 [&_code]:p-2 [&_code]:rounded-lg
-			[&_pre]:bg-slate-950 [&_pre]:text-slate-300 [&_pre]:p-4 [&_pre]:rounded-lg
+			[&_code]:bg-slate-950 [&_code]:text-slate-300 [&_code]:p-2 [&_code]:rounded-lg [&_code]:block [&_code]:myLtr [&_code]:text-left
+			[&_pre]:bg-slate-950 [&_pre]:text-slate-300 [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:block [&_pre]:myLtr [&_pre]:text-left
 			[&_]:border-l-4 [&_blockquote]:border-amber-300 [&_blockquote]:pl-4 [&_blockquote]:my-4
 			[&_hr]:border-0 [&_hr]:border-t-2 [&_hr]:border-slate-400
 		`} dangerouslySetInnerHTML={{ __html: html }}
