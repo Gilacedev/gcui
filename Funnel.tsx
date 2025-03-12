@@ -145,14 +145,14 @@ const Funnel = () => {
 									</li>
 								</ul>
 							</div>
-							<footer>
-								<Button color={ColorTypes.primary} onClick={() => {
+                            <footer className={"flex gap-2 justify-end"}>
+                                <Button color={ColorTypes.primary} onClick={() => {
 									onChangeRadio(1)
 								}}>
 									{Language().next}
-								</Button>
-							</footer>
-						</div>
+                                </Button>
+                            </footer>
+                        </div>
 					}
 					{
 						step == 2 &&
@@ -229,29 +229,29 @@ const Funnel = () => {
                                     </li>
                                 </ul>
                             </div>
-                            <footer className={"flex gap-2"}>
-								<div>
-									<Button color={ColorTypes.default} onClick={() => {
+                            <footer className={"flex gap-2 justify-end"}>
+                                <div>
+                                    <Button color={ColorTypes.default} onClick={() => {
 										setTemporarySelected(1)
 										setStep(1)
 									}}>
 										{Language().back}
-									</Button>
-								</div>
-								<div>
+                                    </Button>
+                                </div>
+                                <div>
                                     <Button color={ColorTypes.primary} onClick={() => {
 										onChangeRadio(2)
 									}}>
 										{Language().next}
                                     </Button>
-								</div>
+                                </div>
                             </footer>
                         </div>
 
 					}
 					{
 						step == 3 &&
-                        <div>
+						<div>
                             <div className={"py-4"}>
                                 <div>
                                     <div className={"text-slate-400"}>
@@ -361,7 +361,7 @@ const Funnel = () => {
                                     </li>
                                 </ul>
                             </div>
-                            <footer className={"flex gap-2"}>
+                            <footer className={"flex gap-2 justify-end"}>
                                 <div>
                                     <Button color={ColorTypes.default} onClick={() => {
 										setTemporarySelected(1)
