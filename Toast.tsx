@@ -23,7 +23,7 @@ const ToastElement = ({ message }: { message: ToastMessage }) => {
 
 	return (
 		<div
-			className={`bg-slate-900 flex items-center gap-4 p-4 rounded-2xl shadow-lg mb-2 ${animation}`}
+			className={`bg-slate-950 flex items-center gap-4 p-4 rounded-2xl shadow-lg mb-2 ${animation}`}
 		>
 			<div className={"w-12"}>
 				<div className={"w-12"}>
@@ -32,7 +32,7 @@ const ToastElement = ({ message }: { message: ToastMessage }) => {
 							className={`far fa-${localMessage.icon} ${localMessage.type === ColorTypes.danger
 								? "text-red-500"
 								: localMessage.type === ColorTypes.success
-									? "text-green-500"
+									? "text-lime-500"
 									: "text-indigo-500"
 								} text-4xl`}
 						/>
