@@ -8,19 +8,17 @@ import Image from "./Image";
 import ContentType from "@/types/ContentType";
 import {useRouter} from "next/navigation";
 import ColorTypes from "@/components/functions/ColorTypes";
+import content from "@/types/Content";
 
-type PopupProps = {
-    popups: ContentType;
-};
 
-const Popup = ({ popups }) => {
+const Popup = ({ popups }:{popups:ContentType}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [doNotShowAgain, setDoNotShowAgain] = useState<boolean>(false);
     const [currentPopup, setCurrentPopup] = useState<any>(null);
     const router = useRouter();
 
     useEffect(() => {
-        const contents = popups?.contents ?? [];
+        const contents = (popups && popups.contents) ? popups.contents: [] as content[] ;
         const hiddenPopups = JSON.parse(localStorage.getItem("hiddenPopups") || "[]");
         const firstActivePopup = contents.find(popup => popup?._status === 1 && !hiddenPopups.includes(popup.id));
 
