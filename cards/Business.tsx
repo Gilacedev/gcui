@@ -32,7 +32,7 @@ const Business = ({ business, editable = false }: BusinessProps) => {
         <div className={"flex items-center gap-2"}>
           <div className={"w-16 h-16 bg-slate-400 rounded-full overflow-hidden"}>
             <Image
-              src={business.avatar ? process.env.NEXT_PUBLIC_UPLOAD_URL + business.avatar : "/assets/images/image-placeholder.svg"}
+              src={business.avatar ? process.env.NEXT_PUBLIC_UPLOAD_URL + "/"+business.avatar : "/assets/images/image-placeholder.svg"}
               alt={"business"}
               type={"cover"}
             />
