@@ -10,7 +10,6 @@ import ColorTypes from "@/components/functions/ColorTypes";
 import content from "@/types/Content";
 
 
-
 const Popup = ({ popups }:{popups:ContentType}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [doNotShowAgain, setDoNotShowAgain] = useState<boolean>(false);
@@ -44,10 +43,11 @@ const Popup = ({ popups }:{popups:ContentType}) => {
     const handleNavigate = () => {
         if (currentPopup) {
             const hiddenPopups = JSON.parse(localStorage.getItem("hiddenPopups") || "[]");
-            if (!hiddenPopups.includes(currentPopup.id)) {
+            if (!hiddenPopups.includes(currentPopup.id)){
                 hiddenPopups.push(currentPopup.id);
                 localStorage.setItem("hiddenPopups", JSON.stringify(hiddenPopups));
             }
+            setDoNotShowAgain(true)
             window.open(`${currentPopup.slug}`, "_blank");
         }
     };
