@@ -1,10 +1,14 @@
 type HtmlContainerProps = {
+	id?: string;
 	html: string; 
   };
   
-  const HtmlContainer = ({ html }: HtmlContainerProps) => {
-	return (
-	  <div className={`
+  const HtmlContainer = ({ html,id }: HtmlContainerProps) => {
+	  const random = Math.random().toString(36).substring(7);
+		return (
+	  <div
+		 id={id? id : `html-container-${random}`}
+		  className={`
 			leading-8 text-slate-300
 			[&_img]:inline-block  [&_img]:w-full [&_img]:h-auto
 			[&_img]:rounded-2xl [&_img]:overflow-hidden
