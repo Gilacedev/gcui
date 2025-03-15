@@ -14,6 +14,7 @@ const Popup = ({ popups }:{popups:ContentType}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [doNotShowAgain, setDoNotShowAgain] = useState<boolean>(false);
     const [currentPopup, setCurrentPopup] = useState<any>(null);
+    const lang = Language();
 
     useEffect(() => {
         const contents = (popups && popups.contents) ? popups.contents: [] as content[] ;
@@ -38,8 +39,6 @@ const Popup = ({ popups }:{popups:ContentType}) => {
         setIsOpen(false);
     };
 
-    const lang = Language();
-
     const handleNavigate = () => {
         if (currentPopup) {
             const hiddenPopups = JSON.parse(localStorage.getItem("hiddenPopups") || "[]");
@@ -49,6 +48,7 @@ const Popup = ({ popups }:{popups:ContentType}) => {
             }
             setDoNotShowAgain(true)
             window.open(`${currentPopup.slug}`, "_blank");
+            setIsOpen(false);
         }
     };
 
