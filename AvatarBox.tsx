@@ -46,7 +46,7 @@ export default function AvatarBox(props: AvatarBoxProps) {
   }
 
   return (
-    <div className="">
+    <div className="curso-pointer">
       <span className="TextInput-Lable">
         {props.label ? props.label : Language().image}
       </span>
