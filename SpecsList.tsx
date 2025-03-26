@@ -10,7 +10,7 @@ import Button from "@/components/Button";
 import Content from "@/types/Content";
 import { getRelated } from "@/models/ContentModel";
 
-const SpecsList = ({ specs }: { specs: any }) => {
+const SpecsList = ({ specs , slugVal }: { specs: any , slugVal:string }) => {
 	const [localSpecs, setLocalSpecs] = useState(specs);
 	const [page, setPage] = useState(2); // Start from page 2 since page 1 is already loaded
 	const [loading, setLoading] = useState(false);
@@ -42,7 +42,7 @@ const SpecsList = ({ specs }: { specs: any }) => {
 	const loadMore = async () => {
 		if (loading || !hasMore) return;
 		setLoading(true);
-		let newSpecs = await getRelated({ slug: "products", content_type: "specs", page });
+		let newSpecs = await getRelated({ slug: slugVal, content_type: "specs", page });
 		if (newSpecs.data.length === 0) setHasMore(false);
 		setLocalSpecs((prevSpecs: any) => ({
 			...prevSpecs,
