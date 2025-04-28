@@ -1,9 +1,9 @@
 "use client";
 import {useEffect, useRef, useState} from "react";
-import NextImage  from 'next/image'
+import NextImage, { StaticImageData }  from 'next/image'
 
 type ImageProps = {
-	src: string;
+	src: string |StaticImageData;
 	alt: string;
 	type: "cover" | "contain";
 	priority?: boolean;
