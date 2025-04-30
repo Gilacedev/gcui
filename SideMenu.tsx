@@ -50,7 +50,7 @@ const SideMenu = () => {
 			<div className={"absolute top-0 start-0 w-full h-full bg-slate-900/10"} onClick={() => {
 				MenuStores.setMenu(false)
 			}}></div>
-			<div className={"sticky w-[70%] bg-slate-900 z-10 h-auto overflow-y-scroll p-5 py-6 rounded-xl shadow-2xl text-slate-900 text-center "}>
+			<div className={"sticky w-[70%] bg-slate-900 z-10 max-h-[95vh] overflow-y-auto p-5 py-6 rounded-xl shadow-2xl text-slate-900 text-center "}>
 				<div className={"flex flex-col"}>
 					{/* <div >
 						<a href={"/"}
